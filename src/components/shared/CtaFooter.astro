@@ -1,0 +1,120 @@
+---
+import { localizedHref, type Locale } from '../../config/site';
+
+interface Props {
+  locale: Locale;
+  sectionNumber?: string;
+}
+
+const { locale, sectionNumber = '08' } = Astro.props;
+
+const label = locale === 'zh' ? '联系我们' : 'GET IN TOUCH';
+
+const headline = locale === 'zh'
+  ? ['我们一起做', '真正上线的东西。']
+  : ["Let's build something", 'that ships.'];
+
+const subtitle = locale === 'zh'
+  ? '不卖 PPT，不讲故事。聊完就开工。'
+  : 'No slide decks. No storytelling. We scope, we ship, we operate.';
+
+const ctaPrimary = locale === 'zh' ? '预约沟通' : 'Book a call';
+const ctaSecondary = locale === 'zh' ? '发邮件' : 'Send an email';
+---
+
+<section class="cta">
+  <div class="cta__inner container-x">
+    <span class="section-label">/ {sectionNumber} — {label}</span>
+
+    <h2 class="cta__headline">
+      <span>{headline[0]}</span>
+      <span>{headline[1]}</span>
+    </h2>
+
+    <p class="cta__subtitle">{subtitle}</p>
+
+    <div class="cta__actions">
+      <a href={localizedHref('/contact/', locale)} class="btn-primary">
+        ↓ {ctaPrimary}
+      </a>
+      <a href="mailto:hello@metatreelab.ai" class="btn-ghost">
+        {ctaSecondary} →
+      </a>
+    </div>
+  </div>
+
+  <div class="cta__glow" aria-hidden="true"></div>
+</section>
+
+<style>
+  .cta {
+    position: relative;
+    padding-block: var(--space-10) var(--space-9);
+    overflow: hidden;
+    z-index: 2;
+  }
+
+  .cta__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    position: relative;
+    z-index: 2;
+  }
+
+  .cta__headline {
+    font-size: var(--fs-display);
+    font-weight: var(--fw-bold);
+    line-height: var(--lh-tight);
+    letter-spacing: -0.03em;
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--space-3);
+  }
+
+  .cta__subtitle {
+    font-size: var(--fs-body-lg);
+    color: var(--text-secondary);
+    max-width: 56rem;
+    margin-top: var(--space-3);
+  }
+
+  .cta__actions {
+    display: flex;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .cta__glow {
+    position: absolute;
+    left: 50%;
+    bottom: -30%;
+    width: 80rem;
+    height: 80rem;
+    transform: translateX(-50%);
+    background: radial-gradient(
+      circle at center,
+      rgba(0, 229, 160, 0.12) 0%,
+      rgba(0, 180, 216, 0.06) 40%,
+      transparent 70%
+    );
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 1;
+    animation: ctaBreathe 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes ctaBreathe {
+    0%, 100% { opacity: 0.5; }
+    50%      { opacity: 0.8; }
+  }
+
+  @media (max-width: 991px) {
+    .cta__headline { font-size: var(--fs-h1); }
+  }
+
+  @media (max-width: 767px) {
+    .cta__headline { font-size: var(--fs-display-m); }
+  }
+</style>

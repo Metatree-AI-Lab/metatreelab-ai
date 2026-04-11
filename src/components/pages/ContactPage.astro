@@ -1,0 +1,336 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../ui/PageHero.astro';
+import { siteConfig, type Locale } from '../../config/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const copy = locale === 'zh'
+  ? {
+      sectionLabel: '/ CONTACT',
+      title: '聊聊你在做的事。',
+      subtitle: '不卖 slides，不讲故事。告诉我们你要解决什么问题，一周内给你回复 + 下一步建议。',
+      formHeading: '/ SEND A BRIEF',
+      nameLabel: '姓名',
+      emailLabel: '邮箱',
+      companyLabel: '公司',
+      interestLabel: '感兴趣的服务',
+      interestOptions: [
+        { value: '', label: '— 请选择 —' },
+        { value: 'ai-build', label: 'AI Build Track（RAG / Agent / LLM 应用）' },
+        { value: 'ai-adopt', label: 'AI Adopt Track（Claude Cowork / OpenClaw / 工作流）' },
+        { value: 'property', label: 'Property Marketing（开发商网站 / 楼盘页）' },
+        { value: 'other', label: '其他 / 还不确定' },
+      ],
+      messageLabel: '项目简介',
+      messagePlaceholder: '你想解决什么问题？有没有时间线和预算范围？',
+      submit: '发送',
+      submitting: '发送中…',
+      bookHeading: '/ OR BOOK A CALL',
+      bookDesc: '更喜欢直接聊？约一个 30 分钟的 intro 通话。',
+      bookCta: '预约 30 分钟通话 →',
+      emailHeading: '/ EMAIL US',
+      emailCta: '发邮件给我们',
+    }
+  : {
+      sectionLabel: '/ CONTACT',
+      title: "Tell us what you're building.",
+      subtitle: 'No slides. No storytelling. Describe the problem you\'re solving and we\'ll get back to you within a week with a scoped next step.',
+      formHeading: '/ SEND A BRIEF',
+      nameLabel: 'Name',
+      emailLabel: 'Email',
+      companyLabel: 'Company',
+      interestLabel: 'Service of interest',
+      interestOptions: [
+        { value: '', label: '— Choose one —' },
+        { value: 'ai-build', label: 'AI Build Track (RAG / Agent / LLM apps)' },
+        { value: 'ai-adopt', label: 'AI Adopt Track (Claude Cowork / OpenClaw / Workflows)' },
+        { value: 'property', label: 'Property Marketing (Developer sites / Landing pages)' },
+        { value: 'other', label: 'Other / Not sure yet' },
+      ],
+      messageLabel: 'Project brief',
+      messagePlaceholder: 'What are you trying to solve? Any timeline or budget range?',
+      submit: 'Send',
+      submitting: 'Sending…',
+      bookHeading: '/ OR BOOK A CALL',
+      bookDesc: 'Prefer to talk? Grab a 30-minute intro slot.',
+      bookCta: 'Book a 30-min call →',
+      emailHeading: '/ EMAIL US',
+      emailCta: 'Send us an email',
+    };
+
+// Web3Forms — replace with real access key in production. Placeholder for MVP.
+const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
+const thanksUrl = locale === 'zh' ? '/zh/thanks/' : '/thanks/';
+---
+
+<BaseLayout title={copy.title} locale={locale} path={Astro.url.pathname}>
+  <PageHero
+    sectionLabel={copy.sectionLabel}
+    title={copy.title}
+    subtitle={copy.subtitle}
+  />
+
+  <section class="contact">
+    <div class="contact__inner container-x">
+      <div class="contact__grid">
+        <!-- FORM -->
+        <div class="contact__form-wrap">
+          <span class="section-label">{copy.formHeading}</span>
+
+          <form
+            class="contact__form"
+            action="https://api.web3forms.com/submit"
+            method="POST"
+          >
+            <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
+            <input type="hidden" name="subject" value="New lead from metatreelab.ai" />
+            <input type="hidden" name="from_name" value="Metatree Lab Website" />
+            <input type="hidden" name="redirect" value={`https://metatreelab.ai${thanksUrl}`} />
+            <input type="hidden" name="locale" value={locale} />
+
+            <!-- Honeypot: hidden from humans, bots fill it -->
+            <input
+              type="checkbox"
+              name="botcheck"
+              class="contact__honeypot"
+              style="display:none"
+              tabindex="-1"
+              autocomplete="off"
+            />
+
+            <div class="field">
+              <label for="name" class="field__label">{copy.nameLabel}</label>
+              <input
+                id="name"
+                type="text"
+                name="name"
+                required
+                class="field__input"
+                autocomplete="name"
+              />
+            </div>
+
+            <div class="field">
+              <label for="email" class="field__label">{copy.emailLabel}</label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                required
+                class="field__input"
+                autocomplete="email"
+              />
+            </div>
+
+            <div class="field">
+              <label for="company" class="field__label">{copy.companyLabel}</label>
+              <input
+                id="company"
+                type="text"
+                name="company"
+                class="field__input"
+                autocomplete="organization"
+              />
+            </div>
+
+            <div class="field">
+              <label for="interest" class="field__label">{copy.interestLabel}</label>
+              <select id="interest" name="service_interest" class="field__input">
+                {copy.interestOptions.map((o) => <option value={o.value}>{o.label}</option>)}
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="message" class="field__label">{copy.messageLabel}</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="6"
+                required
+                class="field__input field__input--textarea"
+                placeholder={copy.messagePlaceholder}></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary contact__submit">
+              ↓ {copy.submit}
+            </button>
+          </form>
+        </div>
+
+        <!-- ASIDE -->
+        <aside class="contact__aside">
+          <div class="contact__block">
+            <span class="section-label">{copy.bookHeading}</span>
+            <p class="contact__block-desc">{copy.bookDesc}</p>
+            <a
+              href={siteConfig.contact.bookingUrl}
+              target="_blank"
+              rel="noreferrer"
+              class="btn-ghost"
+            >
+              {copy.bookCta}
+            </a>
+          </div>
+
+          <div class="contact__block">
+            <span class="section-label">{copy.emailHeading}</span>
+            <a
+              href={`mailto:${siteConfig.contact.email}`}
+              class="contact__email"
+            >
+              {siteConfig.contact.email} →
+            </a>
+          </div>
+
+          <div class="contact__block contact__block--quiet">
+            <span class="section-label">/ PARENT</span>
+            <a
+              href={siteConfig.parent.url}
+              target="_blank"
+              rel="noreferrer"
+              class="contact__email"
+            >
+              {siteConfig.parent.name} ↗
+            </a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact {
+    position: relative;
+    padding-block: var(--space-8) var(--space-10);
+    z-index: 2;
+  }
+
+  .contact__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-7);
+  }
+
+  .contact__form-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .contact__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-lg);
+  }
+
+  .contact__honeypot {
+    position: absolute !important;
+    left: -9999px !important;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .field__label {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-tertiary);
+  }
+
+  .field__input {
+    width: 100%;
+    padding: var(--space-3);
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    transition:
+      border-color var(--dur-normal) var(--ease-out),
+      background var(--dur-normal) var(--ease-out);
+  }
+
+  .field__input:focus {
+    outline: none;
+    border-color: var(--brand-primary);
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 0 3px rgba(0, 229, 160, 0.12);
+  }
+
+  .field__input--textarea {
+    resize: vertical;
+    min-height: 14rem;
+    font-family: var(--font-sans);
+  }
+
+  .contact__submit {
+    align-self: flex-start;
+    margin-top: var(--space-2);
+  }
+
+  /* Aside */
+  .contact__aside {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .contact__block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border-hairline);
+  }
+
+  .contact__block--quiet {
+    opacity: 0.7;
+  }
+
+  .contact__block-desc {
+    font-size: var(--fs-body-sm);
+    color: var(--text-secondary);
+    line-height: var(--lh-normal);
+  }
+
+  .contact__block .btn-ghost {
+    align-self: flex-start;
+    margin-top: var(--space-2);
+  }
+
+  .contact__email {
+    font-family: var(--font-mono);
+    font-size: var(--fs-body);
+    color: var(--text-primary);
+    word-break: break-all;
+    margin-top: var(--space-2);
+  }
+
+  .contact__email:hover {
+    color: var(--brand-primary);
+  }
+
+  @media (max-width: 991px) {
+    .contact__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

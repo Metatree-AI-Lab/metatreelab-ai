@@ -1,0 +1,124 @@
+---
+import type { Locale } from '../../config/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const label = locale === 'zh' ? '我们的底气' : 'RECEIPTS';
+
+const stats = locale === 'zh'
+  ? [
+      { value: '5+', unit: '年', caption: '生产级 AI 运营' },
+      { value: '10+', unit: '', caption: '线上 AI 服务' },
+      { value: '3', unit: '款', caption: '真实用户的 AI 产品' },
+      { value: '2', unit: '', caption: '活跃业务线' },
+    ]
+  : [
+      { value: '5+', unit: 'YRS', caption: 'Production AI in the wild' },
+      { value: '10+', unit: '', caption: 'Live AI services shipped' },
+      { value: '3', unit: '', caption: 'AI products with real users' },
+      { value: '2', unit: '', caption: 'Business lines running' },
+    ];
+---
+
+<section class="stats">
+  <div class="stats__inner container-x">
+    <span class="section-label">/ 04 — {label}</span>
+
+    <div class="stats__grid">
+      {
+        stats.map((s) => (
+          <div class="stats__item">
+            <div class="stats__value">
+              {s.value}
+              {s.unit && <span class="stats__unit">{s.unit}</span>}
+            </div>
+            <div class="stats__rule" aria-hidden="true"></div>
+            <div class="stats__caption">{s.caption}</div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .stats {
+    position: relative;
+    padding-block: var(--space-8);
+    z-index: 2;
+  }
+
+  .stats__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .stats__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-5);
+  }
+
+  .stats__item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .stats__value {
+    font-family: var(--font-sans);
+    font-size: 9.6rem;
+    font-weight: var(--fw-bold);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--text-primary);
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+  }
+
+  .stats__unit {
+    font-size: var(--fs-h4);
+    font-family: var(--font-mono);
+    font-weight: var(--fw-medium);
+    letter-spacing: 0.04em;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+  }
+
+  .stats__rule {
+    height: 1px;
+    width: 100%;
+    background: var(--border-hairline);
+  }
+
+  .stats__caption {
+    font-family: var(--font-mono);
+    font-size: var(--fs-body-sm);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: var(--lh-snug);
+  }
+
+  @media (max-width: 991px) {
+    .stats__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-6) var(--space-5);
+    }
+    .stats__value {
+      font-size: 7.2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .stats__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

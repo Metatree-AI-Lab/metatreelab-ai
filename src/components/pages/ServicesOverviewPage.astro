@@ -1,0 +1,256 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../ui/PageHero.astro';
+import CtaFooter from '../shared/CtaFooter.astro';
+import { localizedHref, type Locale } from '../../config/site';
+import { servicesByTrack } from '../../data/services';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const copy = locale === 'zh'
+  ? {
+      sectionLabel: '/ SERVICES',
+      title: '三条业务线。全是生产证据。',
+      subtitle: '我们做 AI，也做澳洲房产营销。每条业务线都有母公司或真实客户的线上产品作为信任背书。',
+      buildLabel: '/ A1 — AI · BUILD',
+      adoptLabel: '/ A2 — AI · ADOPT',
+      propertyLabel: '/ B — PROPERTY',
+      buildTitle: 'AI Build Track',
+      adoptTitle: 'AI Adopt Track',
+      propertyTitle: 'Property Marketing',
+      buildDesc: '定制 AI 开发：战略、RAG、Agent、LLM 应用、平台工程。单价高、周期长、需要工程师深度参与。',
+      adoptDesc: '把 AI 装进你的团队：Claude Cowork 搭建、OpenClaw 🦞、工作流自动化、员工培训。短周期、量大、现金流引擎。',
+      propertyDesc: '澳洲房地产营销全栈：开发商主站、楼盘专属页、品牌视觉、广告着陆页、长期 retainer。',
+      explore: '查看全部服务',
+      title_b: '了解 Property 服务',
+    }
+  : {
+      sectionLabel: '/ SERVICES',
+      title: 'Three service lines. All backed by production receipts.',
+      subtitle: 'We ship AI, and we ship property marketing. Every service line is anchored in a live product we run ourselves or for a real client.',
+      buildLabel: '/ A1 — AI · BUILD',
+      adoptLabel: '/ A2 — AI · ADOPT',
+      propertyLabel: '/ B — PROPERTY',
+      buildTitle: 'AI Build Track',
+      adoptTitle: 'AI Adopt Track',
+      propertyTitle: 'Property Marketing',
+      buildDesc: 'Custom AI engineering: strategy, RAG, agents, LLM apps, platform engineering. High ticket, long cycle, heavy engineering involvement.',
+      adoptDesc: 'Install AI into your team: Claude Cowork setup, OpenClaw 🦞, workflow automation, enablement training. Short cycle, high volume, cashflow engine.',
+      propertyDesc: 'Full-stack property marketing for Australia: developer websites, single-project landing pages, brand identity, ad pages, ongoing retainers.',
+      explore: 'Explore all services',
+      title_b: 'Explore Property services',
+    };
+
+const tracks = [
+  {
+    label: copy.buildLabel,
+    title: copy.buildTitle,
+    desc: copy.buildDesc,
+    services: servicesByTrack.build,
+    href: localizedHref('/services/ai/', locale),
+    accent: 'jade',
+  },
+  {
+    label: copy.adoptLabel,
+    title: copy.adoptTitle,
+    desc: copy.adoptDesc,
+    services: servicesByTrack.adopt,
+    href: localizedHref('/services/ai/', locale),
+    accent: 'jade',
+  },
+  {
+    label: copy.propertyLabel,
+    title: copy.propertyTitle,
+    desc: copy.propertyDesc,
+    services: servicesByTrack.property,
+    href: localizedHref('/services/property/', locale),
+    accent: 'white',
+  },
+];
+---
+
+<BaseLayout title={copy.title} locale={locale} path={Astro.url.pathname}>
+  <PageHero
+    sectionLabel={copy.sectionLabel}
+    title={copy.title}
+    subtitle={copy.subtitle}
+  />
+
+  <section class="tracks">
+    <div class="tracks__inner container-x">
+      {
+        tracks.map((track) => (
+          <div class={`tracks__block tracks__block--${track.accent}`}>
+            <div class="tracks__head">
+              <span class="section-label">{track.label}</span>
+              <a href={track.href} class="tracks__cta">
+                {copy.explore} →
+              </a>
+            </div>
+
+            <h2 class="tracks__title">{track.title}</h2>
+            <p class="tracks__desc">{track.desc}</p>
+
+            <ul class="tracks__list">
+              {track.services.map((s) => (
+                <li class={`tracks__item ${s.flagship ? 'tracks__item--flagship' : ''}`}>
+                  <div class="tracks__item-head">
+                    <span class="tracks__item-name">{s.title[locale]}</span>
+                    {s.flagship && <span class="tracks__flagship">FLAGSHIP</span>}
+                    <span class="tracks__duration">{s.duration}</span>
+                  </div>
+                  <p class="tracks__item-sub">{s.subtitle[locale]}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <CtaFooter locale={locale} />
+</BaseLayout>
+
+<style>
+  .tracks {
+    position: relative;
+    padding-block: var(--space-8);
+    z-index: 2;
+  }
+
+  .tracks__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-9);
+  }
+
+  .tracks__block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--border-hairline);
+  }
+
+  .tracks__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-2);
+  }
+
+  .tracks__cta {
+    font-family: var(--font-mono);
+    font-size: var(--fs-body-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    transition: color var(--dur-normal) var(--ease-out);
+  }
+
+  .tracks__block--jade .tracks__cta:hover {
+    color: var(--brand-primary);
+  }
+
+  .tracks__block--white .tracks__cta:hover {
+    color: var(--text-primary);
+  }
+
+  .tracks__title {
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-bold);
+    letter-spacing: -0.02em;
+  }
+
+  .tracks__desc {
+    font-size: var(--fs-body-lg);
+    color: var(--text-secondary);
+    max-width: 72rem;
+    line-height: var(--lh-normal);
+  }
+
+  .tracks__list {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-5) 0 0 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--border-hairline);
+  }
+
+  .tracks__item {
+    padding: var(--space-4) var(--space-5) var(--space-4) 0;
+    border-bottom: 1px solid var(--border-hairline);
+  }
+
+  .tracks__item:nth-child(odd) {
+    border-right: 1px solid var(--border-hairline);
+    padding-right: var(--space-5);
+  }
+
+  .tracks__item:nth-child(even) {
+    padding-left: var(--space-5);
+  }
+
+  .tracks__item--flagship {
+    background: rgba(0, 229, 160, 0.03);
+  }
+
+  .tracks__item-head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-2);
+  }
+
+  .tracks__item-name {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-semibold);
+    color: var(--text-primary);
+    flex: 1;
+  }
+
+  .tracks__flagship {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.1em;
+    padding: 2px 6px;
+    background: rgba(0, 229, 160, 0.1);
+    color: var(--brand-primary);
+    border: 1px solid var(--brand-primary);
+    border-radius: var(--radius-sm);
+  }
+
+  .tracks__duration {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+
+  .tracks__item-sub {
+    font-size: var(--fs-body-sm);
+    color: var(--text-secondary);
+    line-height: var(--lh-normal);
+  }
+
+  @media (max-width: 767px) {
+    .tracks__list {
+      grid-template-columns: 1fr;
+    }
+    .tracks__item:nth-child(odd),
+    .tracks__item:nth-child(even) {
+      border-right: none;
+      padding: var(--space-4) 0;
+    }
+    .tracks__title {
+      font-size: var(--fs-h3);
+    }
+  }
+</style>

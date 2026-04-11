@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroPlaceholder from '../../components/home/HeroPlaceholder.astro';
+import ServiceSplit from '../../components/home/ServiceSplit.astro';
+import TrustBar from '../../components/home/TrustBar.astro';
+import StatsRow from '../../components/home/StatsRow.astro';
+import FeaturedWork from '../../components/home/FeaturedWork.astro';
+import CtaFooter from '../../components/shared/CtaFooter.astro';
+import { siteConfig } from '../../config/site';
+---
+
+<BaseLayout
+  title={siteConfig.name}
+  description={siteConfig.description.zh}
+  locale="zh"
+  path="/zh/"
+>
+  <HeroPlaceholder locale="zh" />
+  <ServiceSplit locale="zh" />
+  <TrustBar locale="zh" />
+  <StatsRow locale="zh" />
+  <FeaturedWork locale="zh" />
+  <CtaFooter locale="zh" />
+</BaseLayout>

@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../ui/PageHero.astro';
+import { localizedHref, type Locale } from '../../config/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const copy = locale === 'zh'
+  ? {
+      sectionLabel: '/ THANKS',
+      title: '收到了。',
+      subtitle: '我们会在一周内回复你。这段时间你可以先看看我们做过的东西。',
+      back: '回首页',
+      work: '查看作品',
+    }
+  : {
+      sectionLabel: '/ THANKS',
+      title: 'Got it.',
+      subtitle: "We'll get back to you within a week. While you wait, take a look at what we've shipped.",
+      back: 'Back home',
+      work: 'See our work',
+    };
+---
+
+<BaseLayout title={copy.title} locale={locale} path={Astro.url.pathname}>
+  <PageHero
+    sectionLabel={copy.sectionLabel}
+    title={copy.title}
+    subtitle={copy.subtitle}
+  />
+
+  <section class="thanks">
+    <div class="thanks__inner container-x">
+      <div class="thanks__actions">
+        <a href={localizedHref('/', locale)} class="btn-primary">
+          ← {copy.back}
+        </a>
+        <a href={localizedHref('/work/', locale)} class="btn-ghost">
+          {copy.work} →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .thanks {
+    position: relative;
+    padding-block: var(--space-7) var(--space-10);
+    z-index: 2;
+  }
+
+  .thanks__actions {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+</style>

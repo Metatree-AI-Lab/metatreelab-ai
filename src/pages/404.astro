@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../config/site';
+---
+
+<BaseLayout title="404 — Page not found" locale="en" path="/404/">
+  <section class="notfound">
+    <div class="notfound__inner container-x">
+      <span class="section-label">/ 404</span>
+      <h1 class="notfound__title">Page not found.</h1>
+      <p class="notfound__subtitle">
+        This URL doesn't exist — yet. Maybe it will after the next ship.
+      </p>
+
+      <div class="notfound__actions">
+        <a href="/" class="btn-primary">← Back home</a>
+        <a href="/work/" class="btn-ghost">See our work →</a>
+        <a href="/zh/" class="btn-ghost">中文版 →</a>
+      </div>
+
+      <div class="notfound__ascii" aria-hidden="true">
+        <pre>{`
+         ╭────────╮
+         │  404   │
+         │  ──┬── │
+         │    │   │
+         │  ●━┿━● │
+         │    │   │
+         ╰────────╯
+         {siteConfig.name}
+        `}</pre>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound {
+    position: relative;
+    padding-block: var(--space-10);
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+  }
+
+  .notfound__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-width: 72rem;
+  }
+
+  .notfound__title {
+    font-size: var(--fs-display);
+    font-weight: var(--fw-bold);
+    line-height: var(--lh-tight);
+    letter-spacing: -0.03em;
+  }
+
+  .notfound__subtitle {
+    font-size: var(--fs-body-lg);
+    color: var(--text-secondary);
+    line-height: var(--lh-normal);
+  }
+
+  .notfound__actions {
+    display: flex;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .notfound__ascii {
+    margin-top: var(--space-6);
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    color: var(--text-muted);
+    line-height: 1.3;
+  }
+
+  .notfound__ascii pre {
+    margin: 0;
+  }
+
+  @media (max-width: 767px) {
+    .notfound__title {
+      font-size: var(--fs-h2);
+    }
+  }
+</style>

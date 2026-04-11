@@ -1,0 +1,219 @@
+---
+import { localizedHref, type Locale } from '../../config/site';
+import { useTranslations } from '../../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const aiHref = localizedHref('/services/ai/', locale);
+const propertyHref = localizedHref('/services/property/', locale);
+---
+
+<section class="split">
+  <div class="split__inner container-x">
+    <span class="section-label">{t.split.sectionLabel}</span>
+
+    <div class="split__grid">
+      <!-- AI Systems card -->
+      <a href={aiHref} class="split__card split__card--ai">
+        <div class="split__head">
+          <span class="split__tag">[ A ]</span>
+          <h3 class="split__title">{t.split.ai.title}</h3>
+          <span class="split__arrow">→</span>
+        </div>
+
+        <p class="split__subtitle">{t.split.ai.subtitle}</p>
+
+        <ul class="split__bullets">
+          {t.split.ai.bullets.map((b) => <li>· {b}</li>)}
+        </ul>
+
+        <div class="split__footer">
+          <span class="section-label">PROOF — {t.split.ai.proof}</span>
+        </div>
+
+        <div class="split__cta">
+          <span>{t.split.ai.cta}</span>
+          <span class="split__cta-arrow">→</span>
+        </div>
+      </a>
+
+      <!-- Property Marketing card -->
+      <a href={propertyHref} class="split__card split__card--property">
+        <div class="split__head">
+          <span class="split__tag">[ B ]</span>
+          <h3 class="split__title">{t.split.property.title}</h3>
+          <span class="split__arrow">→</span>
+        </div>
+
+        <p class="split__subtitle">{t.split.property.subtitle}</p>
+
+        <ul class="split__bullets">
+          {t.split.property.bullets.map((b) => <li>· {b}</li>)}
+        </ul>
+
+        <div class="split__footer">
+          <span class="section-label">PROOF — {t.split.property.proof}</span>
+        </div>
+
+        <div class="split__cta">
+          <span>{t.split.property.cta}</span>
+          <span class="split__cta-arrow">→</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .split {
+    position: relative;
+    padding-block: var(--space-9);
+    z-index: 2;
+  }
+
+  .split__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .split__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+
+  .split__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    color: var(--text-primary);
+    transition:
+      border-color var(--dur-normal) var(--ease-out),
+      transform var(--dur-normal) var(--ease-out),
+      box-shadow var(--dur-normal) var(--ease-out);
+    min-height: 44rem;
+  }
+
+  .split__card:hover {
+    transform: translateY(-4px);
+  }
+
+  .split__card--ai:hover {
+    border-color: var(--brand-primary);
+    box-shadow: 0 0 60px rgba(0, 229, 160, 0.12);
+  }
+
+  .split__card--property:hover {
+    border-color: var(--text-primary);
+    box-shadow: 0 0 60px rgba(255, 255, 255, 0.08);
+  }
+
+  .split__head {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+  }
+
+  .split__tag {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    color: var(--text-tertiary);
+    letter-spacing: 0.08em;
+  }
+
+  .split__title {
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-bold);
+    letter-spacing: -0.02em;
+    flex: 1;
+  }
+
+  .split__arrow {
+    font-size: var(--fs-h4);
+    color: var(--text-tertiary);
+    transition:
+      transform var(--dur-normal) var(--ease-out),
+      color var(--dur-normal) var(--ease-out);
+  }
+
+  .split__card:hover .split__arrow {
+    transform: translateX(6px);
+    color: var(--text-primary);
+  }
+
+  .split__card--ai:hover .split__arrow {
+    color: var(--brand-primary);
+  }
+
+  .split__subtitle {
+    font-size: var(--fs-body-lg);
+    color: var(--text-secondary);
+    line-height: var(--lh-normal);
+  }
+
+  .split__bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--fs-body-sm);
+    color: var(--text-secondary);
+    flex: 1;
+  }
+
+  .split__bullets li {
+    letter-spacing: -0.005em;
+  }
+
+  .split__footer {
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--border-hairline);
+  }
+
+  .split__cta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--fs-body-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-primary);
+  }
+
+  .split__cta-arrow {
+    transition: transform var(--dur-normal) var(--ease-out);
+  }
+
+  .split__card:hover .split__cta-arrow {
+    transform: translateX(6px);
+  }
+
+  @media (max-width: 767px) {
+    .split__grid {
+      grid-template-columns: 1fr;
+    }
+    .split__card {
+      min-height: auto;
+      padding: var(--space-5);
+    }
+  }
+</style>

@@ -1,0 +1,101 @@
+---
+import { siteConfig, localizedHref, type Locale } from '../../config/site';
+import { useTranslations } from '../../i18n';
+import NeuralNetwork from './NeuralNetwork.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section class="hero">
+  <div class="hero__inner container-x">
+    <div class="hero__content">
+      <span class="section-label">{t.hero.sectionLabel}</span>
+
+      <h1 class="hero__title">
+        <span>{t.hero.title_line1}</span>
+        <span>{t.hero.title_line2}</span>
+      </h1>
+
+      <p class="hero__subtitle">{t.hero.subtitle}</p>
+
+      <div class="hero__cta">
+        <a href={localizedHref('/contact/', locale)} class="btn-primary">
+          ↓ {t.hero.cta_primary}
+        </a>
+        <a href={localizedHref('/work/', locale)} class="btn-ghost">
+          {t.hero.cta_secondary} →
+        </a>
+      </div>
+
+      <div class="hero__backing">
+        <span class="section-label">· {t.hero.backing} ·</span>
+      </div>
+    </div>
+
+    <NeuralNetwork />
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    padding-block: var(--space-9) var(--space-8);
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+  }
+
+  .hero__inner {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--space-6);
+    align-items: center;
+  }
+
+  .hero__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .hero__title {
+    font-size: var(--fs-display);
+    font-weight: var(--fw-bold);
+    line-height: var(--lh-tight);
+    letter-spacing: -0.03em;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero__subtitle {
+    font-size: var(--fs-body-lg);
+    color: var(--text-secondary);
+    max-width: 52rem;
+    line-height: var(--lh-normal);
+  }
+
+  .hero__cta {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .hero__backing {
+    margin-top: var(--space-2);
+  }
+
+  @media (max-width: 991px) {
+    .hero__title { font-size: var(--fs-h1); }
+    .hero__inner { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 767px) {
+    .hero__title { font-size: var(--fs-display-m); }
+  }
+</style>

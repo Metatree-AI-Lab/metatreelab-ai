@@ -1,0 +1,410 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../ui/PageHero.astro';
+import CtaFooter from '../shared/CtaFooter.astro';
+import { type Locale } from '../../config/site';
+import { servicesByTrack, type ServiceEntry } from '../../data/services';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const copy = locale === 'zh'
+  ? {
+      sectionLabel: '/ AI SYSTEMS',
+      title: '做 AI，或把 AI 用进你的团队。',
+      subtitle: '两条 Track：Build（定制开发，单价高，周期长）+ Adopt（落地实施，短周期，现金流引擎）。两条都有母公司产品作为真实证据。',
+      buildHeading: '/ BUILD TRACK — 定制 AI 开发',
+      buildSub: '给技术决策人的深度工程交付。每个服务都有线上产品支撑。',
+      adoptHeading: '/ ADOPT TRACK — 把 AI 装进团队',
+      adoptSub: '给业务决策人的快速落地交付。搭建 + 培训一体化。',
+      proofHeading: '/ PROOF — 能力 × 证据',
+      proofDesc: '我们说的每项能力，都有线上运营的产品作为证据。',
+      deliverables: '交付内容',
+      proof: '证据',
+      price: '周期',
+    }
+  : {
+      sectionLabel: '/ AI SYSTEMS',
+      title: 'Build AI. Or adopt AI into your team.',
+      subtitle: 'Two tracks: Build (custom engineering, high ticket, long cycle) and Adopt (installation + enablement, short cycle, cashflow engine). Both anchored in live parent-company products.',
+      buildHeading: '/ BUILD TRACK — Custom AI engineering',
+      buildSub: 'Deep engineering delivery for technical decision-makers. Every service is backed by a live product.',
+      adoptHeading: '/ ADOPT TRACK — Install AI into your team',
+      adoptSub: 'Fast delivery for business decision-makers. Setup and training are one engagement, not two.',
+      proofHeading: '/ PROOF — Capability × Receipt',
+      proofDesc: 'Every capability we claim is backed by something we are running live.',
+      deliverables: 'Deliverables',
+      proof: 'Proof',
+      price: 'Duration',
+    };
+
+const buildServices = servicesByTrack.build;
+const adoptServices = servicesByTrack.adopt;
+
+const proofMatrix = locale === 'zh'
+  ? [
+      { capability: 'RAG 与上下文工程', proof: 'training-rag · LangChain · pgvector on Lambda' },
+      { capability: '多租户 AI SaaS', proof: 'SigmaQ · 4 档 Stripe · LMS 集成' },
+      { capability: 'Agent 编排', proof: 'Agent-Skills · MCP · 3 款线上 Chrome AI 扩展' },
+      { capability: 'AI 内容自动化', proof: 'uni-course-architect · Bootcamp Pipeline' },
+      { capability: 'Claude Code 实战', proof: '团队每天用 Claude Code 给 JR Academy 发货' },
+      { capability: 'OpenClaw 部署', proof: 'Agent-first 框架 · 原生微信 / 飞书集成' },
+      { capability: 'AWS AI Infra', proof: '10+ Lambda 微服务 · Terraform IaC' },
+    ]
+  : [
+      { capability: 'RAG & Context Engineering', proof: 'training-rag · LangChain · pgvector on Lambda' },
+      { capability: 'Multi-tenant AI SaaS', proof: 'SigmaQ · 4-tier Stripe · LMS integration' },
+      { capability: 'Agent Orchestration', proof: 'Agent-Skills · MCP · 3 live Chrome AI extensions' },
+      { capability: 'AI Content Automation', proof: 'uni-course-architect · Bootcamp Pipeline' },
+      { capability: 'Claude Code in Practice', proof: 'Team ships JR Academy with Claude Code daily' },
+      { capability: 'OpenClaw Deployment', proof: 'Agent-first framework · native WeChat / Feishu' },
+      { capability: 'AWS AI Infrastructure', proof: '10+ Lambda microservices · Terraform IaC' },
+    ];
+---
+
+<BaseLayout title={copy.title} locale={locale} path={Astro.url.pathname}>
+  <PageHero
+    sectionLabel={copy.sectionLabel}
+    title={copy.title}
+    subtitle={copy.subtitle}
+  />
+
+  <!-- BUILD TRACK -->
+  <section class="track">
+    <div class="track__inner container-x">
+      <div class="track__header">
+        <span class="section-label">{copy.buildHeading}</span>
+        <p class="track__sub">{copy.buildSub}</p>
+      </div>
+
+      <div class="track__list">
+        {
+          buildServices.map((s: ServiceEntry) => (
+            <article class={`service ${s.flagship ? 'service--flagship' : ''}`}>
+              <div class="service__top">
+                <div class="service__titlegroup">
+                  {s.flagship && <span class="service__flagship">FLAGSHIP</span>}
+                  <h3 class="service__title">{s.title[locale]}</h3>
+                </div>
+                <span class="service__duration">{s.duration}</span>
+              </div>
+
+              <p class="service__subtitle">{s.subtitle[locale]}</p>
+              <p class="service__summary">{s.summary[locale]}</p>
+
+              <div class="service__deliverables">
+                <span class="section-label">{copy.deliverables}</span>
+                <ul>
+                  {s.deliverables[locale].map((d) => <li>· {d}</li>)}
+                </ul>
+              </div>
+
+              {s.proof && (
+                <div class="service__proof">
+                  <span class="section-label">{copy.proof}</span>
+                  <p>{s.proof[locale]}</p>
+                </div>
+              )}
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ADOPT TRACK -->
+  <section class="track track--adopt">
+    <div class="track__inner container-x">
+      <div class="track__header">
+        <span class="section-label">{copy.adoptHeading}</span>
+        <p class="track__sub">{copy.adoptSub}</p>
+      </div>
+
+      <div class="track__list">
+        {
+          adoptServices.map((s: ServiceEntry) => (
+            <article class={`service ${s.flagship ? 'service--flagship' : ''}`}>
+              <div class="service__top">
+                <div class="service__titlegroup">
+                  {s.flagship && <span class="service__flagship">FLAGSHIP</span>}
+                  <h3 class="service__title">{s.title[locale]}</h3>
+                </div>
+                <span class="service__duration">{s.duration}</span>
+              </div>
+
+              <p class="service__subtitle">{s.subtitle[locale]}</p>
+              <p class="service__summary">{s.summary[locale]}</p>
+
+              <div class="service__deliverables">
+                <span class="section-label">{copy.deliverables}</span>
+                <ul>
+                  {s.deliverables[locale].map((d) => <li>· {d}</li>)}
+                </ul>
+              </div>
+
+              {s.proof && (
+                <div class="service__proof">
+                  <span class="section-label">{copy.proof}</span>
+                  <p>{s.proof[locale]}</p>
+                </div>
+              )}
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF MATRIX -->
+  <section class="proof-section">
+    <div class="proof-section__inner container-x">
+      <div class="proof-section__header">
+        <span class="section-label">{copy.proofHeading}</span>
+        <p class="proof-section__desc">{copy.proofDesc}</p>
+      </div>
+
+      <div class="proof-matrix">
+        {
+          proofMatrix.map((row) => (
+            <div class="proof-row">
+              <div class="proof-row__cap">/ {row.capability}</div>
+              <div class="proof-row__proof">{row.proof}</div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaFooter locale={locale} />
+</BaseLayout>
+
+<style>
+  .track {
+    position: relative;
+    padding-block: var(--space-8);
+    z-index: 2;
+  }
+
+  .track--adopt {
+    border-top: 1px solid var(--border-hairline);
+  }
+
+  .track__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .track__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .track__sub {
+    font-size: var(--fs-body-lg);
+    color: var(--text-secondary);
+    max-width: 72rem;
+  }
+
+  .track__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+
+  .service {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-5);
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-lg);
+    transition: border-color var(--dur-normal) var(--ease-out);
+  }
+
+  .service:hover {
+    border-color: var(--border-strong);
+  }
+
+  .service--flagship {
+    border-color: rgba(0, 229, 160, 0.3);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 229, 160, 0.04) 0%,
+      var(--bg-glass) 100%
+    );
+  }
+
+  .service--flagship:hover {
+    border-color: var(--brand-primary);
+  }
+
+  .service__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .service__titlegroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    flex: 1;
+  }
+
+  .service__flagship {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.12em;
+    color: var(--brand-primary);
+    width: fit-content;
+    padding: 2px 6px;
+    border: 1px solid var(--brand-primary);
+    border-radius: var(--radius-sm);
+    background: rgba(0, 229, 160, 0.08);
+  }
+
+  .service__title {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-bold);
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .service__duration {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding-top: 4px;
+  }
+
+  .service__subtitle {
+    font-size: var(--fs-body);
+    color: var(--text-primary);
+    font-weight: var(--fw-medium);
+  }
+
+  .service__summary {
+    font-size: var(--fs-body-sm);
+    color: var(--text-secondary);
+    line-height: var(--lh-normal);
+  }
+
+  .service__deliverables {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--border-hairline);
+  }
+
+  .service__deliverables ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .service__deliverables li {
+    font-family: var(--font-mono);
+    font-size: var(--fs-body-sm);
+    color: var(--text-secondary);
+    line-height: var(--lh-snug);
+  }
+
+  .service__proof {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--border-hairline);
+  }
+
+  .service__proof p {
+    font-size: var(--fs-body-sm);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    letter-spacing: -0.005em;
+  }
+
+  /* Proof matrix */
+  .proof-section {
+    position: relative;
+    padding-block: var(--space-8);
+    border-top: 1px solid var(--border-hairline);
+    z-index: 2;
+  }
+
+  .proof-section__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .proof-section__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .proof-section__desc {
+    font-size: var(--fs-body-lg);
+    color: var(--text-secondary);
+  }
+
+  .proof-matrix {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--border-hairline);
+  }
+
+  .proof-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-4);
+    padding-block: var(--space-4);
+    border-bottom: 1px solid var(--border-hairline);
+    transition: background var(--dur-normal) var(--ease-out);
+  }
+
+  .proof-row:hover {
+    background: rgba(255, 255, 255, 0.015);
+  }
+
+  .proof-row__cap {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-semibold);
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .proof-row__proof {
+    font-family: var(--font-mono);
+    font-size: var(--fs-body-sm);
+    color: var(--text-secondary);
+    align-self: center;
+  }
+
+  @media (max-width: 991px) {
+    .track__list {
+      grid-template-columns: 1fr;
+    }
+    .proof-row {
+      grid-template-columns: 1fr;
+      gap: var(--space-1);
+    }
+  }
+</style>

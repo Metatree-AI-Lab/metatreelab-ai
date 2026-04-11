@@ -1,0 +1,52 @@
+---
+/**
+ * GridLines — the invisible 12-column blueprint grid.
+ * This is the signature visual of the entire Metatree Lab aesthetic.
+ * See design.md §5.1 and §7.1 (Projects page grid lines).
+ */
+---
+
+<div class="grid-lines" aria-hidden="true">
+  <div class="grid-lines__inner">
+    {Array.from({ length: 12 }).map(() => <span />)}
+  </div>
+</div>
+
+<style>
+  .grid-lines {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .grid-lines__inner {
+    position: absolute;
+    inset: 0;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--container-pad);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 0;
+  }
+
+  .grid-lines__inner span {
+    border-right: 1px solid var(--border-grid);
+    height: 100%;
+  }
+
+  .grid-lines__inner span:first-child {
+    border-left: 1px solid var(--border-grid);
+  }
+
+  /* On mobile, show fewer columns */
+  @media (max-width: 767px) {
+    .grid-lines__inner {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .grid-lines__inner span:nth-child(n + 5) {
+      display: none;
+    }
+  }
+</style>

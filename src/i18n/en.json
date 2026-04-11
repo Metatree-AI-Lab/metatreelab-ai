@@ -1,0 +1,53 @@
+{
+  "nav": {
+    "services": "Services",
+    "work": "Work",
+    "about": "About",
+    "contact": "Contact",
+    "bookCall": "Book a call"
+  },
+  "hero": {
+    "sectionLabel": "/ 01 — METATREE LAB",
+    "title_line1": "We build systems",
+    "title_line2": "that ship.",
+    "subtitle": "A digital studio from JR Academy. AI for teams that build. Marketing for teams that sell property. Both shipped with the same engineering obsession.",
+    "cta_primary": "Book a call",
+    "cta_secondary": "See our work",
+    "backing": "Backed by JR Academy · 5+ yrs in production AI"
+  },
+  "split": {
+    "sectionLabel": "/ 02 — WHAT DO YOU NEED?",
+    "ai": {
+      "title": "AI Systems",
+      "subtitle": "Build AI. Or adopt AI into your team's flow.",
+      "bullets": [
+        "RAG & agent development",
+        "Claude Cowork rollout",
+        "OpenClaw implementation",
+        "AI platform engineering"
+      ],
+      "proof": "training-rag · SigmaQ · 3 Chrome AI extensions",
+      "cta": "Explore AI Systems"
+    },
+    "property": {
+      "title": "Property Marketing",
+      "subtitle": "Websites, landing pages, and brand for Australian property.",
+      "bullets": [
+        "Developer main site",
+        "Single-project landing page",
+        "Brand identity",
+        "Google / Meta ad pages"
+      ],
+      "proof": "Forma Property",
+      "cta": "Explore Property Marketing"
+    }
+  },
+  "footer": {
+    "builtBy": "Built by Metatree Lab",
+    "parent": "Powered by JR Academy",
+    "rights": "All rights reserved"
+  },
+  "locale": {
+    "switchTo": "中"
+  }
+}

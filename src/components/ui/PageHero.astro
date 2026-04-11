@@ -1,0 +1,78 @@
+---
+/**
+ * PageHero — reusable hero for sub-pages (Services, Work, About, Contact).
+ * Simpler than the home Hero, just a section label + big title + subtitle.
+ */
+
+interface Props {
+  sectionLabel: string;
+  title: string;
+  subtitle?: string;
+}
+
+const { sectionLabel, title, subtitle } = Astro.props;
+---
+
+<section class="page-hero">
+  <div class="page-hero__inner container-x">
+    <span class="section-label">{sectionLabel}</span>
+    <h1 class="page-hero__title">{title}</h1>
+    {subtitle && <p class="page-hero__subtitle">{subtitle}</p>}
+  </div>
+
+  <div class="page-hero__glow" aria-hidden="true"></div>
+</section>
+
+<style>
+  .page-hero {
+    position: relative;
+    padding-block: var(--space-9) var(--space-7);
+    overflow: hidden;
+    z-index: 2;
+  }
+
+  .page-hero__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    position: relative;
+    z-index: 2;
+  }
+
+  .page-hero__title {
+    font-size: var(--fs-h1);
+    font-weight: var(--fw-bold);
+    line-height: var(--lh-tight);
+    letter-spacing: -0.02em;
+    max-width: 80rem;
+  }
+
+  .page-hero__subtitle {
+    font-size: var(--fs-body-lg);
+    color: var(--text-secondary);
+    max-width: 64rem;
+    line-height: var(--lh-normal);
+  }
+
+  .page-hero__glow {
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 60rem;
+    height: 60rem;
+    background: radial-gradient(
+      circle,
+      rgba(0, 229, 160, 0.08) 0%,
+      transparent 70%
+    );
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  @media (max-width: 767px) {
+    .page-hero__title {
+      font-size: var(--fs-h2);
+    }
+  }
+</style>

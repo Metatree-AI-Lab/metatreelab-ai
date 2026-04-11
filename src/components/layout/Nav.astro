@@ -1,0 +1,173 @@
+---
+import { siteConfig, localizedHref, type Locale } from '../../config/site';
+import { useTranslations } from '../../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const links = [
+  { href: localizedHref('/services/', locale), label: t.nav.services },
+  { href: localizedHref('/work/', locale), label: t.nav.work },
+  { href: localizedHref('/about/', locale), label: t.nav.about },
+];
+
+// Language switch: strip or add /zh prefix
+const currentPath = Astro.url.pathname;
+const switchHref =
+  locale === 'en'
+    ? `/zh${currentPath === '/' ? '/' : currentPath}`
+    : currentPath.replace(/^\/zh/, '') || '/';
+---
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href={localizedHref('/', locale)} class="nav__logo" aria-label={siteConfig.name}>
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 32 32"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <linearGradient id="navGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#00E5A0" />
+            <stop offset="100%" stop-color="#00B4D8" />
+          </linearGradient>
+        </defs>
+        <g stroke="url(#navGrad)" stroke-width="1.5" stroke-linecap="round" fill="none">
+          <path d="M16 24 L16 14" />
+          <path d="M16 18 L10 12" />
+          <path d="M16 18 L22 12" />
+          <path d="M10 12 L6 8" />
+          <path d="M22 12 L26 8" />
+        </g>
+        <g fill="url(#navGrad)">
+          <circle cx="16" cy="24" r="1.4" />
+          <circle cx="16" cy="18" r="1.4" />
+          <circle cx="10" cy="12" r="1.2" />
+          <circle cx="22" cy="12" r="1.2" />
+          <circle cx="6" cy="8" r="1" />
+          <circle cx="26" cy="8" r="1" />
+        </g>
+      </svg>
+      <span>Metatree</span>
+    </a>
+
+    <div class="nav__links">
+      {
+        links.map((link) => (
+          <a href={link.href} class="nav__link">
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="nav__cta">
+      <a href={switchHref} class="nav__locale" aria-label="Switch language">
+        {t.locale.switchTo}
+      </a>
+      <a href={localizedHref('/contact/', locale)} class="btn-primary nav__book">
+        ↓ {t.nav.bookCall}
+      </a>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: sticky;
+    top: var(--space-3);
+    z-index: 50;
+    padding-inline: var(--container-pad);
+    pointer-events: none;
+  }
+
+  .nav__inner {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding: var(--space-2) var(--space-4);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+  }
+
+  .nav__logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--fs-body-sm);
+    font-weight: var(--fw-semibold);
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .nav__logo:hover {
+    color: var(--text-primary);
+  }
+
+  .nav__links {
+    display: flex;
+    gap: var(--space-5);
+  }
+
+  .nav__link {
+    font-family: var(--font-mono);
+    font-size: var(--fs-body-sm);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: var(--fw-medium);
+  }
+
+  .nav__link:hover {
+    color: var(--text-primary);
+  }
+
+  .nav__cta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .nav__locale {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    padding: var(--space-2);
+    border-radius: var(--radius-sm);
+  }
+
+  .nav__locale:hover {
+    color: var(--brand-primary);
+  }
+
+  .nav__book {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--fs-label);
+  }
+
+  @media (max-width: 767px) {
+    .nav__links {
+      display: none;
+    }
+    .nav__inner {
+      padding: var(--space-2) var(--space-3);
+    }
+  }
+</style>

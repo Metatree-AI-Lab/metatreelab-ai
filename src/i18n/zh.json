@@ -1,0 +1,53 @@
+{
+  "nav": {
+    "services": "服务",
+    "work": "作品",
+    "about": "关于",
+    "contact": "联系",
+    "bookCall": "预约沟通"
+  },
+  "hero": {
+    "sectionLabel": "/ 01 — METATREE LAB",
+    "title_line1": "我们做真正",
+    "title_line2": "上线的系统。",
+    "subtitle": "匠人学院旗下的 Digital Studio。给技术团队做 AI，给澳洲房产团队做营销 — 同一种工程师的偏执，两种不同的产出。",
+    "cta_primary": "预约沟通",
+    "cta_secondary": "查看作品",
+    "backing": "由匠人学院支持 · 5 年以上生产级 AI 运营经验"
+  },
+  "split": {
+    "sectionLabel": "/ 02 — WHAT DO YOU NEED?",
+    "ai": {
+      "title": "AI Systems",
+      "subtitle": "帮你搭 AI，或者帮你把 AI 用进团队日常。",
+      "bullets": [
+        "RAG 与 AI Agent 搭建",
+        "Claude Cowork 落地",
+        "OpenClaw 🦞 实施",
+        "AI 平台工程"
+      ],
+      "proof": "training-rag · SigmaQ · 3 款线上 AI Chrome 产品",
+      "cta": "了解 AI 服务"
+    },
+    "property": {
+      "title": "Property Marketing",
+      "subtitle": "澳洲房地产行业的网站、楼盘页与品牌视觉。",
+      "bullets": [
+        "开发商官网",
+        "楼盘专属着陆页",
+        "品牌视觉系统",
+        "Google / Meta 广告着陆页"
+      ],
+      "proof": "Forma Property",
+      "cta": "了解 Property 服务"
+    }
+  },
+  "footer": {
+    "builtBy": "由 Metatree Lab 打造",
+    "parent": "匠人学院出品",
+    "rights": "版权所有"
+  },
+  "locale": {
+    "switchTo": "EN"
+  }
+}

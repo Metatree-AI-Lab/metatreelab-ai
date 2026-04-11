@@ -1,0 +1,14 @@
+{
+  "id": "ai-adopt-01",
+  "quote": {
+    "en": "We asked three consultancies to help us deploy OpenClaw for our internal ops team. Only Metatree had actually shipped real agents in production. The difference showed in week one.",
+    "zh": "我们让三家咨询公司帮我们给内部运营团队部署 OpenClaw。只有 Metatree 是真的在生产环境跑过 agent 的。第一周就看出差距了。"
+  },
+  "author": "Head of Operations",
+  "role": {
+    "en": "Education Group · Melbourne",
+    "zh": "教育集团 · 墨尔本"
+  },
+  "company": "Confidential",
+  "featured": false
+}

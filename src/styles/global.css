@@ -1,0 +1,328 @@
+/* ============================================================
+   Metatree Lab — Global Styles
+   Design tokens implement design.md §2-§4
+   ============================================================ */
+
+@import "tailwindcss";
+
+/* ------------------------------------------------------------
+   Design Tokens (CSS variables)
+   ------------------------------------------------------------ */
+:root {
+  /* Backgrounds */
+  --bg-base: #000000;
+  --bg-elevated: #0a0a0b;
+  --bg-glass: rgba(255, 255, 255, 0.03);
+
+  /* Text */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.65);
+  --text-tertiary: rgba(255, 255, 255, 0.45);
+  --text-muted: rgba(255, 255, 255, 0.30);
+
+  /* Borders */
+  --border-hairline: rgba(255, 255, 255, 0.08);
+  --border-grid: rgba(255, 255, 255, 0.05);
+  --border-strong: rgba(255, 255, 255, 0.15);
+
+  /* Brand */
+  --brand-primary: #00e5a0;
+  --brand-secondary: #00b4d8;
+  --brand-accent: #7df9c5;
+  --brand-gradient: linear-gradient(
+    135deg,
+    #00e5a0 0%,
+    #00c89e 25%,
+    #00b4d8 60%,
+    #0095c4 100%
+  );
+  --brand-glow: radial-gradient(
+    circle,
+    rgba(0, 229, 160, 0.35) 0%,
+    rgba(0, 180, 216, 0.15) 50%,
+    transparent 100%
+  );
+
+  /* Spacing (8px baseline) */
+  --space-1: 0.4rem;
+  --space-2: 0.8rem;
+  --space-3: 1.6rem;
+  --space-4: 2.4rem;
+  --space-5: 3.2rem;
+  --space-6: 4.8rem;
+  --space-7: 6.4rem;
+  --space-8: 9.6rem;
+  --space-9: 12.8rem;
+  --space-10: 16.0rem;
+
+  /* Layout */
+  --container-max: 128rem;
+  --container-pad: 2.4rem;
+
+  /* Radius */
+  --radius-sm: 0.8rem;
+  --radius-md: 1.2rem;
+  --radius-lg: 2.4rem;
+  --radius-pill: 9.9rem;
+
+  /* Typography — font stacks */
+  --font-sans: "Satoshi", "Inter", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", "JetBrains Mono", "SF Mono", Menlo, Consolas,
+    monospace;
+  --font-sans-zh: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", sans-serif;
+
+  /* Font sizes (1rem = 10px, see html font-size below) */
+  --fs-display: 8.4rem;
+  --fs-display-m: 4.8rem;
+  --fs-h1: 6.4rem;
+  --fs-h2: 4.8rem;
+  --fs-h3: 3.2rem;
+  --fs-h4: 2.4rem;
+  --fs-body-lg: 1.8rem;
+  --fs-body: 1.6rem;
+  --fs-body-sm: 1.4rem;
+  --fs-label: 1.2rem;
+  --fs-micro: 1.0rem;
+
+  /* Font weights */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Line heights */
+  --lh-tight: 1.05;
+  --lh-snug: 1.25;
+  --lh-normal: 1.5;
+  --lh-loose: 1.75;
+
+  /* Shadows */
+  --shadow-card:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.06),
+    inset -1px -1px 0 rgba(255, 255, 255, 0.04),
+    0 10px 30px rgba(0, 0, 0, 0.4);
+  --shadow-glow:
+    0 0 40px rgba(0, 229, 160, 0.15),
+    0 0 80px rgba(0, 180, 216, 0.08);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 200ms;
+  --dur-normal: 400ms;
+  --dur-slow: 800ms;
+  --dur-breath: 4000ms;
+}
+
+/* ------------------------------------------------------------
+   Tailwind v4 @theme — expose tokens as utility classes
+   e.g. bg-brand-primary, text-text-secondary, etc.
+   ------------------------------------------------------------ */
+@theme {
+  --color-bg-base: #000000;
+  --color-bg-elevated: #0a0a0b;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.65);
+  --color-text-tertiary: rgba(255, 255, 255, 0.45);
+  --color-text-muted: rgba(255, 255, 255, 0.30);
+
+  --color-brand-primary: #00e5a0;
+  --color-brand-secondary: #00b4d8;
+  --color-brand-accent: #7df9c5;
+
+  --color-border-hairline: rgba(255, 255, 255, 0.08);
+  --color-border-grid: rgba(255, 255, 255, 0.05);
+  --color-border-strong: rgba(255, 255, 255, 0.15);
+
+  --font-sans: "Satoshi", "Inter", -apple-system, sans-serif;
+  --font-mono: "Geist Mono", "JetBrains Mono", "SF Mono", monospace;
+
+  --radius-sm: 0.8rem;
+  --radius-md: 1.2rem;
+  --radius-lg: 2.4rem;
+  --radius-pill: 9.9rem;
+}
+
+/* ------------------------------------------------------------
+   Base styles
+   ------------------------------------------------------------ */
+html {
+  /* 1rem = 10px */
+  font-size: 62.5%;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+@media (max-width: 767px) {
+  html {
+    font-size: 56.25%; /* 1rem = 9px on mobile */
+  }
+}
+
+html[lang="zh"] {
+  font-family: var(--font-sans-zh);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  overflow-x: hidden;
+}
+
+html[lang="zh"] body {
+  line-height: var(--lh-loose);
+}
+
+/* Typography defaults */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+h4 { font-size: var(--fs-h4); }
+
+p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--dur-normal) var(--ease-out);
+}
+
+a:hover {
+  color: var(--brand-primary);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Selection */
+::selection {
+  background: var(--brand-primary);
+  color: var(--bg-base);
+}
+
+/* ------------------------------------------------------------
+   Utility classes (used across components)
+   ------------------------------------------------------------ */
+
+/* Section label: / 01 — SERVICES */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary);
+  font-weight: var(--fw-medium);
+}
+
+/* Container with max-width and padding */
+.container-x {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+/* Glass card */
+.card-glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: border-color var(--dur-normal) var(--ease-out);
+}
+
+.card-glass:hover {
+  border-color: var(--border-strong);
+}
+
+/* Primary button (glass + mono label) */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  background: var(--bg-glass);
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  border: 1px solid var(--border-hairline);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition:
+    border-color var(--dur-normal) var(--ease-out),
+    box-shadow var(--dur-normal) var(--ease-out),
+    transform var(--dur-normal) var(--ease-out);
+}
+
+.btn-primary:hover {
+  border-color: var(--brand-primary);
+  box-shadow: var(--shadow-glow);
+  color: var(--text-primary);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--fs-body-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: all var(--dur-normal) var(--ease-out);
+}
+
+.btn-ghost:hover {
+  color: var(--text-primary);
+  border-color: var(--border-hairline);
+}
+
+/* ------------------------------------------------------------
+   Accessibility
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 4px;
+  border-radius: 2px;
+}

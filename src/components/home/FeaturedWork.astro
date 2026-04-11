@@ -1,0 +1,242 @@
+---
+import { localizedHref, type Locale } from '../../config/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const label = locale === 'zh' ? '精选作品' : 'SELECTED WORK';
+const viewAll = locale === 'zh' ? '查看全部作品' : 'View all work';
+
+// Hardcoded featured projects for now (P0).
+// These will be replaced by content collection queries once projects/ is seeded.
+const featured = locale === 'zh'
+  ? [
+      {
+        tag: 'AI · RAG',
+        name: 'training-rag',
+        summary: '匠人学院的生产级 RAG 系统，LangChain + pgvector on AWS Lambda，服务全球华语学员。',
+        client: 'JR Academy',
+      },
+      {
+        tag: 'AI · SAAS',
+        name: 'SigmaQ',
+        summary: '多租户企业级测评 SaaS，4 档 Stripe 订阅、LMS 集成、Super Admin 后台。',
+        client: 'JR Academy',
+      },
+      {
+        tag: 'PROPERTY · WEB',
+        name: 'Forma Property',
+        summary: '悉尼房地产开发商集团主站，编辑级极简风，商业与住宅项目集合展示。',
+        client: 'Forma Group',
+      },
+    ]
+  : [
+      {
+        tag: 'AI · RAG',
+        name: 'training-rag',
+        summary: 'Production RAG for JR Academy learning platform. LangChain + pgvector on AWS Lambda, shipping personalised learning paths.',
+        client: 'JR Academy',
+      },
+      {
+        tag: 'AI · SAAS',
+        name: 'SigmaQ',
+        summary: 'Multi-tenant enterprise assessment SaaS. 4-tier Stripe billing, LMS integration, super admin console.',
+        client: 'JR Academy',
+      },
+      {
+        tag: 'PROPERTY · WEB',
+        name: 'Forma Property',
+        summary: 'Sydney property developer group main site. Editorial minimal design, commercial + residential project showcase.',
+        client: 'Forma Group',
+      },
+    ];
+---
+
+<section class="featured">
+  <div class="featured__inner container-x">
+    <div class="featured__header">
+      <span class="section-label">/ 05 — {label}</span>
+      <a href={localizedHref('/work/', locale)} class="featured__all">
+        {viewAll} →
+      </a>
+    </div>
+
+    <div class="featured__grid">
+      {
+        featured.map((p) => (
+          <a href={localizedHref('/work/', locale)} class="featured__card">
+            <div class="featured__cover" aria-hidden="true">
+              <div class="featured__cover-inner">
+                <span class="featured__tag">{p.tag}</span>
+                <div class="featured__pattern"></div>
+              </div>
+            </div>
+
+            <div class="featured__body">
+              <h3 class="featured__name">{p.name}</h3>
+              <p class="featured__summary">{p.summary}</p>
+              <div class="featured__meta">
+                <span class="section-label">CLIENT · {p.client}</span>
+                <span class="featured__arrow">→</span>
+              </div>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .featured {
+    position: relative;
+    padding-block: var(--space-9);
+    z-index: 2;
+  }
+
+  .featured__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .featured__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .featured__all {
+    font-family: var(--font-mono);
+    font-size: var(--fs-body-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    transition: color var(--dur-normal) var(--ease-out);
+  }
+
+  .featured__all:hover {
+    color: var(--brand-primary);
+  }
+
+  .featured__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+
+  .featured__card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition:
+      border-color var(--dur-normal) var(--ease-out),
+      transform var(--dur-normal) var(--ease-out),
+      box-shadow var(--dur-normal) var(--ease-out);
+  }
+
+  .featured__card:hover {
+    border-color: var(--brand-primary);
+    transform: translateY(-4px);
+    box-shadow: 0 0 40px rgba(0, 229, 160, 0.1);
+  }
+
+  .featured__cover {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    background:
+      linear-gradient(135deg, rgba(0, 229, 160, 0.06), rgba(0, 180, 216, 0.06));
+    border-bottom: 1px solid var(--border-hairline);
+    overflow: hidden;
+  }
+
+  .featured__cover-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    padding: var(--space-4);
+  }
+
+  .featured__pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        transparent 0,
+        transparent 24px,
+        rgba(255, 255, 255, 0.02) 24px,
+        rgba(255, 255, 255, 0.02) 25px
+      );
+    pointer-events: none;
+  }
+
+  .featured__tag {
+    position: relative;
+    z-index: 2;
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--brand-primary);
+    padding: var(--space-1) var(--space-2);
+    border: 1px solid var(--brand-primary);
+    border-radius: var(--radius-sm);
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .featured__body {
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    flex: 1;
+  }
+
+  .featured__name {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-bold);
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .featured__summary {
+    font-size: var(--fs-body-sm);
+    color: var(--text-secondary);
+    line-height: var(--lh-normal);
+    flex: 1;
+  }
+
+  .featured__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--border-hairline);
+  }
+
+  .featured__arrow {
+    color: var(--text-tertiary);
+    transition: transform var(--dur-normal) var(--ease-out);
+  }
+
+  .featured__card:hover .featured__arrow {
+    transform: translateX(4px);
+    color: var(--brand-primary);
+  }
+
+  @media (max-width: 991px) {
+    .featured__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

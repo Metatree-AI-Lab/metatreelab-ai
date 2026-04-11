@@ -1,0 +1,14 @@
+{
+  "id": "jr-student-01",
+  "quote": {
+    "en": "The Metatree team doesn't just talk about AI — they ship it. The Claude Code rollout saved our engineering team weeks per sprint and the team actually uses it, not just talks about it.",
+    "zh": "Metatree 团队不是在嘴上讲 AI，他们是真的在发货。Claude Code 落地让我们工程团队每个 sprint 省下数周时间，而且团队是真的在用，不是只是在讨论。"
+  },
+  "author": "Senior Engineering Lead",
+  "role": {
+    "en": "Fintech SaaS · Sydney",
+    "zh": "金融科技 SaaS · 悉尼"
+  },
+  "company": "Confidential",
+  "featured": true
+}

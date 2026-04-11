@@ -1,0 +1,143 @@
+---
+import type { Locale } from '../../config/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const label = locale === 'zh' ? '母公司产品矩阵' : 'BUILT ALONGSIDE';
+
+const brands = [
+  { name: 'SigmaQ', note: 'Assessment SaaS' },
+  { name: '考证匠', note: 'IT Cert Tutor' },
+  { name: '求职匠', note: 'Job Hunter' },
+  { name: '牛小匠', note: 'Uni Tutor' },
+  { name: 'JR Academy', note: 'Parent Brand' },
+  { name: 'Forma Property', note: 'Property Client' },
+];
+---
+
+<section class="trustbar">
+  <div class="trustbar__inner container-x">
+    <div class="trustbar__header">
+      <span class="section-label">/ 03 — {label}</span>
+      <div class="trustbar__line" aria-hidden="true"></div>
+    </div>
+
+    <ul class="trustbar__grid">
+      {
+        brands.map((b) => (
+          <li class="trustbar__item">
+            <span class="trustbar__name">{b.name}</span>
+            <span class="trustbar__note">{b.note}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .trustbar {
+    position: relative;
+    padding-block: var(--space-7);
+    z-index: 2;
+  }
+
+  .trustbar__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .trustbar__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .trustbar__line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      var(--border-hairline) 0%,
+      transparent 100%
+    );
+  }
+
+  .trustbar__grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--border-hairline);
+    border-bottom: 1px solid var(--border-hairline);
+  }
+
+  .trustbar__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-5) var(--space-3);
+    border-right: 1px solid var(--border-hairline);
+    transition: background var(--dur-normal) var(--ease-out);
+  }
+
+  .trustbar__item:last-child {
+    border-right: none;
+  }
+
+  .trustbar__item:hover {
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .trustbar__name {
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    font-weight: var(--fw-semibold);
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .trustbar__note {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 991px) {
+    .trustbar__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .trustbar__item:nth-child(3) {
+      border-right: none;
+    }
+    .trustbar__item:nth-child(n + 4) {
+      border-top: 1px solid var(--border-hairline);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .trustbar__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .trustbar__item {
+      border-right: 1px solid var(--border-hairline);
+    }
+    .trustbar__item:nth-child(2n) {
+      border-right: none;
+    }
+    .trustbar__item:nth-child(n + 3) {
+      border-top: 1px solid var(--border-hairline);
+    }
+  }
+</style>

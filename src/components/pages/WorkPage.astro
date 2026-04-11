@@ -1,0 +1,322 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../ui/PageHero.astro';
+import CtaFooter from '../shared/CtaFooter.astro';
+import { type Locale } from '../../config/site';
+import { projects, type ProjectEntry } from '../../data/projects';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const copy = locale === 'zh'
+  ? {
+      sectionLabel: '/ WORK',
+      title: '发到生产环境的项目作品。',
+      subtitle: '精选跨 AI、房产、品牌的作品 — 母公司自有产品 + 真实客户案例。',
+      filters: [
+        { id: 'all', label: '全部' },
+        { id: 'ai-systems', label: 'AI 系统' },
+        { id: 'property', label: '房产' },
+        { id: 'brand', label: '品牌' },
+      ],
+      client: '客户',
+      empty: '暂无作品',
+    }
+  : {
+      sectionLabel: '/ WORK',
+      title: 'Projects shipped to production.',
+      subtitle: 'Selected work across AI, property, and brand — built for our parent company and for real clients.',
+      filters: [
+        { id: 'all', label: 'All' },
+        { id: 'ai-systems', label: 'AI Systems' },
+        { id: 'property', label: 'Property' },
+        { id: 'brand', label: 'Brand' },
+      ],
+      client: 'Client',
+      empty: 'No projects yet',
+    };
+
+const sorted = [...projects].sort((a, b) => a.order - b.order);
+---
+
+<BaseLayout title={copy.title} locale={locale} path={Astro.url.pathname}>
+  <PageHero
+    sectionLabel={copy.sectionLabel}
+    title={copy.title}
+    subtitle={copy.subtitle}
+  />
+
+  <section class="work">
+    <div class="work__inner container-x">
+      <!-- Filter tabs -->
+      <div class="work__filters" role="tablist" aria-label="Filter projects">
+        {
+          copy.filters.map((f, i) => (
+            <button
+              type="button"
+              class={`work__filter ${i === 0 ? 'is-active' : ''}`}
+              data-filter={f.id}
+              role="tab"
+              aria-selected={i === 0 ? 'true' : 'false'}
+            >
+              {f.label}
+            </button>
+          ))
+        }
+      </div>
+
+      <!-- Grid -->
+      <div class="work__grid" id="work-grid">
+        {
+          sorted.map((p: ProjectEntry) => (
+            <article
+              class="work-card"
+              data-category={p.category}
+            >
+              <div class="work-card__cover">
+                <span class="work-card__tags">
+                  {p.tags.map((t) => (
+                    <span class="work-card__tag">{t}</span>
+                  ))}
+                </span>
+                <div class="work-card__pattern"></div>
+              </div>
+
+              <div class="work-card__body">
+                <h3 class="work-card__name">{p.name}</h3>
+                <p class="work-card__summary">{p.summary[locale]}</p>
+
+                <div class="work-card__meta">
+                  <span class="section-label">
+                    {copy.client.toUpperCase()} · {p.client} · {p.year}
+                  </span>
+                  {p.url && (
+                    <a href={p.url} target="_blank" rel="noreferrer" class="work-card__link">
+                      ↗
+                    </a>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="work__empty" id="work-empty" hidden>
+        <span class="section-label">{copy.empty}</span>
+      </div>
+    </div>
+  </section>
+
+  <CtaFooter locale={locale} />
+</BaseLayout>
+
+<script>
+  // Client-side filter — vanilla, no framework.
+  const filterButtons = document.querySelectorAll<HTMLButtonElement>('.work__filter');
+  const cards = document.querySelectorAll<HTMLElement>('.work-card');
+  const empty = document.getElementById('work-empty');
+
+  filterButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter ?? 'all';
+
+      // Update active tab state
+      filterButtons.forEach((b) => {
+        b.classList.toggle('is-active', b === btn);
+        b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
+      });
+
+      // Filter cards
+      let visible = 0;
+      cards.forEach((card) => {
+        const category = card.dataset.category ?? '';
+        const show = filter === 'all' || category === filter;
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+
+      if (empty) empty.hidden = visible > 0;
+    });
+  });
+</script>
+
+<style>
+  .work {
+    position: relative;
+    padding-block: var(--space-8);
+    z-index: 2;
+  }
+
+  .work__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .work__filters {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--border-hairline);
+  }
+
+  .work__filter {
+    padding: var(--space-2) var(--space-4);
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-pill);
+    background: var(--bg-glass);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: var(--fs-body-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: all var(--dur-normal) var(--ease-out);
+  }
+
+  .work__filter:hover {
+    color: var(--text-primary);
+    border-color: var(--border-strong);
+  }
+
+  .work__filter.is-active {
+    color: var(--brand-primary);
+    border-color: var(--brand-primary);
+    background: rgba(0, 229, 160, 0.08);
+  }
+
+  .work__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+
+  .work__empty {
+    padding-block: var(--space-7);
+    text-align: center;
+  }
+
+  .work-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition:
+      border-color var(--dur-normal) var(--ease-out),
+      transform var(--dur-normal) var(--ease-out);
+  }
+
+  .work-card:hover {
+    border-color: var(--brand-primary);
+    transform: translateY(-4px);
+  }
+
+  .work-card__cover {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 229, 160, 0.04),
+      rgba(0, 180, 216, 0.04)
+    );
+    border-bottom: 1px solid var(--border-hairline);
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: var(--space-3);
+  }
+
+  .work-card__pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        transparent 0,
+        transparent 24px,
+        rgba(255, 255, 255, 0.015) 24px,
+        rgba(255, 255, 255, 0.015) 25px
+      );
+    pointer-events: none;
+  }
+
+  .work-card__tags {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: var(--space-1);
+    flex-wrap: wrap;
+  }
+
+  .work-card__tag {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    padding: 2px 6px;
+    background: rgba(0, 0, 0, 0.6);
+    color: var(--brand-primary);
+    border: 1px solid var(--brand-primary);
+    border-radius: var(--radius-sm);
+    letter-spacing: 0.08em;
+  }
+
+  .work-card__body {
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    flex: 1;
+  }
+
+  .work-card__name {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-bold);
+    letter-spacing: -0.01em;
+  }
+
+  .work-card__summary {
+    font-size: var(--fs-body-sm);
+    color: var(--text-secondary);
+    line-height: var(--lh-normal);
+    flex: 1;
+  }
+
+  .work-card__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--space-3);
+    margin-top: var(--space-2);
+    border-top: 1px solid var(--border-hairline);
+  }
+
+  .work-card__link {
+    color: var(--text-tertiary);
+    font-family: var(--font-mono);
+    font-size: var(--fs-body);
+  }
+
+  .work-card__link:hover {
+    color: var(--brand-primary);
+  }
+
+  @media (max-width: 991px) {
+    .work__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .work__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

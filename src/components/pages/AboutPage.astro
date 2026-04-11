@@ -1,0 +1,422 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../ui/PageHero.astro';
+import CtaFooter from '../shared/CtaFooter.astro';
+import { siteConfig, type Locale } from '../../config/site';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const copy = locale === 'zh'
+  ? {
+      sectionLabel: '/ ABOUT',
+      title: 'Metatree Lab 是匠人学院旗下的 Digital Studio。',
+      subtitle: '我们做两件事：给技术团队做 AI，给澳洲房产团队做营销。母公司在教育科技领域运营 5+ 年，所有 AI 能力都有线上产品作为证据。',
+      matrixHeading: '/ CAPABILITY × PROOF',
+      matrixDesc: '我们说我们能做什么，每一项都有一个正在线上跑的产品作为证据。',
+      parentHeading: '/ BACKED BY JR ACADEMY',
+      parentDesc: 'Metatree Lab 不是个独立小工作室。我们背后是运营 5+ 年的匠人学院 — 一家面向全球华语学员的 AI 教育平台，在 AWS 上跑着 10+ 个 Lambda 微服务、3 款线上 AI 产品、一个多租户测评 SaaS 和一个生产级 RAG 系统。',
+      parentCta: '访问匠人学院 →',
+      testimonialsHeading: '/ WHAT CLIENTS SAY',
+      principlesHeading: '/ HOW WE WORK',
+      principles: [
+        { label: '先发货，再优雅', text: '我们更在乎能不能跑到生产，而不是代码有多漂亮。能跑起来的丑方案永远比跑不起来的优雅方案有价值。' },
+        { label: '每项能力都有证据', text: '我们不做 slideware pitch。每项服务都能给你看一个正在线上运行的同类系统。' },
+        { label: '团队比个人重要', text: '交付不是一个英雄工程师，是一个小团队 + 完整文档 + 团队能接手的 SOP。' },
+        { label: '不做套话', text: '"赋能"、"行业领先"、"打通闭环"这类词我们不用。我们只说具体做了什么、交付了什么、结果如何。' },
+      ],
+    }
+  : {
+      sectionLabel: '/ ABOUT',
+      title: 'Metatree Lab is a digital studio from JR Academy.',
+      subtitle: 'We do two things: AI for teams that build, marketing for Australian property teams. Our parent has been operating in ed-tech for 5+ years, and every AI capability we claim is backed by a live product.',
+      matrixHeading: '/ CAPABILITY × PROOF',
+      matrixDesc: 'Every capability we claim has a live system to back it up.',
+      parentHeading: '/ BACKED BY JR ACADEMY',
+      parentDesc: 'Metatree Lab is not a standalone boutique. We are backed by JR Academy — a 5+ year old AI education platform serving global Chinese learners, running 10+ Lambda microservices on AWS, 3 live AI products, a multi-tenant assessment SaaS, and a production RAG system.',
+      parentCta: 'Visit JR Academy →',
+      testimonialsHeading: '/ WHAT CLIENTS SAY',
+      principlesHeading: '/ HOW WE WORK',
+      principles: [
+        { label: 'Ship first, polish second', text: 'We optimise for whether it runs in production, not whether the code is pretty. An ugly system in production always beats an elegant one that never ships.' },
+        { label: 'Every capability has receipts', text: 'We do not pitch with slideware. For every service we sell, we can show you a live version running somewhere.' },
+        { label: 'Team over hero engineer', text: 'Delivery is a small team plus full documentation plus SOPs your team can take over. Not a lone hero.' },
+        { label: 'No corporate speak', text: '"Enable", "synergy", "industry-leading" — we do not use them. We say what we did, what we shipped, and what the result was.' },
+      ],
+    };
+
+const matrix = locale === 'zh'
+  ? [
+      { capability: 'RAG 与上下文工程', proof: 'training-rag · LangChain · pgvector on Lambda · 服务真实学员' },
+      { capability: '多租户企业 AI SaaS', proof: 'SigmaQ · 4 档 Stripe 订阅 · LMS 集成 · Super Admin' },
+      { capability: 'AI Agent 编排', proof: 'Agent-Skills 知识库 · 自研 MCP servers · 3 款线上 Chrome agent' },
+      { capability: 'AI 内容自动化', proof: 'uni-course-architect · Claude Bootcamp Pipeline' },
+      { capability: 'Claude Code 团队落地', proof: '团队天天用 Claude Code 给 JR Academy 发货' },
+      { capability: 'OpenClaw 🦞 部署', proof: '原生微信 / 飞书集成 · 自托管 agent-first 架构' },
+      { capability: 'AWS AI 基建', proof: '10+ Lambda 微服务 · Terraform IaC · DynamoDB / S3 / SQS' },
+      { capability: '房产营销网站', proof: 'Forma Property · formaproperty.com.au 线上运行' },
+      { capability: '双语运营', proof: '母公司 5+ 年华语市场 + 英文主流市场双线运营' },
+    ]
+  : [
+      { capability: 'RAG & Context Engineering', proof: 'training-rag · LangChain · pgvector on Lambda · serving real learners' },
+      { capability: 'Multi-tenant Enterprise AI SaaS', proof: 'SigmaQ · 4-tier Stripe subscription · LMS integration · Super Admin' },
+      { capability: 'AI Agent Orchestration', proof: 'Agent-Skills knowledge base · custom MCP servers · 3 live Chrome agents' },
+      { capability: 'AI Content Automation', proof: 'uni-course-architect · Claude-driven Bootcamp Pipeline' },
+      { capability: 'Claude Code Team Rollout', proof: 'Our team ships JR Academy with Claude Code every day' },
+      { capability: 'OpenClaw 🦞 Deployment', proof: 'Native WeChat / Feishu integration · self-hosted agent-first stack' },
+      { capability: 'AWS AI Infrastructure', proof: '10+ Lambda microservices · Terraform IaC · DynamoDB / S3 / SQS' },
+      { capability: 'Property Marketing Sites', proof: 'Forma Property · formaproperty.com.au in production' },
+      { capability: 'Bilingual Operations', proof: 'Parent company runs Chinese + English markets for 5+ years' },
+    ];
+
+// Load testimonials from collection
+const testimonials = await getCollection('testimonials');
+const featuredTestimonials = testimonials
+  .filter((t) => t.data.featured)
+  .slice(0, 2);
+---
+
+<BaseLayout title={copy.title} locale={locale} path={Astro.url.pathname}>
+  <PageHero
+    sectionLabel={copy.sectionLabel}
+    title={copy.title}
+    subtitle={copy.subtitle}
+  />
+
+  <!-- CAPABILITY × PROOF MATRIX -->
+  <section class="about-matrix">
+    <div class="about-matrix__inner container-x">
+      <div class="about-matrix__header">
+        <span class="section-label">{copy.matrixHeading}</span>
+        <p class="about-matrix__desc">{copy.matrixDesc}</p>
+      </div>
+
+      <div class="matrix">
+        <div class="matrix__row matrix__row--head">
+          <div class="matrix__cap">CAPABILITY</div>
+          <div class="matrix__proof">PROOF IN PRODUCTION</div>
+        </div>
+        {
+          matrix.map((row) => (
+            <div class="matrix__row">
+              <div class="matrix__cap">/ {row.capability}</div>
+              <div class="matrix__proof">{row.proof}</div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- JR ACADEMY BACKING -->
+  <section class="parent">
+    <div class="parent__inner container-x">
+      <div class="parent__card">
+        <div class="parent__body">
+          <span class="section-label">{copy.parentHeading}</span>
+          <h2 class="parent__title">JR Academy · 匠人学院</h2>
+          <p class="parent__desc">{copy.parentDesc}</p>
+          <a
+            href={siteConfig.parent.url}
+            target="_blank"
+            rel="noreferrer"
+            class="btn-ghost"
+          >
+            {copy.parentCta}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRINCIPLES -->
+  <section class="principles">
+    <div class="principles__inner container-x">
+      <span class="section-label">{copy.principlesHeading}</span>
+
+      <div class="principles__grid">
+        {
+          copy.principles.map((p, i) => (
+            <div class="principle">
+              <span class="principle__num section-label">/ {String(i + 1).padStart(2, '0')}</span>
+              <h3 class="principle__label">{p.label}</h3>
+              <p class="principle__text">{p.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {
+    featuredTestimonials.length > 0 && (
+      <section class="testimonials">
+        <div class="testimonials__inner container-x">
+          <span class="section-label">{copy.testimonialsHeading}</span>
+
+          <div class="testimonials__grid">
+            {featuredTestimonials.map((t, i) => (
+              <figure class={`quote ${i % 2 === 0 ? 'quote--offset' : ''}`}>
+                <div class="quote__mark">"</div>
+                <blockquote class="quote__text">{t.data.quote[locale]}</blockquote>
+                <figcaption class="quote__meta">
+                  <div class="quote__author">{t.data.author}</div>
+                  <div class="quote__role">{t.data.role[locale]}</div>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <CtaFooter locale={locale} />
+</BaseLayout>
+
+<style>
+  .about-matrix {
+    position: relative;
+    padding-block: var(--space-8);
+    z-index: 2;
+  }
+
+  .about-matrix__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .about-matrix__desc {
+    font-size: var(--fs-body-lg);
+    color: var(--text-secondary);
+    margin-top: var(--space-2);
+  }
+
+  .matrix {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--border-hairline);
+  }
+
+  .matrix__row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-4);
+    padding-block: var(--space-4);
+    border-bottom: 1px solid var(--border-hairline);
+    transition: background var(--dur-normal) var(--ease-out);
+  }
+
+  .matrix__row:not(.matrix__row--head):hover {
+    background: rgba(255, 255, 255, 0.015);
+  }
+
+  .matrix__row--head {
+    padding-block: var(--space-2);
+  }
+
+  .matrix__row--head .matrix__cap,
+  .matrix__row--head .matrix__proof {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .matrix__cap {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-semibold);
+    letter-spacing: -0.01em;
+  }
+
+  .matrix__proof {
+    font-family: var(--font-mono);
+    font-size: var(--fs-body-sm);
+    color: var(--text-secondary);
+    align-self: center;
+    line-height: var(--lh-normal);
+  }
+
+  /* Parent */
+  .parent {
+    position: relative;
+    padding-block: var(--space-8);
+    border-top: 1px solid var(--border-hairline);
+    z-index: 2;
+  }
+
+  .parent__card {
+    position: relative;
+    padding: var(--space-7);
+    background: linear-gradient(
+      135deg,
+      rgba(0, 229, 160, 0.04),
+      rgba(0, 180, 216, 0.04)
+    );
+    border: 1px solid rgba(0, 229, 160, 0.2);
+    border-radius: var(--radius-lg);
+  }
+
+  .parent__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    max-width: 72rem;
+  }
+
+  .parent__title {
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-bold);
+    letter-spacing: -0.02em;
+  }
+
+  .parent__desc {
+    font-size: var(--fs-body-lg);
+    color: var(--text-secondary);
+    line-height: var(--lh-normal);
+  }
+
+  .parent .btn-ghost {
+    align-self: flex-start;
+    margin-top: var(--space-2);
+  }
+
+  /* Principles */
+  .principles {
+    position: relative;
+    padding-block: var(--space-8);
+    border-top: 1px solid var(--border-hairline);
+    z-index: 2;
+  }
+
+  .principles__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .principles__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5);
+    border-top: 1px solid var(--border-hairline);
+    padding-top: var(--space-5);
+  }
+
+  .principle {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .principle__num {
+    color: var(--text-tertiary);
+  }
+
+  .principle__label {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-bold);
+    letter-spacing: -0.01em;
+  }
+
+  .principle__text {
+    font-size: var(--fs-body);
+    color: var(--text-secondary);
+    line-height: var(--lh-normal);
+  }
+
+  /* Testimonials */
+  .testimonials {
+    position: relative;
+    padding-block: var(--space-8);
+    border-top: 1px solid var(--border-hairline);
+    z-index: 2;
+  }
+
+  .testimonials__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .testimonials__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+    align-items: flex-start;
+  }
+
+  .quote {
+    padding: var(--space-5);
+    margin: 0;
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .quote--offset {
+    margin-top: var(--space-5);
+  }
+
+  .quote__mark {
+    font-family: var(--font-sans);
+    font-size: 4.8rem;
+    font-weight: var(--fw-bold);
+    line-height: 1;
+    color: var(--brand-primary);
+    opacity: 0.6;
+    letter-spacing: -0.04em;
+  }
+
+  .quote__text {
+    font-size: var(--fs-body);
+    color: var(--text-primary);
+    line-height: var(--lh-loose);
+    font-style: italic;
+    margin: 0;
+  }
+
+  .quote__meta {
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--border-hairline);
+  }
+
+  .quote__author {
+    font-size: var(--fs-body-sm);
+    color: var(--text-primary);
+    font-weight: var(--fw-semibold);
+  }
+
+  .quote__role {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 2px;
+  }
+
+  @media (max-width: 991px) {
+    .matrix__row,
+    .principles__grid,
+    .testimonials__grid {
+      grid-template-columns: 1fr;
+    }
+    .matrix__row {
+      gap: var(--space-1);
+    }
+    .quote--offset { margin-top: 0; }
+    .parent__title { font-size: var(--fs-h3); }
+  }
+</style>
