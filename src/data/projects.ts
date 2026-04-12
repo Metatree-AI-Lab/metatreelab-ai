@@ -155,7 +155,8 @@ export const projects: ProjectEntry[] = [
     featured: true,
     order: 3,
     name: 'Jobpin AI',
-    client: 'JR Academy',
+    client: 'Metatree Lab',
+    cover: '/work/jobpin-ai.png',
     summary: {
       en: 'AI-powered job matching platform with intelligent agent that searches across the web for hidden opportunities, auto-generates tailored resumes and cover letters, and connects candidates to insider referral networks. Trusted by 100+ companies.',
       zh: 'AI 驱动的智能求职平台。AI Agent 全网搜索隐藏岗位机会，自动生成定制简历和求职信，连接内推人脉网络。已获 100+ 企业信任。',
