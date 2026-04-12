@@ -120,6 +120,38 @@ export const projects: ProjectEntry[] = [
   },
 
   {
+    slug: 'jracademy-ai',
+    category: 'ai-systems',
+    tags: ['AI', 'EdTech', 'Platform'],
+    year: 2025,
+    featured: true,
+    order: 4,
+    name: 'JR Academy AI',
+    client: 'JR Academy',
+    cover: '/work/jracademy-ai.png',
+    summary: {
+      en: 'AI-powered education platform empowering global talent with AI & tech training. Partnered with Atlassian, Google, and AWS. 1000+ cooperative enterprises, bootcamps, P3 incubator, and enterprise training solutions.',
+      zh: 'AI 驱动的教育平台，面向全球人才提供 AI 与技术培训。与 Atlassian、Google、AWS 合作，1000+ 合作企业，提供 Bootcamp、P3 孵化器和企业培训方案。',
+    },
+    outcomes: {
+      en: [
+        '1000+ cooperative enterprises',
+        'Partnerships with Atlassian, Google, AWS',
+        'AI-powered bootcamps and P3 incubator program',
+        'Enterprise training solutions for global talent',
+      ],
+      zh: [
+        '1000+ 合作企业',
+        '与 Atlassian、Google、AWS 合作',
+        'AI 驱动的 Bootcamp 与 P3 孵化器',
+        '面向全球人才的企业培训方案',
+      ],
+    },
+    stack: ['Next.js', 'NestJS', 'MongoDB', 'AWS', 'AI'],
+    url: 'https://jracademy.ai',
+  },
+
+  {
     slug: 'afaa',
     category: 'brand',
     tags: ['Association', 'Web', 'Brand'],
