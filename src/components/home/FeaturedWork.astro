@@ -22,12 +22,17 @@ const featured = featuredProjects;
         {viewAll} →
       </a>
     </div>
+<div class="featured__grid">
+  {
+    featured.map((p, idx) => (
+      <a 
+        href={localizedHref(`/work/${p.slug}/`, locale)} 
+        class={`featured__card card-shimmer delay-${(idx % 3) + 1}`}
+        data-reveal="3d"
+      >
+        <div class="featured__cover" aria-hidden="true">
+...
 
-    <div class="featured__grid">
-      {
-        featured.map((p) => (
-          <a href={localizedHref(`/work/${p.slug}/`, locale)} class="featured__card">
-            <div class="featured__cover" aria-hidden="true">
               <ProjectThumbnail project={p} />
             </div>
 

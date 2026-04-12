@@ -327,6 +327,26 @@ button {
    Utility classes (used across components)
    ------------------------------------------------------------ */
 ...
+/* Container with max-width and padding */
+.container-x {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+@media (min-width: 768px) {
+  .container-x {
+    padding-inline: var(--space-6);
+  }
+}
+
+@media (min-width: 1200px) {
+  .container-x {
+    padding-inline: var(--space-7);
+  }
+}
+
 /* Glass card */
 .card-glass {
   background: var(--bg-glass);

@@ -37,8 +37,11 @@ const brands = locale === 'zh'
 
     <ul class="trustbar__grid">
       {
-        brands.map((b) => (
-          <li class="trustbar__item">
+        brands.map((b, idx) => (
+          <li 
+            class={`trustbar__item delay-${(idx % 5) + 1}`} 
+            data-reveal="3d"
+          >
             <span class="trustbar__name">{b.name}</span>
             <span class="trustbar__note">{b.note}</span>
           </li>
