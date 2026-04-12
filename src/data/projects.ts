@@ -184,6 +184,37 @@ export const projects: ProjectEntry[] = [
   },
 
   {
+    slug: 'argus-systems',
+    category: 'ai-systems',
+    tags: ['AI', 'Infrastructure', 'Critical Systems'],
+    year: 2025,
+    featured: false,
+    order: 9,
+    name: 'Argus Systems',
+    client: 'Argus Systems',
+    summary: {
+      en: 'AI infrastructure for real-world critical systems. Founded by Carnegie Mellon, Georgia Tech, and Harvard veterans with backgrounds in Waymo autonomous vehicles and military intelligence. Resilience-first AI for high-stakes environments.',
+      zh: 'AI 基础设施，面向真实世界关键系统。由 Carnegie Mellon、Georgia Tech 和 Harvard 背景的团队创立，拥有 Waymo 自动驾驶和军事情报经验。为高风险环境打造可靠 AI。',
+    },
+    outcomes: {
+      en: [
+        'AI resilience for critical infrastructure',
+        'Founded by CMU / Georgia Tech / Harvard veterans',
+        'Prior experience: Waymo autonomous vehicles as public transit',
+        'Military intelligence + autonomous systems pedigree',
+      ],
+      zh: [
+        '关键基础设施的 AI 可靠性',
+        'CMU / Georgia Tech / Harvard 背景团队创立',
+        '前经历：Waymo 自动驾驶公共交通',
+        '军事情报 + 自主系统基因',
+      ],
+    },
+    stack: ['AI', 'Infrastructure', 'Autonomous Systems'],
+    url: 'https://argus.systems',
+  },
+
+  {
     slug: 'gotocourt',
     category: 'ai-systems',
     tags: ['AI', 'LegalTech', 'Platform'],
