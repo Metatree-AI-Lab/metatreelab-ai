@@ -29,7 +29,7 @@ export const siteConfig = {
   contact: {
     email: 'hello@jiangren.com.au',
     phone: '+61 421 672 555',
-    bookingUrl: 'https://cal.com/metatreelab/intro',
+    apiUrl: 'https://api.jiangren.com.au/business-inquiry',
   },
 
   offices: [

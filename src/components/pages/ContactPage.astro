@@ -63,8 +63,7 @@ const copy = locale === 'zh'
       emailCta: 'Send us an email',
     };
 
-// Web3Forms — replace with real access key in production. Placeholder for MVP.
-const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
+const API_URL = 'https://api.jiangren.com.au/business-inquiry';
 const thanksUrl = locale === 'zh' ? '/zh/thanks/' : '/thanks/';
 ---
 
@@ -75,6 +74,55 @@ const thanksUrl = locale === 'zh' ? '/zh/thanks/' : '/thanks/';
     subtitle={copy.subtitle}
   />
 
+  <script>
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
+    const statusEl = document.getElementById('form-status') as HTMLElement | null;
+
+    if (form && submitBtn && statusEl) {
+      const apiUrl = form.dataset.api ?? '';
+      const thanksUrl = form.dataset.thanks ?? '/thanks/';
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = '…';
+        statusEl.textContent = '';
+
+        const body = {
+          companyName: (document.getElementById('companyName') as HTMLInputElement).value,
+          contactName: (document.getElementById('contactName') as HTMLInputElement).value,
+          email: (document.getElementById('email') as HTMLInputElement).value,
+          phone: (document.getElementById('phone') as HTMLInputElement).value || undefined,
+          services: [(document.getElementById('services') as HTMLSelectElement).value || 'other'],
+          description: (document.getElementById('description') as HTMLTextAreaElement).value,
+        };
+
+        try {
+          const res = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+          });
+
+          if (res.ok) {
+            window.location.href = thanksUrl;
+          } else {
+            const data = await res.json().catch(() => ({}));
+            statusEl.textContent = (data as { message?: string }).message || 'Something went wrong. Please email us directly.';
+            submitBtn.disabled = false;
+            submitBtn.textContent = '↓ Send';
+          }
+        } catch {
+          statusEl.textContent = 'Network error. Please email us directly.';
+          submitBtn.disabled = false;
+          submitBtn.textContent = '↓ Send';
+        }
+      });
+    }
+  </script>
+
   <section class="contact">
     <div class="contact__inner container-x">
       <div class="contact__grid">
@@ -84,31 +132,15 @@ const thanksUrl = locale === 'zh' ? '/zh/thanks/' : '/thanks/';
 
           <form
             class="contact__form"
-            action="https://api.web3forms.com/submit"
-            method="POST"
+            id="contact-form"
+            data-api={API_URL}
+            data-thanks={thanksUrl}
           >
-            <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
-            <input type="hidden" name="subject" value="New lead from metatreelab.ai" />
-            <input type="hidden" name="from_name" value="Metatree Lab Website" />
-            <input type="hidden" name="redirect" value={`https://metatreelab.ai${thanksUrl}`} />
-            <input type="hidden" name="locale" value={locale} />
-
-            <!-- Honeypot: hidden from humans, bots fill it -->
-            <input
-              type="checkbox"
-              name="botcheck"
-              class="contact__honeypot"
-              style="display:none"
-              tabindex="-1"
-              autocomplete="off"
-            />
-
             <div class="field">
-              <label for="name" class="field__label">{copy.nameLabel}</label>
+              <label for="contactName" class="field__label">{copy.nameLabel}</label>
               <input
-                id="name"
+                id="contactName"
                 type="text"
-                name="name"
                 required
                 class="field__input"
                 autocomplete="name"
@@ -120,7 +152,6 @@ const thanksUrl = locale === 'zh' ? '/zh/thanks/' : '/thanks/';
               <input
                 id="email"
                 type="email"
-                name="email"
                 required
                 class="field__input"
                 autocomplete="email"
@@ -128,55 +159,54 @@ const thanksUrl = locale === 'zh' ? '/zh/thanks/' : '/thanks/';
             </div>
 
             <div class="field">
-              <label for="company" class="field__label">{copy.companyLabel}</label>
+              <label for="companyName" class="field__label">{copy.companyLabel}</label>
               <input
-                id="company"
+                id="companyName"
                 type="text"
-                name="company"
+                required
                 class="field__input"
                 autocomplete="organization"
               />
             </div>
 
             <div class="field">
-              <label for="interest" class="field__label">{copy.interestLabel}</label>
-              <select id="interest" name="service_interest" class="field__input">
+              <label for="phone" class="field__label">{locale === 'zh' ? '电话（选填）' : 'Phone (optional)'}</label>
+              <input
+                id="phone"
+                type="tel"
+                class="field__input"
+                autocomplete="tel"
+              />
+            </div>
+
+            <div class="field">
+              <label for="services" class="field__label">{copy.interestLabel}</label>
+              <select id="services" class="field__input">
                 {copy.interestOptions.map((o) => <option value={o.value}>{o.label}</option>)}
               </select>
             </div>
 
             <div class="field">
-              <label for="message" class="field__label">{copy.messageLabel}</label>
+              <label for="description" class="field__label">{copy.messageLabel}</label>
               <textarea
-                id="message"
-                name="message"
+                id="description"
                 rows="6"
                 required
                 class="field__input field__input--textarea"
                 placeholder={copy.messagePlaceholder}></textarea>
             </div>
 
-            <button type="submit" class="btn-primary contact__submit">
-              ↓ {copy.submit}
-            </button>
+            <div class="contact__form-footer">
+              <button type="submit" class="btn-primary contact__submit" id="submit-btn">
+                ↓ {copy.submit}
+              </button>
+              <span class="contact__status" id="form-status"></span>
+            </div>
           </form>
         </div>
 
         <!-- ASIDE -->
         <aside class="contact__aside">
-          <div class="contact__block">
-            <span class="section-label">{copy.bookHeading}</span>
-            <p class="contact__block-desc">{copy.bookDesc}</p>
-            <a
-              href={siteConfig.contact.bookingUrl}
-              target="_blank"
-              rel="noreferrer"
-              class="btn-ghost"
-            >
-              {copy.bookCta}
-            </a>
-          </div>
-
           <div class="contact__block">
             <span class="section-label">{copy.emailHeading}</span>
             <a
@@ -302,9 +332,26 @@ const thanksUrl = locale === 'zh' ? '/zh/thanks/' : '/thanks/';
     font-family: var(--font-sans);
   }
 
-  .contact__submit {
-    align-self: flex-start;
+  .contact__form-footer {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
     margin-top: var(--space-2);
+  }
+
+  .contact__submit {
+    flex-shrink: 0;
+  }
+
+  .contact__submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .contact__status {
+    font-family: var(--font-mono);
+    font-size: var(--fs-body-sm);
+    color: #ff5c7a;
   }
 
   /* Aside */
