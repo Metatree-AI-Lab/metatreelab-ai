@@ -120,6 +120,38 @@ export const projects: ProjectEntry[] = [
   },
 
   {
+    slug: 'afaa',
+    category: 'brand',
+    tags: ['Association', 'Web', 'Brand'],
+    year: 2025,
+    featured: false,
+    order: 7,
+    name: 'AFAA',
+    client: 'Australian Federation of AI Associations',
+    cover: '/work/afaa.png',
+    summary: {
+      en: 'Official website for the Australian Federation of AI Associations — connecting academia, industry, and government for AI innovation. 1k+ members joined. Membership portal, events, and community hub.',
+      zh: '澳大利亚人工智能协会联合会官网 — 连接学术界、产业界与政府，推动 AI 创新。1000+ 会员加入。会员门户、活动管理与社区中心。',
+    },
+    outcomes: {
+      en: [
+        'Membership portal with tiered plans',
+        'Events management and registration system',
+        '1k+ members onboarded',
+        'Connecting academia, industry, and government',
+      ],
+      zh: [
+        '分级会员门户系统',
+        '活动管理与报名系统',
+        '1000+ 会员入驻',
+        '连接学术界、产业界与政府',
+      ],
+    },
+    stack: ['Next.js', 'CMS', 'Membership'],
+    url: 'https://afaa.ai',
+  },
+
+  {
     slug: 'dispatch-ai',
     category: 'ai-systems',
     tags: ['AI', 'SaaS'],
