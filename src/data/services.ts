@@ -315,6 +315,53 @@ export const services: ServiceEntry[] = [
   },
 
   {
+    slug: 'ai-agent-workflow-automation',
+    track: 'adopt',
+    flagship: true,
+    duration: '2-8w',
+    order: 10,
+    tags: ['agent', 'automation', 'workflow', 'flagship'],
+    title: {
+      en: 'AI Agent Workflow Automation',
+      zh: 'AI Agent 自动化工作流',
+    },
+    subtitle: {
+      en: 'Replace repetitive manual work with AI agents that run 24/7.',
+      zh: '用 7×24 小时运行的 AI Agent 替代重复性人工操作。',
+    },
+    summary: {
+      en: 'We help companies design and deploy AI agent workflows that automate real business processes — not toy demos. From customer support triage and lead qualification to document processing, content generation, and cross-system data sync. We assess your highest-ROI automation opportunities, build the agent pipelines, integrate with your existing tools (CRM, ERP, Slack, WeChat, email), and hand over with documentation so your team owns it.',
+      zh: '帮企业设计和部署 AI Agent 工作流，自动化真实业务流程 — 不是玩具 demo。从客服分流、线索评分，到文档处理、内容生成、跨系统数据同步。我们评估最高 ROI 的自动化机会，搭建 agent 管道，对接现有工具（CRM、ERP、Slack、微信、邮箱），交付文档让你团队能自己维护。',
+    },
+    deliverables: {
+      en: [
+        'Automation opportunity audit and ROI prioritisation',
+        'AI agent pipeline design and development',
+        'Integration with existing tools (CRM, ERP, Slack, WeChat, email, databases)',
+        'Human-in-the-loop checkpoints for critical decisions',
+        'Error handling, retries, and alerting',
+        'Monitoring dashboard and cost tracking',
+        'Documentation and team handover training',
+        'Optional: deploy on OpenClaw 🦞 for self-hosted, privacy-first setups',
+      ],
+      zh: [
+        '自动化机会审计与 ROI 优先级排序',
+        'AI Agent 管道设计与开发',
+        '对接现有工具（CRM、ERP、Slack、微信、邮箱、数据库）',
+        '关键决策点的 human-in-the-loop 检查',
+        '错误处理、重试与告警',
+        '监控面板与成本追踪',
+        '文档与团队接手培训',
+        '可选：部署到 OpenClaw 🦞 实现自托管、数据不出内网',
+      ],
+    },
+    proof: {
+      en: 'We run 10+ automated agent workflows internally. Same architecture, deployed for your business.',
+      zh: '我们内部运行 10+ 个自动化 agent 工作流。同样的架构，部署到你的业务。',
+    },
+  },
+
+  {
     slug: 'openclaw-implementation',
     track: 'adopt',
     flagship: true,
