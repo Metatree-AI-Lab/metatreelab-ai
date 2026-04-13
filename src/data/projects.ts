@@ -35,7 +35,8 @@ export const projects: ProjectEntry[] = [
     featured: true,
     order: 2,
     name: 'SigmaQ',
-    client: 'JR Academy',
+    client: 'Metatree Lab',
+    cover: '/work/sigmaq.png',
     summary: {
       en: 'Multi-tenant enterprise assessment SaaS with Stripe subscriptions, LMS integration via webhooks, and an anti-cheat engine. Powers certification prep for IT professionals at scale.',
       zh: '多租户企业级测评 SaaS，带 Stripe 订阅、LMS webhook 集成、防作弊引擎。规模化服务 IT 专业人士的认证备考。',
