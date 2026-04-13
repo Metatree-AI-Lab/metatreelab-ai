@@ -32,7 +32,7 @@ export const services: ServiceEntry[] = [
     slug: 'ai-strategy-sprint',
     track: 'build',
     flagship: false,
-    duration: '2-4w',
+    duration: '1-2w',
     order: 1,
     tags: ['strategy', 'poc', 'roadmap'],
     title: {
@@ -44,8 +44,8 @@ export const services: ServiceEntry[] = [
       zh: '一个跑得起来的 POC + 落地路线图，不是 PPT。',
     },
     summary: {
-      en: 'Two to four weeks to validate whether AI can actually deliver value for your business problem. You leave with a working demo, a scoped roadmap, and clear go/no-go criteria.',
-      zh: '2 到 4 周验证 AI 能否真正为你的业务问题交付价值。你会拿到一个可运行的 demo、一份明确的路线图，以及 go/no-go 判断标准。',
+      en: 'One to two weeks to validate whether AI can actually deliver value for your business problem. You leave with a working demo, a scoped roadmap, and clear go/no-go criteria.',
+      zh: '1 到 2 周验证 AI 能否真正为你的业务问题交付价值。你会拿到一个可运行的 demo、一份明确的路线图，以及 go/no-go 判断标准。',
     },
     deliverables: {
       en: [
@@ -69,7 +69,7 @@ export const services: ServiceEntry[] = [
     slug: 'rag-knowledge-systems',
     track: 'build',
     flagship: false,
-    duration: '4-12w',
+    duration: '2-6w',
     order: 2,
     tags: ['rag', 'knowledge', 'vector', 'embeddings'],
     title: {
@@ -110,7 +110,7 @@ export const services: ServiceEntry[] = [
     slug: 'ai-agent-development',
     track: 'build',
     flagship: true,
-    duration: '6-16w',
+    duration: '3-8w',
     order: 3,
     tags: ['agent', 'tool-use', 'flagship'],
     title: {
@@ -153,7 +153,7 @@ export const services: ServiceEntry[] = [
     slug: 'custom-llm-applications',
     track: 'build',
     flagship: false,
-    duration: '6-16w',
+    duration: '3-8w',
     order: 4,
     tags: ['llm', 'app', 'eval'],
     title: {
@@ -231,7 +231,7 @@ export const services: ServiceEntry[] = [
     slug: 'web3-blockchain',
     track: 'build',
     flagship: false,
-    duration: '4-12w',
+    duration: '2-6w',
     order: 6,
     tags: ['web3', 'blockchain', 'dapp', 'defi'],
     title: {
@@ -271,7 +271,7 @@ export const services: ServiceEntry[] = [
     slug: 'claude-cowork-setup',
     track: 'adopt',
     flagship: true,
-    duration: '2-4w',
+    duration: '1-2w',
     order: 10,
     tags: ['claude-code', 'claude-cowork', 'flagship', 'rollout'],
     title: {
@@ -295,7 +295,7 @@ export const services: ServiceEntry[] = [
         '5-10 reference workflows on your real business scenarios',
         'Team collaboration SOPs and prompt library',
         'Technical training repackaged from JR Academy curriculum',
-        '2-4 weeks hands-on + 30 days Slack support',
+        '1-2 weeks hands-on + 30 days Slack support',
       ],
       zh: [
         '环境与 SSO 搭建 + 用量治理',
@@ -305,7 +305,7 @@ export const services: ServiceEntry[] = [
         '基于你真实业务场景的 5-10 个示范 workflow',
         '团队协作 SOP 与 prompt library',
         '从匠人学院课程重新打包的技术培训',
-        '2-4 周陪跑 + 30 天 Slack 支持',
+        '1-2 周陪跑 + 30 天 Slack 支持',
       ],
     },
     proof: {
@@ -318,7 +318,7 @@ export const services: ServiceEntry[] = [
     slug: 'ai-agent-workflow-automation',
     track: 'adopt',
     flagship: true,
-    duration: '2-8w',
+    duration: '1-4w',
     order: 10,
     tags: ['agent', 'automation', 'workflow', 'flagship'],
     title: {
@@ -365,7 +365,7 @@ export const services: ServiceEntry[] = [
     slug: 'openclaw-implementation',
     track: 'adopt',
     flagship: true,
-    duration: '3-6w',
+    duration: '1-3w',
     order: 11,
     tags: ['openclaw', 'lobster', 'self-hosted', 'flagship', 'agent'],
     title: {
@@ -408,7 +408,7 @@ export const services: ServiceEntry[] = [
     slug: 'hermes-agent-implementation',
     track: 'adopt',
     flagship: true,
-    duration: '2-6w',
+    duration: '1-3w',
     order: 12,
     tags: ['hermes', 'self-improving', 'flagship', 'agent'],
     title: {
@@ -453,7 +453,7 @@ export const services: ServiceEntry[] = [
     slug: 'workflow-automation',
     track: 'adopt',
     flagship: false,
-    duration: '2-6w',
+    duration: '1-3w',
     order: 12,
     tags: ['n8n', 'make', 'zapier', 'automation'],
     title: {
@@ -490,7 +490,7 @@ export const services: ServiceEntry[] = [
     slug: 'ai-tools-rollout',
     track: 'adopt',
     flagship: false,
-    duration: '1-3w',
+    duration: '3-5d',
     order: 13,
     tags: ['chatgpt', 'copilot', 'cursor', 'rollout'],
     title: {
@@ -565,7 +565,7 @@ export const services: ServiceEntry[] = [
     slug: 'enterprise-ai-training',
     track: 'adopt',
     flagship: false,
-    duration: '1-4w',
+    duration: '3-10d',
     order: 15,
     tags: ['training', 'enterprise', 'workshop'],
     title: {
@@ -612,7 +612,7 @@ export const services: ServiceEntry[] = [
     slug: 'developer-website',
     track: 'property',
     flagship: false,
-    duration: '1-2w',
+    duration: '3-7d',
     order: 20,
     tags: ['website', 'developer', 'ai-powered'],
     title: {
@@ -624,7 +624,7 @@ export const services: ServiceEntry[] = [
       zh: 'AI 辅助构建 — 几天上线，而不是几个月。',
     },
     summary: {
-      en: 'A full developer group website launched fast with AI-assisted design and content generation. Investor-grade positioning, responsive, SEO-ready. What used to take 2 months now ships in 1-2 weeks.',
+      en: 'A full developer group website launched fast with AI-assisted design and content generation. Investor-grade positioning, responsive, SEO-ready. What used to take 2 months now ships in days.',
       zh: '一个完整的开发商集团主站，把你的品牌定位在高净值买家和机构投资人面前。参考案例：Forma Property（由 metatreelab.ai 出品）。',
     },
     deliverables: {
@@ -653,7 +653,7 @@ export const services: ServiceEntry[] = [
     slug: 'project-landing-page',
     track: 'property',
     flagship: false,
-    duration: '2-4w',
+    duration: '3-7d',
     order: 21,
     tags: ['landing', 'project', 'lead-gen'],
     title: {
@@ -690,7 +690,7 @@ export const services: ServiceEntry[] = [
     slug: 'brand-identity',
     track: 'property',
     flagship: false,
-    duration: '2-6w',
+    duration: '1-2w',
     order: 22,
     tags: ['brand', 'identity', 'design'],
     title: {
@@ -770,7 +770,7 @@ export const services: ServiceEntry[] = [
     slug: 'ad-landing-pages',
     track: 'property',
     flagship: false,
-    duration: '1-2w',
+    duration: '2-5d',
     order: 23,
     tags: ['ads', 'landing', 'conversion', 'ab-test'],
     title: {

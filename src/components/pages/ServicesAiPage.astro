@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../ui/PageHero.astro';
+import EngagementModes from '../home/EngagementModes.astro';
 import CtaFooter from '../shared/CtaFooter.astro';
 import { type Locale } from '../../config/site';
 import { servicesByTrack, type ServiceEntry } from '../../data/services';
@@ -157,6 +158,9 @@ const proofMatrix = locale === 'zh'
       </div>
     </div>
   </section>
+
+  <!-- ENGAGEMENT MODES -->
+  <EngagementModes locale={locale} />
 
   <!-- PROOF MATRIX -->
   <section class="proof-section">

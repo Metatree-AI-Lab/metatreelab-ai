@@ -1,0 +1,91 @@
+---
+import type { Locale } from '../../config/site';
+import { useTranslations } from '../../i18n/index';
+import { deckSlides } from '../../data/deck';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const slide = deckSlides[9];
+---
+
+<div class="slide-inner">
+  <span class="slide-label">{slide.label}</span>
+
+  <h2 class="slide-title" data-deck-reveal>{slide.title[locale]}</h2>
+
+  <div class="engage-grid">
+    <!-- Project-based -->
+    <div class="engage-card deck-card" data-deck-reveal>
+      <div class="engage-indicator" style="background: #00e5a0"></div>
+      <span class="engage-tag engage-tag--project">{t.engagement.project.tag}</span>
+      <h3 class="engage-name">{t.engagement.project.title}</h3>
+      <p class="engage-desc">{t.engagement.project.description}</p>
+    </div>
+
+    <!-- Consultant -->
+    <div class="engage-card deck-card" data-deck-reveal>
+      <div class="engage-indicator" style="background: #00b4d8"></div>
+      <span class="engage-tag engage-tag--consultant">{t.engagement.consultant.tag}</span>
+      <h3 class="engage-name">{t.engagement.consultant.title}</h3>
+      <p class="engage-desc">{t.engagement.consultant.description}</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .engage-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(1.2rem, 2cqi, 2.4rem);
+    margin-top: clamp(2.4rem, 4cqi, 4.8rem);
+  }
+  .engage-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .engage-indicator {
+    width: 3.2rem;
+    height: 0.3rem;
+    border-radius: 2px;
+  }
+  .engage-tag {
+    font-family: var(--font-mono);
+    font-size: clamp(0.9rem, 1.1cqi, 1.1rem);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    width: fit-content;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-sm);
+  }
+  .engage-tag--project {
+    color: #00e5a0;
+    border: 1px solid #00e5a0;
+    background: rgba(0, 229, 160, 0.08);
+  }
+  .engage-tag--consultant {
+    color: #00b4d8;
+    border: 1px solid #00b4d8;
+    background: rgba(0, 180, 216, 0.08);
+  }
+  .engage-name {
+    font-family: var(--font-sans);
+    font-size: clamp(1.6rem, 2.2cqi, 2.4rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.2;
+  }
+  .engage-desc {
+    font-size: clamp(1.1rem, 1.4cqi, 1.4rem);
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+  }
+  @media (max-width: 767px) {
+    .engage-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

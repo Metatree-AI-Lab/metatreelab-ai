@@ -1,0 +1,126 @@
+---
+import type { Locale } from '../../config/site';
+import { useTranslations } from '../../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section class="engagement">
+  <div class="engagement__inner container-x">
+    <span class="section-label" data-reveal>{t.engagement.sectionLabel}</span>
+    <h2 class="engagement__title" data-reveal>{t.engagement.title}</h2>
+
+    <div class="engagement__grid">
+      <!-- Project-based -->
+      <div class="engagement__card card-shimmer" data-reveal>
+        <span class="engagement__tag engagement__tag--project">{t.engagement.project.tag}</span>
+        <h3 class="engagement__card-title">{t.engagement.project.title}</h3>
+        <p class="engagement__desc">{t.engagement.project.description}</p>
+      </div>
+
+      <!-- Consultant -->
+      <div class="engagement__card card-shimmer" data-reveal style="transition-delay: 0.15s">
+        <span class="engagement__tag engagement__tag--consultant">{t.engagement.consultant.tag}</span>
+        <h3 class="engagement__card-title">{t.engagement.consultant.title}</h3>
+        <p class="engagement__desc">{t.engagement.consultant.description}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .engagement {
+    position: relative;
+    padding-block: var(--space-9);
+    z-index: 2;
+  }
+
+  .engagement__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .engagement__title {
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-bold);
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+
+  .engagement__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+
+  .engagement__card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-6);
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    transition:
+      border-color var(--dur-normal) var(--ease-out),
+      transform var(--dur-normal) var(--ease-out);
+  }
+
+  .engagement__card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-strong);
+  }
+
+  .engagement__tag {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    width: fit-content;
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+  }
+
+  .engagement__tag--project {
+    color: var(--brand-primary);
+    border: 1px solid var(--brand-primary);
+    background: rgba(0, 229, 160, 0.08);
+  }
+
+  .engagement__tag--consultant {
+    color: var(--brand-secondary, #00b4d8);
+    border: 1px solid var(--brand-secondary, #00b4d8);
+    background: rgba(0, 180, 216, 0.08);
+  }
+
+  .engagement__card-title {
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-bold);
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .engagement__desc {
+    font-size: var(--fs-body);
+    color: var(--text-secondary);
+    line-height: var(--lh-normal);
+  }
+
+  @media (max-width: 767px) {
+    .engagement__grid {
+      grid-template-columns: 1fr;
+    }
+    .engagement__card {
+      padding: var(--space-5);
+    }
+  }
+</style>

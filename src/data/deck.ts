@@ -43,7 +43,7 @@ export const deckSlides: DeckSlide[] = [
   {
     id: 'adopt',
     label: '/ 06 — AI ADOPT',
-    title: { en: 'Your team, AI-native\nin 2 weeks.', zh: '让你的团队\n两周内 AI 化。' },
+    title: { en: 'Your team, AI-native\nin days.', zh: '让你的团队\n几天内 AI 化。' },
   },
   {
     id: 'property',
@@ -61,18 +61,23 @@ export const deckSlides: DeckSlide[] = [
     title: { en: 'From call to production\nin 4 steps.', zh: '从沟通到上线\n只需 4 步。' },
   },
   {
+    id: 'engagement',
+    label: '/ 10 — HOW TO ENGAGE',
+    title: { en: 'Two ways to work\nwith us.', zh: '两种合作模式。' },
+  },
+  {
     id: 'team',
-    label: '/ 10 — TEAM',
+    label: '/ 11 — TEAM',
     title: { en: 'Small team.\nFull coverage.', zh: '精锐团队，\n全栈覆盖。' },
   },
   {
     id: 'why-us',
-    label: '/ 11 — WHY METATREE',
+    label: '/ 12 — WHY METATREE',
     title: { en: 'How we\'re different.', zh: '我们的不同之处。' },
   },
   {
     id: 'cta',
-    label: '/ 12 — LET\'S TALK',
+    label: '/ 13 — LET\'S TALK',
     title: { en: 'Let\'s build something\nthat ships.', zh: '让我们一起\n做出能上线的产品。' },
   },
 ];
@@ -111,7 +116,7 @@ export const processSteps = [
   {
     step: '02',
     title: { en: 'Strategy Sprint', zh: '战略冲刺' },
-    desc: { en: '2-4 week POC to validate feasibility and architecture.', zh: '2-4 周 POC 验证可行性与架构。' },
+    desc: { en: '1-2 week POC to validate feasibility and architecture.', zh: '1-2 周 POC 验证可行性与架构。' },
   },
   {
     step: '03',
@@ -122,6 +127,26 @@ export const processSteps = [
     step: '04',
     title: { en: 'Handover & Support', zh: '交接支持' },
     desc: { en: 'Full docs, SOP, and optional ongoing support.', zh: '完整文档、SOP，可选持续支持。' },
+  },
+];
+
+/** Engagement models */
+export const engagementModels = [
+  {
+    title: { en: 'Project-Based', zh: '项目制' },
+    desc: {
+      en: 'Fixed scope, fixed price. Discovery → Sprint → Build → Handover. Ideal for defined deliverables — an AI agent, a RAG system, a property site.',
+      zh: '固定范围、固定价格。需求沟通 → 冲刺 → 开发 → 交接。适合目标明确的交付物 — AI Agent、RAG 系统、楼盘官网。',
+    },
+    suited: { en: 'Best for: defined deliverables with clear scope', zh: '适合：范围明确的定制交付' },
+  },
+  {
+    title: { en: 'Retainer / Embedded', zh: '驻场顾问' },
+    desc: {
+      en: 'Ongoing partnership. Our team embeds with yours — weekly sprints, shared Slack, continuous delivery. Scale up or down as needed.',
+      zh: '持续合作。我们的团队嵌入你的团队 — 每周迭代、共享 Slack、持续交付。按需扩缩。',
+    },
+    suited: { en: 'Best for: long-term AI transformation & team enablement', zh: '适合：长期 AI 转型与团队赋能' },
   },
 ];
 
