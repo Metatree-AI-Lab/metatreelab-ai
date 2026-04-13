@@ -8,47 +8,38 @@ const { className = '', showText = true } = Astro.props;
 ---
 
 <div class={`logo-group ${className}`} aria-label="Metatree Lab">
-  <svg
-    width="32"
-    height="32"
-    viewBox="0 0 32 32"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    class="logo-icon"
-  >
-    <defs>
-      <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#00E5A0" />
-        <stop offset="100%" stop-color="#00B4D8" />
-      </linearGradient>
+  <div class="logo-icon-wrapper">
+    <svg
+      width="28"
+      height="28"
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      class="logo-svg"
+    >
+      <defs>
+        <linearGradient id="logoGradM_Final" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#00E5A0" />
+          <stop offset="100%" stop-color="#00B4D8" />
+        </linearGradient>
+      </defs>
+
+      <!-- The 'M' path - sharp, techy, and geometric -->
+      <path 
+        d="M5 25V7L16 17L27 7V25" 
+        stroke="url(#logoGradM_Final)" 
+        stroke-width="4" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"
+        class="path-m-anim"
+      />
       
-      <filter id="logoGlow" x="-50%" y="-50%" width="200%" height="200%">
-        <feGaussianBlur stdDeviation="1.5" result="blur" />
-        <feComposite in="SourceGraphic" in2="blur" operator="over" />
-      </filter>
-    </defs>
-
-    <!-- Neural Tree Structure -->
-    <g class="logo-structure" stroke="url(#logoGrad)" stroke-width="1.5" stroke-linecap="round">
-      <path d="M16 26V14" class="line-trunk" />
-      <path d="M16 18L10 12" class="line-branch" />
-      <path d="M16 18L22 12" class="line-branch" />
-      <path d="M10 12L6 8" class="line-leaf" />
-      <path d="M22 12L26 8" class="line-leaf" />
-      <path d="M16 14L16 8" class="line-leaf" />
-    </g>
-
-    <!-- Pulsing Synapses -->
-    <g fill="url(#logoGrad)" filter="url(#logoGlow)">
-      <circle cx="16" cy="26" r="1.5" class="dot-root" />
-      <circle cx="16" cy="18" r="1.2" class="dot-joint" />
-      <circle cx="10" cy="12" r="1.2" class="dot-joint" />
-      <circle cx="22" cy="12" r="1.2" class="dot-joint" />
-      <circle cx="6" cy="8" r="1" class="dot-terminal" />
-      <circle cx="26" cy="8" r="1" class="dot-terminal" />
-      <circle cx="16" cy="8" r="1" class="dot-terminal" />
-    </g>
-  </svg>
+      <!-- Strategic Neural Nodes -->
+      <circle cx="5" cy="7" r="3" fill="url(#logoGradM_Final)" class="logo-node" />
+      <circle cx="27" cy="7" r="3" fill="url(#logoGradM_Final)" class="logo-node" />
+      <circle cx="16" cy="17" r="3" fill="url(#logoGradM_Final)" class="logo-node logo-node--center" />
+    </svg>
+  </div>
 
   {showText && (
     <div class="logo-text">
@@ -61,67 +52,72 @@ const { className = '', showText = true } = Astro.props;
   .logo-group {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-2);
+    gap: 1.2rem;
     cursor: pointer;
-    user-select: none;
+    text-decoration: none;
   }
 
-  .logo-icon {
-    flex-shrink: 0;
+  .logo-icon-wrapper {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-svg {
     overflow: visible;
   }
 
   .logo-text {
-    font-size: 1.8rem;
-    letter-spacing: -0.02em;
-    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 2.2rem;
+    letter-spacing: -0.03em;
+    color: #FFFFFF;
     display: flex;
     align-items: baseline;
+    line-height: 1;
   }
 
   .text-meta {
-    font-family: var(--font-sans);
-    font-weight: var(--fw-bold);
+    font-weight: 800; /* Extra Bold */
   }
 
   .text-tree {
-    font-family: var(--font-mono);
-    font-weight: var(--fw-regular);
-    text-transform: uppercase;
-    font-size: 0.85em;
+    font-weight: 400;
     color: var(--brand-primary);
-    margin-left: 0.1em;
+    margin-left: 0.1rem;
   }
 
-  /* Animations */
-  .dot-terminal {
-    animation: logoPulse 3s ease-in-out infinite;
-  }
-  
-  .dot-terminal:nth-child(2) { animation-delay: 0.5s; }
-  .dot-terminal:nth-child(3) { animation-delay: 1s; }
-
-  .line-leaf {
-    stroke-dasharray: 10;
-    stroke-dashoffset: 10;
-    animation: logoDraw 2s var(--ease-out) forwards;
+  /* Entrance Animation */
+  .path-m-anim {
+    stroke-dasharray: 80;
+    stroke-dashoffset: 80;
+    animation: drawLogoM 1.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
   }
 
-  @keyframes logoPulse {
-    0%, 100% { opacity: 0.4; transform: scale(0.8); }
-    50% { opacity: 1; transform: scale(1.2); }
+  /* Pulsing Center Node */
+  .logo-node--center {
+    animation: nodePulseLogo 3s ease-in-out infinite;
   }
 
-  @keyframes logoDraw {
+  @keyframes drawLogoM {
     to { stroke-dashoffset: 0; }
   }
 
-  .logo-group:hover .logo-icon {
-    transform: translateY(-1px);
-    filter: brightness(1.1);
+  @keyframes nodePulseLogo {
+    0%, 100% { filter: brightness(1) drop-shadow(0 0 2px var(--brand-primary)); }
+    50% { filter: brightness(1.5) drop-shadow(0 0 8px var(--brand-primary)); }
+  }
+
+  .logo-group:hover .logo-svg {
+    transform: scale(1.1);
+    transition: transform 0.3s var(--ease-out);
   }
   
   .logo-group:hover .text-tree {
-    color: var(--text-primary);
+    color: #FFFFFF;
+    transition: color 0.3s var(--ease-out);
   }
 </style>

@@ -209,6 +209,7 @@ export const projects: ProjectEntry[] = [
     order: 9,
     name: 'Argus Systems',
     client: 'Argus Systems',
+    cover: '/work/argus-systems.png',
     summary: {
       en: 'AI infrastructure for real-world critical systems. Founded by Carnegie Mellon, Georgia Tech, and Harvard veterans with backgrounds in Waymo autonomous vehicles and military intelligence. Resilience-first AI for high-stakes environments.',
       zh: 'AI 基础设施，面向真实世界关键系统。由 Carnegie Mellon、Georgia Tech 和 Harvard 背景的团队创立，拥有 Waymo 自动驾驶和军事情报经验。为高风险环境打造可靠 AI。',

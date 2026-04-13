@@ -227,6 +227,45 @@ export const services: ServiceEntry[] = [
     },
   },
 
+  {
+    slug: 'web3-blockchain',
+    track: 'build',
+    flagship: false,
+    duration: '4-12w',
+    order: 6,
+    tags: ['web3', 'blockchain', 'dapp', 'defi'],
+    title: {
+      en: 'Web3 & Blockchain Applications',
+      zh: 'Web3 与区块链应用',
+    },
+    subtitle: {
+      en: 'DApps, DeFi platforms, NFT marketplaces, and blockchain infrastructure.',
+      zh: 'DApp、DeFi 平台、NFT 市场与区块链基础设施。',
+    },
+    summary: {
+      en: 'We build Web3 applications from smart contracts to full-stack DApps. Token economies, DeFi protocols, NFT platforms, DAO tooling, and blockchain data infrastructure — shipped to mainnet with security audits and production monitoring.',
+      zh: '从智能合约到全栈 DApp 的完整 Web3 应用开发。代币经济、DeFi 协议、NFT 平台、DAO 工具、区块链数据基建 — 审计通过后部署到主网，配套生产监控。',
+    },
+    deliverables: {
+      en: [
+        'Smart contract development and security audits',
+        'Full-stack DApp frontend + backend',
+        'DeFi protocol and token economy design',
+        'NFT marketplace and minting platforms',
+        'Wallet integration and on-chain analytics',
+        'Mainnet deployment with monitoring',
+      ],
+      zh: [
+        '智能合约开发与安全审计',
+        '全栈 DApp 前后端',
+        'DeFi 协议与代币经济设计',
+        'NFT 市场与铸造平台',
+        '钱包集成与链上分析',
+        '主网部署 + 监控',
+      ],
+    },
+  },
+
   // ========== AI ADOPT TRACK ==========
   {
     slug: 'claude-cowork-setup',

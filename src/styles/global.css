@@ -432,3 +432,54 @@ button {
   outline-offset: 4px;
   border-radius: 2px;
 }
+
+/* ------------------------------------------------------------
+   Mobile Responsive Overrides
+   ------------------------------------------------------------ */
+
+@media (max-width: 767px) {
+  :root {
+    /* Reduce spacing on mobile */
+    --space-8: 6.4rem;
+    --space-9: 8rem;
+    --space-10: 9.6rem;
+
+    /* Reduce font sizes */
+    --fs-display: 4.8rem;
+    --fs-display-m: 3.6rem;
+    --fs-h1: 4rem;
+    --fs-h2: 3.2rem;
+    --fs-h3: 2.4rem;
+    --fs-h4: 2rem;
+  }
+
+  /* Tighter container padding */
+  .container-x {
+    padding-inline: var(--space-3);
+  }
+
+  /* Section label */
+  .section-label {
+    font-size: var(--fs-micro);
+  }
+
+  /* Buttons */
+  .btn-primary,
+  .btn-ghost {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--fs-label);
+  }
+
+  /* CTA footer tighter on mobile */
+  .cta__headline {
+    font-size: var(--fs-h2) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --fs-display: 3.6rem;
+    --fs-h1: 3.2rem;
+    --fs-h2: 2.8rem;
+  }
+}

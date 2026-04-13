@@ -14,9 +14,9 @@ const links = [
   { href: localizedHref('/services/', locale), label: t.nav.services },
   { href: localizedHref('/work/', locale), label: t.nav.work },
   { href: localizedHref('/about/', locale), label: t.nav.about },
+  { href: localizedHref('/contact/', locale), label: t.nav.contact },
 ];
 
-// Language switch: strip or add /zh prefix
 const currentPath = Astro.url.pathname;
 const switchHref =
   locale === 'en'
@@ -30,26 +30,77 @@ const switchHref =
       <Logo />
     </a>
 
+    <!-- Desktop links -->
     <div class="nav__links">
-      {
-        links.map((link) => (
-          <a href={link.href} class="nav__link">
-            {link.label}
-          </a>
-        ))
-      }
+      {links.map((link) => <a href={link.href} class="nav__link">{link.label}</a>)}
     </div>
 
-    <div class="nav__cta">
+    <div class="nav__right">
       <a href={switchHref} class="nav__locale" aria-label="Switch language">
         {t.locale.switchTo}
       </a>
       <a href={localizedHref('/contact/', locale)} class="btn-primary nav__book">
         ↓ {t.nav.bookCall}
       </a>
+
+      <!-- Mobile hamburger -->
+      <button
+        class="nav__burger"
+        id="nav-burger"
+        aria-label="Open menu"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div class="nav__drawer" id="nav-drawer" aria-hidden="true">
+    <div class="nav__drawer-inner">
+      {links.map((link) => <a href={link.href} class="nav__drawer-link">{link.label}</a>)}
+      <div class="nav__drawer-divider"></div>
+      <a href={switchHref} class="nav__drawer-link nav__drawer-link--muted">
+        {t.locale.switchTo === '中' ? 'Switch to 中文' : 'Switch to English'}
+      </a>
+      <a href={localizedHref('/contact/', locale)} class="btn-primary nav__drawer-cta">
+        ↓ {t.nav.bookCall}
+      </a>
     </div>
   </div>
 </nav>
+
+<script>
+  function initMobileNav() {
+    const burger = document.getElementById('nav-burger');
+    const drawer = document.getElementById('nav-drawer');
+    if (!burger || !drawer) return;
+
+    burger.addEventListener('click', () => {
+      const open = drawer.classList.toggle('is-open');
+      burger.classList.toggle('is-open', open);
+      burger.setAttribute('aria-expanded', String(open));
+      drawer.setAttribute('aria-hidden', String(!open));
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+
+    // Close on link click
+    drawer.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => {
+        drawer.classList.remove('is-open');
+        burger.classList.remove('is-open');
+        burger.setAttribute('aria-expanded', 'false');
+        drawer.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  initMobileNav();
+  document.addEventListener('astro:after-swap', initMobileNav);
+</script>
 
 <style>
   .nav {
@@ -104,7 +155,7 @@ const switchHref =
     color: var(--text-primary);
   }
 
-  .nav__cta {
+  .nav__right {
     display: flex;
     align-items: center;
     gap: var(--space-3);
@@ -128,12 +179,129 @@ const switchHref =
     font-size: var(--fs-label);
   }
 
+  /* Hamburger button — hidden on desktop */
+  .nav__burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 3.2rem;
+    height: 3.2rem;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .nav__burger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 1px;
+    transition: all 300ms var(--ease-out);
+    transform-origin: center;
+  }
+
+  .nav__burger.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .nav__burger.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav__burger.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Drawer — hidden on desktop */
+  .nav__drawer {
+    display: none;
+  }
+
+  /* ====== Mobile ====== */
   @media (max-width: 767px) {
     .nav__links {
       display: none;
     }
+
+    .nav__book {
+      display: none;
+    }
+
+    .nav__burger {
+      display: flex;
+    }
+
     .nav__inner {
       padding: var(--space-2) var(--space-3);
+    }
+
+    .nav__drawer {
+      display: block;
+      pointer-events: auto;
+      position: fixed;
+      inset: 0;
+      z-index: 49;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      opacity: 0;
+      visibility: hidden;
+      transition:
+        opacity 400ms var(--ease-out),
+        visibility 400ms;
+    }
+
+    .nav__drawer.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .nav__drawer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      padding: 10rem var(--space-5) var(--space-7);
+      max-width: 40rem;
+      margin-inline: auto;
+    }
+
+    .nav__drawer-link {
+      font-family: var(--font-sans);
+      font-size: var(--fs-h3);
+      font-weight: var(--fw-bold);
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      padding: var(--space-2) 0;
+      border-bottom: 1px solid var(--border-hairline);
+      transition: color var(--dur-normal) var(--ease-out);
+    }
+
+    .nav__drawer-link:hover {
+      color: var(--brand-primary);
+    }
+
+    .nav__drawer-link--muted {
+      font-size: var(--fs-body);
+      font-weight: var(--fw-medium);
+      color: var(--text-tertiary);
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: none;
+    }
+
+    .nav__drawer-divider {
+      height: 1px;
+      background: var(--border-hairline);
+      margin-block: var(--space-2);
+    }
+
+    .nav__drawer-cta {
+      align-self: flex-start;
+      margin-top: var(--space-3);
     }
   }
 </style>
