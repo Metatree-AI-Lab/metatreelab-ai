@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Metatree Lab — Posters</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0a;
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: #fff;
+    padding: 40px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: rgba(255,255,255,0.8);
+  }
+  .links {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .links a {
+    display: inline-block;
+    margin: 0 16px;
+    padding: 12px 32px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    color: #00E5A0;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    transition: border-color 0.2s;
+  }
+  .links a:hover {
+    border-color: #00E5A0;
+  }
+  .posters {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .poster-frame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .poster-frame label {
+    font-size: 16px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  iframe {
+    width: 540px;
+    height: 675px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    background: #000;
+  }
+</style>
+</head>
+<body>
+  <h1>Metatree Lab — Promotional Posters</h1>
+  <div class="links">
+    <a href="/poster-zh.html" target="_blank">Chinese Full Size</a>
+    <a href="/poster-en.html" target="_blank">English Full Size</a>
+  </div>
+  <div class="posters">
+    <div class="poster-frame">
+      <label>Chinese / 中文</label>
+      <iframe src="/poster-zh.html" scrolling="no"></iframe>
+    </div>
+    <div class="poster-frame">
+      <label>English</label>
+      <iframe src="/poster-en.html" scrolling="no"></iframe>
+    </div>
+  </div>
+</body>
+</html>
