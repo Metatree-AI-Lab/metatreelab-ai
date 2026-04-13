@@ -405,6 +405,51 @@ export const services: ServiceEntry[] = [
   },
 
   {
+    slug: 'hermes-agent-implementation',
+    track: 'adopt',
+    flagship: true,
+    duration: '2-6w',
+    order: 12,
+    tags: ['hermes', 'self-improving', 'flagship', 'agent'],
+    title: {
+      en: 'Hermes Agent Implementation',
+      zh: 'Hermes Agent 实施',
+    },
+    subtitle: {
+      en: 'The self-improving AI agent with 64k+ GitHub stars — deployed for your team.',
+      zh: '64k+ GitHub Star 的自进化 AI Agent — 为你的团队部署。',
+    },
+    summary: {
+      en: 'Hermes Agent by Nous Research is the hottest open-source AI agent of 2026 — self-improving, persistent memory, 40+ built-in tools, runs on a $5 VPS. It learns from every conversation and writes reusable skill documents that make it better over time. We deploy it on your infrastructure, connect it to your team\'s Slack, Telegram, Discord or WhatsApp, build custom skills for your workflows, and set up the persistent memory system so it actually gets smarter the more your team uses it.',
+      zh: 'Hermes Agent 是 Nous Research 出品的 2026 年最火开源 AI Agent — 自进化、持久记忆、40+ 内置工具、$5 VPS 就能跑。它从每次对话中学习，自动生成可复用的 skill 文档，越用越聪明。我们在你的基建上部署，接入团队的 Slack / Telegram / Discord / WhatsApp，开发定制 skill，配置持久记忆系统，让它真正随着使用变得更强。',
+    },
+    deliverables: {
+      en: [
+        'Deployment on your infrastructure (Linux / macOS / VPS / cloud)',
+        'Multi-platform gateway setup (Slack, Telegram, Discord, WhatsApp, Signal)',
+        'Custom skill development for your business workflows',
+        'Persistent memory configuration (SQLite + FTS5 indexing)',
+        'Self-improvement loop tuning and evaluation',
+        'Security boundaries and usage governance',
+        'Team onboarding and skill authoring training',
+      ],
+      zh: [
+        '在你的基建上部署（Linux / macOS / VPS / 云）',
+        '多平台网关配置（Slack、Telegram、Discord、WhatsApp、Signal）',
+        '为你业务工作流开发定制 skill',
+        '持久记忆配置（SQLite + FTS5 索引）',
+        '自进化循环调优与评估',
+        '安全边界与用量治理',
+        '团队上手培训 + skill 编写教程',
+      ],
+    },
+    proof: {
+      en: 'Hermes Agent: 64k+ GitHub stars, Nous Research, self-improving loop — the agent framework developers are migrating to in 2026.',
+      zh: 'Hermes Agent：64k+ GitHub Star，Nous Research 出品，自进化循环 — 2026 年开发者正在迁移的 agent 框架。',
+    },
+  },
+
+  {
     slug: 'workflow-automation',
     track: 'adopt',
     flagship: false,
