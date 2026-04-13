@@ -225,6 +225,7 @@ export const projects: ProjectEntry[] = [
     order: 98,
     name: 'QLD Architecture Archive',
     client: 'University of Queensland',
+    cover: '/work/qldarch.png',
     summary: {
       en: 'Digital Archive of Queensland Architecture — a research database preserving the region\'s design history from 1945 onwards. Browse architects, buildings, firms, and articles with timeline, map, and word cloud tools.',
       zh: '昆士兰建筑数字档案馆 — 保存该地区 1945 年以来设计历史的研究数据库。通过时间线、地图和词云工具浏览建筑师、建筑、事务所与文章。',
