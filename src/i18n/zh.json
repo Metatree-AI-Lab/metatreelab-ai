@@ -4,7 +4,8 @@
     "work": "案例",
     "about": "关于",
     "contact": "联系",
-    "bookCall": "预约沟通"
+    "bookCall": "预约沟通",
+    "quote": "获取报价"
   },
   "hero": {
     "sectionLabel": "/ 01 — 你的 AI 合作伙伴",
@@ -76,6 +77,28 @@
     "founderRole": "创始人 & AI 战略负责人",
     "founderBio": "5 年以上 AI 平台搭建经验，已帮助 50+ 企业落地 AI——从战略到可运行的系统。",
     "teamCapabilities": "AI 战略 · 流程自动化 · 团队培训 · 定制软件 · AI 智能助手 · 数据系统 · 产品设计 · 平台工程"
+  },
+  "quote": {
+    "sectionLabel": "/ 即时报价",
+    "title": "选功能，看价格。",
+    "subtitle": "选择你需要的功能模块，即时获取价格预估——无需打电话、无需等待。",
+    "step": "步骤",
+    "of": "/",
+    "next": "下一步",
+    "back": "上一步",
+    "selected": "已选",
+    "total": "预估总价",
+    "perMonth": "/月",
+    "oneOff": "一次性",
+    "recurring": "按月付费",
+    "summary": "你的报价摘要",
+    "noItems": "还没有选择任何项目。",
+    "ctaTitle": "准备好了？",
+    "ctaSubtitle": "这是初步预估。联系我们，获取针对你项目的详细方案和报价。",
+    "ctaButton": "获取详细报价",
+    "disclaimerTitle": "预估说明",
+    "disclaimer": "价格为澳元参考起步价。最终价格取决于项目范围、复杂度和时间线。初次沟通后，我们会提供详细方案。",
+    "resetButton": "重置"
   },
   "engagement": {
     "sectionLabel": "/ 合作方式",

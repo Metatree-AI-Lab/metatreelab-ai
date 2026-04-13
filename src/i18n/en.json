@@ -4,7 +4,8 @@
     "work": "Case Studies",
     "about": "About",
     "contact": "Contact",
-    "bookCall": "Book a call"
+    "bookCall": "Book a call",
+    "quote": "Get a Quote"
   },
   "hero": {
     "sectionLabel": "/ 01 — YOUR AI PARTNER",
@@ -76,6 +77,28 @@
     "founderRole": "Founder & AI Strategy Lead",
     "founderBio": "5+ years building AI-powered platforms. Has helped 50+ businesses adopt AI — from strategy to working systems.",
     "teamCapabilities": "AI Strategy · Automation · Team Training · Custom Software · AI Agents · Data Systems · Product Design · Platform Engineering"
+  },
+  "quote": {
+    "sectionLabel": "/ INSTANT QUOTE",
+    "title": "Build your project, see the price.",
+    "subtitle": "Select the features you need. Get an instant estimate — no calls, no waiting.",
+    "step": "Step",
+    "of": "of",
+    "next": "Next",
+    "back": "Back",
+    "selected": "Selected",
+    "total": "Estimated Total",
+    "perMonth": "/mo",
+    "oneOff": "One-off",
+    "recurring": "Recurring",
+    "summary": "Your Quote Summary",
+    "noItems": "No items selected yet.",
+    "ctaTitle": "Ready to get started?",
+    "ctaSubtitle": "This is an estimate. Get in touch for a detailed, scoped proposal tailored to your project.",
+    "ctaButton": "Get a detailed quote",
+    "disclaimerTitle": "How this estimate works",
+    "disclaimer": "Prices are indicative starting points in AUD. Final pricing depends on project scope, complexity, and timeline. We'll provide a detailed proposal after an initial consultation.",
+    "resetButton": "Reset"
   },
   "engagement": {
     "sectionLabel": "/ HOW WE WORK",
