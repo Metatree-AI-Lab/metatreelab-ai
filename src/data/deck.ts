@@ -14,31 +14,31 @@ export const deckSlides: DeckSlide[] = [
   {
     id: 'cover',
     label: '/ 01 — METATREE LAB',
-    title: { en: 'AI consulting that ships\nto production.', zh: '落地型 AI 咨询。' },
+    title: { en: 'Cut costs. Ship faster.\nAI that works.', zh: '降本增效，\nAI 真正落地。' },
     subtitle: {
-      en: 'Strategy × Engineering × Delivery',
-      zh: '战略 × 工程 × 交付',
+      en: 'Your AI Partner · Strategy × Delivery × Training',
+      zh: '你的 AI 合作伙伴 · 战略 × 交付 × 培训',
     },
   },
   {
     id: 'problem',
     label: '/ 02 — THE PROBLEM',
-    title: { en: 'Most AI projects never\nleave the demo stage.', zh: '大多数 AI 项目\n止步于 Demo 阶段。' },
+    title: { en: 'Your competitors are\nalready using AI.', zh: '你的竞争对手\n已经在用 AI 了。' },
   },
   {
     id: 'who-we-are',
     label: '/ 03 — WHO WE ARE',
-    title: { en: 'A digital studio backed by\n5+ years of production.', zh: '一支有 5 年以上\n生产经验的 Digital Studio。' },
+    title: { en: 'We\'re an AI company\nthat builds for others.', zh: '我们自己就是 AI 公司，\n同时帮别人做。' },
   },
   {
     id: 'what-we-do',
     label: '/ 04 — WHAT WE DO',
-    title: { en: 'Three service lines.\nOne delivery team.', zh: '三条业务线，\n一个交付团队。' },
+    title: { en: 'Three ways we\nhelp your business.', zh: '三种方式\n帮你的业务增长。' },
   },
   {
     id: 'build',
     label: '/ 05 — AI BUILD',
-    title: { en: 'Custom AI engineering\nfor production.', zh: '面向生产的\n定制 AI 工程。' },
+    title: { en: 'Custom AI systems\nthat save you money.', zh: '帮你省钱的\n定制 AI 系统。' },
   },
   {
     id: 'adopt',
@@ -48,17 +48,17 @@ export const deckSlides: DeckSlide[] = [
   {
     id: 'property',
     label: '/ 07 — PROPERTY',
-    title: { en: 'Property marketing,\nengineered.', zh: '工程化驱动的\n房产营销。' },
+    title: { en: 'Same quality. A fraction\nof agency prices.', zh: '同样品质，\n价格只是代理的零头。' },
   },
   {
     id: 'cases',
     label: '/ 08 — CASE STUDIES',
-    title: { en: 'Production receipts.', zh: '交付成果。' },
+    title: { en: 'Real results from\nreal clients.', zh: '真实客户，\n真实成果。' },
   },
   {
     id: 'process',
     label: '/ 09 — HOW WE WORK',
-    title: { en: 'From call to production\nin 4 steps.', zh: '从沟通到上线\n只需 4 步。' },
+    title: { en: 'From call to results\nin 4 simple steps.', zh: '从沟通到见效\n只需 4 步。' },
   },
   {
     id: 'engagement',
@@ -68,116 +68,116 @@ export const deckSlides: DeckSlide[] = [
   {
     id: 'team',
     label: '/ 11 — TEAM',
-    title: { en: 'Small team.\nFull coverage.', zh: '精锐团队，\n全栈覆盖。' },
+    title: { en: 'Small team.\nFull coverage.', zh: '精锐团队，\n全面覆盖。' },
   },
   {
     id: 'why-us',
     label: '/ 12 — WHY METATREE',
-    title: { en: 'How we\'re different.', zh: '我们的不同之处。' },
+    title: { en: 'Everyone says they do AI.\nHere\'s why we\'re different.', zh: '都说自己做 AI，\n我们凭什么不一样？' },
   },
   {
     id: 'cta',
     label: '/ 13 — LET\'S TALK',
-    title: { en: 'Let\'s build something\nthat ships.', zh: '让我们一起\n做出能上线的产品。' },
+    title: { en: 'Free 30-minute call.\nSee how much you can save.', zh: '免费 30 分钟评估，\n看看能帮你省多少。' },
   },
 ];
 
-/** Problem slide stats */
+/** Problem slide stats — business pain, not tech jargon */
 export const problemStats = [
   {
-    value: '87%',
-    label: { en: 'of AI projects never make it to production', zh: '的 AI 项目从未上线' },
+    value: '70%',
+    label: { en: 'of businesses say they\'re falling behind on AI adoption', zh: '的企业认为自己在 AI 应用上已经落后' },
   },
   {
-    value: '$ 4.6M',
-    label: { en: 'average cost of a failed AI initiative', zh: '失败 AI 项目的平均成本' },
+    value: '20h+',
+    label: { en: 'per week wasted on tasks AI can automate', zh: '每周浪费在 AI 可以自动化的工作上' },
   },
   {
-    value: '8 mo',
-    label: { en: 'median time from POC to abandoned', zh: '从 POC 到放弃的中位时间' },
+    value: '10×',
+    label: { en: 'cost difference between traditional agencies and AI-powered delivery', zh: '传统代理与 AI 驱动交付的成本差距' },
   },
 ];
 
 /** Backing stats for who-we-are slide */
 export const backingStats = [
-  { value: '5+', label: { en: 'Years in production', zh: '年生产经验' } },
-  { value: '10+', label: { en: 'Lambda microservices', zh: '个 Lambda 微服务' } },
-  { value: '3', label: { en: 'Live AI products', zh: '个上线 AI 产品' } },
-  { value: '1000+', label: { en: 'Enterprise partners', zh: '家企业合作伙伴' } },
+  { value: '5+', label: { en: 'Years building AI systems', zh: '年 AI 系统搭建经验' } },
+  { value: '50+', label: { en: 'Businesses trust us', zh: '家企业选择我们' } },
+  { value: '70%', label: { en: 'Avg. cost reduction', zh: '平均帮客户降低成本' } },
+  { value: '3', label: { en: 'Offices across Australia', zh: '个澳洲办公室' } },
 ];
 
 /** Process steps */
 export const processSteps = [
   {
     step: '01',
-    title: { en: 'Discovery Call', zh: '需求沟通' },
-    desc: { en: 'We listen, scope the problem, and agree on outcomes.', zh: '倾听需求，定义问题范围，对齐目标。' },
+    title: { en: 'Free Consultation', zh: '免费评估' },
+    desc: { en: 'We listen to your challenges and identify where AI saves you the most.', zh: '倾听你的挑战，找出 AI 能帮你省最多的地方。' },
   },
   {
     step: '02',
-    title: { en: 'Strategy Sprint', zh: '战略冲刺' },
-    desc: { en: '1-2 week POC to validate feasibility and architecture.', zh: '1-2 周 POC 验证可行性与架构。' },
+    title: { en: 'Plan & Quote', zh: '方案报价' },
+    desc: { en: 'Clear scope, fixed price, no surprises. You know exactly what you get.', zh: '明确范围、固定价格、没有意外。你清楚知道会拿到什么。' },
   },
   {
     step: '03',
-    title: { en: 'Build & Ship', zh: '开发交付' },
-    desc: { en: 'Production code, not prototypes. Weekly demos, continuous deploy.', zh: '交付生产代码，不是原型。每周 Demo，持续部署。' },
+    title: { en: 'Build & Deliver', zh: '开发交付' },
+    desc: { en: 'We build it fast — you see progress every week, not after months.', zh: '快速开发——每周看到进展，不是等几个月。' },
   },
   {
     step: '04',
-    title: { en: 'Handover & Support', zh: '交接支持' },
-    desc: { en: 'Full docs, SOP, and optional ongoing support.', zh: '完整文档、SOP，可选持续支持。' },
+    title: { en: 'Train & Support', zh: '培训支持' },
+    desc: { en: 'Your team learns to use it. We stay available for ongoing support.', zh: '你的团队学会使用。我们持续提供支持。' },
   },
 ];
 
 /** Engagement models */
 export const engagementModels = [
   {
-    title: { en: 'Project-Based', zh: '项目制' },
+    title: { en: 'Fixed Price', zh: '固定报价' },
     desc: {
-      en: 'Fixed scope, fixed price. Discovery → Sprint → Build → Handover. Ideal for defined deliverables — an AI agent, a RAG system, a property site.',
-      zh: '固定范围、固定价格。需求沟通 → 冲刺 → 开发 → 交接。适合目标明确的交付物 — AI Agent、RAG 系统、楼盘官网。',
+      en: 'Tell us the problem. We scope it, build it, and hand you a working system — on a fixed price and timeline. No surprises. You own everything we deliver.',
+      zh: '告诉我们问题。我们评估、开发、交付——固定价格、固定周期。没有意外加价。所有交付物归你所有。',
     },
-    suited: { en: 'Best for: defined deliverables with clear scope', zh: '适合：范围明确的定制交付' },
+    suited: { en: 'Best for: defined projects with clear goals', zh: '适合：目标明确的项目' },
   },
   {
-    title: { en: 'Retainer / Embedded', zh: '驻场顾问' },
+    title: { en: 'Ongoing Partner', zh: '长期陪跑' },
     desc: {
-      en: 'Ongoing partnership. Our team embeds with yours — weekly sprints, shared Slack, continuous delivery. Scale up or down as needed.',
-      zh: '持续合作。我们的团队嵌入你的团队 — 每周迭代、共享 Slack、持续交付。按需扩缩。',
+      en: 'We become your AI department — without the overhead. Continuous optimisation, new opportunities, training. Your growth is our KPI.',
+      zh: '我们就是你的 AI 部门——但没有固定人力开销。持续优化、发现新机会、培训团队。你的增长就是我们的 KPI。',
     },
-    suited: { en: 'Best for: long-term AI transformation & team enablement', zh: '适合：长期 AI 转型与团队赋能' },
+    suited: { en: 'Best for: businesses that want continuous AI improvement', zh: '适合：想持续用 AI 提升的企业' },
   },
 ];
 
-/** Why us differentiators */
+/** Why us differentiators — company DNA angle */
 export const whyUsPoints = [
   {
-    title: { en: 'Ship First', zh: 'Ship First' },
+    title: { en: "Australia's largest AI network", zh: '全澳最大的 AI 技术网络' },
     desc: {
-      en: 'Production over elegance. We deliver working systems, then polish.',
-      zh: '上线优先于完美。我们先交付可运行的系统，再打磨。',
+      en: '1000+ enterprise partners. Google, AWS, Atlassian alumni. Not a small shop — a network.',
+      zh: '1000+ 企业合作伙伴。Google、AWS、Atlassian 背景。不是小作坊——是一个网络。',
     },
   },
   {
-    title: { en: 'Every Claim Has Receipts', zh: '每个承诺都有交付记录' },
+    title: { en: 'Top-tier talent, not freelancers', zh: '大厂人才，不是外包' },
     desc: {
-      en: 'Every capability is backed by a live product we built and run.',
-      zh: '每项能力背后都是我们亲手构建并运行的产品。',
+      en: 'Our people come from Google, AWS, Big 4, and banks. Enterprise standards on your project.',
+      zh: '我们的人来自 Google、AWS、四大、银行。用大厂标准做你的项目。',
     },
   },
   {
-    title: { en: 'Team Over Hero', zh: '团队优于英雄' },
+    title: { en: 'Startups to enterprise', zh: '从初创到大企业' },
     desc: {
-      en: 'Small team + docs + SOP. No single point of failure.',
-      zh: '小团队 + 文档 + SOP，没有单点故障。',
+      en: '$2k quick wins to $200k+ enterprise architecture. We\'ve done the big builds.',
+      zh: '$2k 快速方案到 $200k+ 企业级架构。大项目我们做过，复杂系统我们搭过。',
     },
   },
   {
-    title: { en: 'No Corporate Speak', zh: '拒绝空话套话' },
+    title: { en: 'Build, teach, and stay', zh: '能做、能教、能陪跑' },
     desc: {
-      en: 'Specific results, not buzzwords. No "synergy" or "industry-leading".',
-      zh: '只谈具体成果，不说"赋能"和"行业领先"。',
+      en: '30+ AI trainers. We build it, train your team, and stay as your AI partner.',
+      zh: '30+ 位培训师。搭系统、教团队、长期陪跑。',
     },
   },
 ];

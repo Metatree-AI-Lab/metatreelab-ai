@@ -1,0 +1,231 @@
+---
+import type { Locale } from '../../config/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const label = locale === 'zh' ? '为什么选我们' : 'WHY US';
+const title = locale === 'zh'
+  ? ['这么多公司都说自己做 AI，', '我们凭什么不一样？']
+  : ['Everyone says they do AI.', "Here's why we're different."];
+
+const diffs = locale === 'zh'
+  ? [
+      {
+        icon: '🌐',
+        heading: '全澳最大的 AI 技术网络',
+        subheading: '1000+ 企业合作伙伴 · Atlassian · Google · AWS',
+        desc: '我们不是一个几个人的小作坊。匠人学院旗下有全澳洲最庞大的技术人才网络——1000+ 家企业合作伙伴，覆盖 Google、AWS、Atlassian 等大厂。需要什么样的专家，我们都能从网络中调配。',
+      },
+      {
+        icon: '👔',
+        heading: '我们的人在大公司里工作',
+        subheading: '不是接外包的 freelancer',
+        desc: '普通软件公司的团队可能就是几个 junior 开发。我们的顾问和工程师很多来自 Google、AWS、四大、银行等一线企业——带着大厂的工程标准和视野来帮你做项目，格局和质量完全不同。',
+      },
+      {
+        icon: '📊',
+        heading: '多层级服务，丰俭由人',
+        subheading: '$2k 快速启动到 $200k+ 企业级架构',
+        desc: '我们不只做小项目。从 $2k 的快速网站、$5k 的 AI 自动化、$50k 的定制 AI 平台，到 $200k+ 的企业级多系统集成架构——匹配不同规模企业，配置对应级别的团队和交付标准。大项目我们做过，复杂系统我们搭过。',
+      },
+      {
+        icon: '🏭',
+        heading: '我们自己就是 AI 公司',
+        subheading: '卖给你的，是我们自己在跑的',
+        desc: '匠人学院自己运营 10+ 套 AI 系统，每天服务真实用户。我们不是学了 AI 再教你——我们卖给你的东西，就是我们自己每天在用的。这种区别，第一周就能感受到。',
+      },
+      {
+        icon: '🎓',
+        heading: '能教、能做、能陪跑',
+        subheading: '30+ 位 AI 培训师 + 成熟课程体系',
+        desc: '别的公司做完就走，你的团队还是不会用。我们背后是澳洲最大的 AI 教育平台——不只帮你搭系统，还教你的团队自己运行、自己迭代。做完不消失，你的增长就是我们的 KPI。',
+      },
+      {
+        icon: '🔧',
+        heading: '我们用 AI 做 AI',
+        subheading: '所以才能做到又快又便宜',
+        desc: '传统公司靠堆人头、靠工时计费。我们团队深度使用 AI 开发工具——1 周完成别人 2 个月的工作量。省下来的成本，直接让给客户。同样品质，十分之一的价格和时间。',
+      },
+    ]
+  : [
+      {
+        icon: '🌐',
+        heading: "Australia's largest AI talent network",
+        subheading: '1000+ enterprise partners · Atlassian · Google · AWS',
+        desc: "We're not a small shop. JR Academy has built Australia's largest tech talent network — 1000+ enterprise partners spanning Google, AWS, Atlassian and more. Whatever expertise your project needs, we can source it from our network.",
+      },
+      {
+        icon: '👔',
+        heading: 'Our people work at top companies',
+        subheading: 'Not freelancers picking up gigs',
+        desc: "Most software shops staff projects with junior developers. Our consultants and engineers come from Google, AWS, Big 4, and major banks — they bring enterprise-grade engineering standards to your project. The quality gap shows from day one.",
+      },
+      {
+        icon: '📊',
+        heading: 'Multiple tiers — startups to enterprise',
+        subheading: '$2k quick starts to $200k+ enterprise architecture',
+        desc: "We don't just do small jobs. From $2k websites and $5k AI automations, to $50k custom AI platforms and $200k+ enterprise-grade multi-system integrations — we match the team and delivery standard to your scale. We've done the big builds. We've shipped the complex systems.",
+      },
+      {
+        icon: '🏭',
+        heading: "We're an AI company ourselves",
+        subheading: 'What we sell you is what we run',
+        desc: "JR Academy runs 10+ AI systems serving real users every day. We didn't learn AI to sell it — we built our business on it. That difference shows in the first week of working with us.",
+      },
+      {
+        icon: '🎓',
+        heading: 'Build, teach, and stay',
+        subheading: "30+ AI trainers + proven curriculum",
+        desc: "Other firms build and leave — your team still can't use it. We're backed by Australia's largest AI education platform. We build your system, train your team to run it, and stay as your long-term AI partner.",
+      },
+      {
+        icon: '🔧',
+        heading: 'We use AI to build AI',
+        subheading: "That's why we're faster and cheaper",
+        desc: "Traditional firms charge by the hour and stack headcount. We use AI tools deeply — 1 week for us = 2 months for others. The savings go straight to you. Same quality, a fraction of the cost.",
+      },
+    ];
+---
+
+<section class="wu">
+  <div class="wu__inner container-x">
+    <span class="section-label" data-reveal>/ 05 — {label}</span>
+
+    <div class="wu__header" data-reveal>
+      <h2 class="wu__title">
+        <span>{title[0]}</span>
+        <span>{title[1]}</span>
+      </h2>
+    </div>
+
+    <div class="wu__grid">
+      {diffs.map((d, idx) => (
+        <div class={`wu__card delay-${(idx % 3) + 1}`} data-reveal="3d">
+          <div class="wu__card-top">
+            <span class="wu__icon">{d.icon}</span>
+            <div>
+              <h3 class="wu__heading">{d.heading}</h3>
+              <span class="wu__subheading">{d.subheading}</span>
+            </div>
+          </div>
+          <p class="wu__desc">{d.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .wu {
+    position: relative;
+    padding-block: var(--space-9);
+    z-index: 2;
+  }
+
+  .wu__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .wu__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .wu__title {
+    font-size: var(--fs-h1);
+    font-weight: var(--fw-bold);
+    line-height: var(--lh-tight);
+    letter-spacing: -0.03em;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .wu__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+
+  .wu__card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-5);
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    transition:
+      border-color var(--dur-normal) var(--ease-out),
+      transform var(--dur-normal) var(--ease-out);
+  }
+
+  .wu__card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-strong);
+  }
+
+  .wu__card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .wu__icon {
+    font-size: 2.4rem;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+  }
+
+  .wu__heading {
+    font-size: var(--fs-body);
+    font-weight: var(--fw-bold);
+    color: var(--text-primary);
+    margin: 0;
+    line-height: var(--lh-snug);
+  }
+
+  .wu__subheading {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    color: var(--brand-primary);
+    letter-spacing: 0.02em;
+    display: block;
+    margin-top: 0.2rem;
+  }
+
+  .wu__desc {
+    font-size: var(--fs-body-sm);
+    color: var(--text-secondary);
+    line-height: var(--lh-normal);
+    margin: 0;
+  }
+
+  @media (max-width: 991px) {
+    .wu__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .wu__title {
+      font-size: var(--fs-h2);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .wu__grid {
+      grid-template-columns: 1fr;
+    }
+    .wu__title {
+      font-size: var(--fs-h3);
+    }
+  }
+</style>
