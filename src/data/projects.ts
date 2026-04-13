@@ -185,6 +185,38 @@ export const projects: ProjectEntry[] = [
   },
 
   {
+    slug: 'innovate-future',
+    category: 'brand',
+    tags: ['EdTech', 'Web', 'Association'],
+    year: 2025,
+    featured: false,
+    order: 12,
+    name: 'Innovate Future',
+    client: 'Innovate Future Association',
+    cover: '/work/innovate-future.png',
+    summary: {
+      en: 'Platform for an international education association empowering future global innovators. AI-driven education programs, international study tours, career planning, and membership community. Events, partner management, and member portal.',
+      zh: '国际教育协会平台，赋能未来全球创新者。AI 驱动的教育项目、国际游学、职业规划与会员社区。活动管理、合作伙伴管理与会员门户。',
+    },
+    outcomes: {
+      en: [
+        'AI science & technology education programs',
+        'International study tours & cultural exploration',
+        'Career planning & industry mentor community',
+        'Events, membership, and partner management',
+      ],
+      zh: [
+        'AI 科学与技术教育项目',
+        '国际游学与文化探索',
+        '职业规划与行业导师社区',
+        '活动、会员与合作伙伴管理',
+      ],
+    },
+    stack: ['Next.js', 'CMS', 'Membership'],
+    url: 'https://www.innovatefuture.foundation',
+  },
+
+  {
     slug: 'qldarch',
     category: 'brand',
     tags: ['Web', 'Archive', 'Research'],
