@@ -1,0 +1,70 @@
+---
+import type { Locale } from '../../config/site';
+import { useTranslations } from '../../i18n/index';
+import { deckSlides } from '../../data/deck';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const slide = deckSlides[3];
+
+const tracks = [
+  { name: t.deck.trackBuild, desc: t.deck.trackBuildDesc, color: '#00e5a0' },
+  { name: t.deck.trackAdopt, desc: t.deck.trackAdoptDesc, color: '#00b4d8' },
+  { name: t.deck.trackProperty, desc: t.deck.trackPropertyDesc, color: '#7df9c5' },
+];
+---
+
+<div class="slide-inner">
+  <span class="slide-label">{slide.label}</span>
+
+  <h2 class="slide-title" data-deck-reveal>{slide.title[locale]}</h2>
+
+  <div class="tracks-grid">
+    {tracks.map((track) => (
+      <div class="track-card deck-card" data-deck-reveal>
+        <div class="track-indicator" style={`background: ${track.color}`}></div>
+        <h3 class="track-name">{track.name}</h3>
+        <p class="track-desc">{track.desc}</p>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .tracks-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.2rem, 2cqi, 2.4rem);
+    margin-top: clamp(2.4rem, 4cqi, 4.8rem);
+  }
+  .track-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .track-indicator {
+    width: 3.2rem;
+    height: 0.3rem;
+    border-radius: 2px;
+  }
+  .track-name {
+    font-family: var(--font-sans);
+    font-size: clamp(1.6rem, 2.2cqi, 2.4rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.2;
+  }
+  .track-desc {
+    font-size: clamp(1.1rem, 1.4cqi, 1.4rem);
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+  }
+  @media (max-width: 767px) {
+    .tracks-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

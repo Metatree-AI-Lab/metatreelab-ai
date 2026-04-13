@@ -1,0 +1,39 @@
+---
+import type { Locale } from '../../config/site';
+import { deckSlides, problemStats } from '../../data/deck';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const slide = deckSlides[1];
+---
+
+<div class="slide-inner">
+  <span class="slide-label">{slide.label}</span>
+
+  <h2 class="slide-title" data-deck-reveal>{slide.title[locale]}</h2>
+
+  <div class="problem-stats">
+    {problemStats.map((stat, i) => (
+      <div class="problem-stat deck-card" data-deck-reveal>
+        <div class="stat-value">{stat.value}</div>
+        <div class="stat-label">{stat.label[locale]}</div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .problem-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.2rem, 2cqi, 2.4rem);
+    margin-top: clamp(2.4rem, 4cqi, 4.8rem);
+    max-width: 90%;
+  }
+  @media (max-width: 767px) {
+    .problem-stats {
+      grid-template-columns: 1fr;
+      max-width: 100%;
+    }
+  }
+</style>

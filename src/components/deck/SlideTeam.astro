@@ -1,0 +1,119 @@
+---
+import type { Locale } from '../../config/site';
+import { useTranslations } from '../../i18n/index';
+import { deckSlides } from '../../data/deck';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const slide = deckSlides[9];
+
+const capabilities = t.deck.teamCapabilities.split(' · ');
+---
+
+<div class="slide-inner">
+  <span class="slide-label">{slide.label}</span>
+
+  <div class="team-layout">
+    <div class="team-left">
+      <h2 class="slide-title" data-deck-reveal>{slide.title[locale]}</h2>
+
+      <div class="founder-card deck-card" data-deck-reveal>
+        <div class="founder-avatar">LW</div>
+        <div class="founder-info">
+          <h3 class="founder-name">{t.deck.founderTitle}</h3>
+          <p class="founder-role">{t.deck.founderRole}</p>
+          <p class="founder-bio">{t.deck.founderBio}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-right" data-deck-reveal>
+      <div class="cap-label">Capabilities</div>
+      <div class="cap-cloud">
+        {capabilities.map((cap) => (
+          <span class="cap-tag">{cap}</span>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .team-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2.4rem, 4cqi, 4.8rem);
+    align-items: center;
+  }
+  .founder-card {
+    display: flex;
+    gap: 1.6rem;
+    align-items: flex-start;
+    margin-top: 2.4rem;
+  }
+  .founder-avatar {
+    flex-shrink: 0;
+    width: clamp(4.8rem, 6cqi, 6.4rem);
+    height: clamp(4.8rem, 6cqi, 6.4rem);
+    border-radius: 50%;
+    background: var(--brand-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: clamp(1.4rem, 2cqi, 2rem);
+    font-weight: 700;
+    color: #000;
+  }
+  .founder-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .founder-name {
+    font-size: clamp(1.4rem, 1.8cqi, 2rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+  }
+  .founder-role {
+    font-family: var(--font-mono);
+    font-size: clamp(0.9rem, 1.2cqi, 1.2rem);
+    color: var(--brand-primary);
+    margin: 0;
+  }
+  .founder-bio {
+    font-size: clamp(1rem, 1.3cqi, 1.3rem);
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0.4rem 0 0;
+  }
+
+  .cap-label {
+    font-family: var(--font-mono);
+    font-size: clamp(0.9rem, 1.1cqi, 1.2rem);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 1.6rem;
+  }
+  .cap-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+  .cap-tag {
+    font-family: var(--font-mono);
+    font-size: clamp(1rem, 1.3cqi, 1.4rem);
+    color: var(--text-secondary);
+    background: var(--bg-glass);
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-sm);
+    padding: 0.6rem 1.2rem;
+    backdrop-filter: blur(8px);
+  }
+  @media (max-width: 767px) {
+    .team-layout { grid-template-columns: 1fr; }
+  }
+</style>

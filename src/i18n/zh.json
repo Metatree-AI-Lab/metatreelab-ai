@@ -13,13 +13,13 @@
     "subtitle": "帮企业落地真正能跑的 AI — RAG 知识系统、自主 Agent、Claude Code 团队落地、OpenClaw 自动化。不做 PPT，只交付生产系统。",
     "cta_primary": "联系我们",
     "cta_secondary": "查看作品",
-    "backing": "AI 战略 · Agent 搭建 · Claude Cowork · OpenClaw 🦞 · RAG 系统"
+    "backing": "AI 战略 · Compound Engineering · Harness Engineering · Agent 搭建 · RAG 系统"
   },
   "split": {
     "sectionLabel": "/ 02 — WHAT DO YOU NEED?",
     "ai": {
       "title": "AI Consulting",
-      "subtitle": "定制 AI Agent、RAG 系统，或帮你团队落地 Claude 和 OpenClaw。",
+      "subtitle": "Compound AI 系统、Harness Engineering，或帮你团队用 Claude 和 OpenClaw 实现 AI 化。",
       "bullets": [
         "AI 战略评估与 POC",
         "RAG 与知识系统工程",
@@ -64,9 +64,9 @@
     "or": "或",
     "parentBacking": "匠人学院旗下 — 5 年以上教育科技经验，为 1000+ 企业提供 AI 培训。",
     "trackBuild": "AI Build",
-    "trackBuildDesc": "定制 AI 工程。Agent、RAG、LLM 应用 — 为生产环境构建，不是做 Demo。",
+    "trackBuildDesc": "Compound AI 工程。Agent、RAG、LLM 应用 — 为生产环境构建，不是做 Demo。",
     "trackAdopt": "AI Adopt",
-    "trackAdoptDesc": "让团队 AI 化。Claude Code 落地、OpenClaw 自动化、工作流升级。",
+    "trackAdoptDesc": "Harness Engineering 让团队 AI 化。Claude Code 落地、OpenClaw 自动化、工作流升级。",
     "trackProperty": "Property Marketing",
     "trackPropertyDesc": "开发商官网、Pitch Deck、品牌视觉 — 工程化驱动，快速交付。",
     "buildServices": "AI Agent 开发 · RAG 知识系统 · 定制 LLM 应用 · AI 平台工程",
@@ -76,5 +76,19 @@
     "founderRole": "创始人 & AI 战略负责人",
     "founderBio": "全栈产品负责人，5 年以上 AI 教育与 SaaS 平台经验。主导战略咨询、Agent 架构设计和平台工程。",
     "teamCapabilities": "AI 战略 · Agent 架构 · RAG 工程 · Claude Code · MCP · OpenClaw · 平台工程 · 产品设计"
+  },
+  "engagement": {
+    "sectionLabel": "/ HOW WE WORK",
+    "title": "两种合作模式",
+    "project": {
+      "tag": "项目制",
+      "title": "端到端交付",
+      "description": "我们全权负责项目，从需求梳理到生产上线。交付完整的 Compound AI 系统、Agent 平台或全栈应用 — 固定范围、固定时间线。"
+    },
+    "consultant": {
+      "tag": "顾问制",
+      "title": "帮你组建 AI 团队",
+      "description": "我们嵌入你的团队，帮助搭建 AI 工程能力 — 招聘指导、工具链搭建、工作流设计、手把手培训，直到你的团队能独立交付。"
+    }
   }
 }

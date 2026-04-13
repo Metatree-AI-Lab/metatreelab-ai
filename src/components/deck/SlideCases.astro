@@ -1,0 +1,107 @@
+---
+import type { Locale } from '../../config/site';
+import { deckSlides } from '../../data/deck';
+import { projects } from '../../data/projects';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const slide = deckSlides[7];
+
+const featured = projects.filter(p => p.featured).sort((a, b) => a.order - b.order).slice(0, 4);
+---
+
+<div class="slide-inner">
+  <span class="slide-label">{slide.label}</span>
+
+  <h2 class="slide-title" data-deck-reveal>{slide.title[locale]}</h2>
+
+  <div class="cases-grid">
+    {featured.map((proj) => (
+      <div class="case-card deck-card" data-deck-reveal>
+        <div class="case-header">
+          <h3 class="case-name">{proj.name}</h3>
+          <span class="case-year">{proj.year}</span>
+        </div>
+        <p class="case-summary">{proj.summary[locale]}</p>
+        <div class="case-footer">
+          <span class="case-client">{proj.client}</span>
+          {proj.stack && (
+            <div class="case-stack">
+              {proj.stack.slice(0, 4).map((tech) => (
+                <span class="case-tech">{tech}</span>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .cases-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(1.2rem, 2cqi, 2rem);
+    margin-top: clamp(2rem, 3cqi, 3.2rem);
+  }
+  .case-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .case-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+  .case-name {
+    font-size: clamp(1.4rem, 2cqi, 2rem);
+    font-weight: 700;
+    color: var(--brand-primary);
+    margin: 0;
+  }
+  .case-year {
+    font-family: var(--font-mono);
+    font-size: clamp(0.9rem, 1.1cqi, 1.1rem);
+    color: var(--text-muted);
+  }
+  .case-summary {
+    font-size: clamp(1rem, 1.2cqi, 1.3rem);
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .case-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-hairline);
+  }
+  .case-client {
+    font-size: clamp(0.9rem, 1.1cqi, 1.2rem);
+    color: var(--text-tertiary);
+    font-weight: 500;
+  }
+  .case-stack {
+    display: flex;
+    gap: 0.4rem;
+  }
+  .case-tech {
+    font-family: var(--font-mono);
+    font-size: clamp(0.7rem, 0.9cqi, 0.9rem);
+    color: var(--text-muted);
+    background: rgba(255,255,255,0.04);
+    padding: 0.1rem 0.5rem;
+    border-radius: var(--radius-sm);
+  }
+  @media (max-width: 767px) {
+    .cases-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,53 @@
+---
+import type { Locale } from '../../config/site';
+import { deckSlides, whyUsPoints } from '../../data/deck';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const slide = deckSlides[10];
+---
+
+<div class="slide-inner">
+  <span class="slide-label">{slide.label}</span>
+
+  <h2 class="slide-title" data-deck-reveal>{slide.title[locale]}</h2>
+
+  <div class="why-grid">
+    {whyUsPoints.map((point) => (
+      <div class="why-card deck-card" data-deck-reveal>
+        <h3 class="why-title">{point.title[locale]}</h3>
+        <p class="why-desc">{point.desc[locale]}</p>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(1.2rem, 2cqi, 2rem);
+    margin-top: clamp(2.4rem, 4cqi, 4rem);
+  }
+  .why-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .why-title {
+    font-size: clamp(1.6rem, 2.2cqi, 2.4rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.2;
+  }
+  .why-desc {
+    font-size: clamp(1rem, 1.3cqi, 1.4rem);
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+  }
+  @media (max-width: 767px) {
+    .why-grid { grid-template-columns: 1fr; }
+  }
+</style>

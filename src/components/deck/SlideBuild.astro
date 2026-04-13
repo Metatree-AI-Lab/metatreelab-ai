@@ -1,0 +1,113 @@
+---
+import type { Locale } from '../../config/site';
+import { useTranslations } from '../../i18n/index';
+import { deckSlides } from '../../data/deck';
+import { services } from '../../data/services';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const slide = deckSlides[4];
+
+const buildServices = services.filter(s => s.track === 'build' && s.flagship);
+const allBuild = services.filter(s => s.track === 'build');
+---
+
+<div class="slide-inner">
+  <span class="slide-label">{slide.label}</span>
+
+  <div class="build-layout">
+    <div class="build-left">
+      <h2 class="slide-title" data-deck-reveal>{slide.title[locale]}</h2>
+      <div class="build-services">
+        {allBuild.slice(0, 5).map((svc) => (
+          <div class="build-svc" data-deck-reveal>
+            <span class="svc-name">{svc.title[locale]}</span>
+            {svc.flagship && <span class="svc-flag">FLAGSHIP</span>}
+            <span class="svc-dur">{svc.duration}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="build-right" data-deck-reveal>
+      <div class="build-proof deck-card">
+        <div class="proof-label">Production proof</div>
+        <div class="proof-name">SigmaQ</div>
+        <div class="proof-desc">{locale === 'en' ? 'Multi-tenant assessment SaaS — Stripe billing, LMS webhooks, anti-cheat engine.' : '多租户测评 SaaS — Stripe 计费、LMS webhook、防作弊引擎。'}</div>
+        <div class="proof-stack">NestJS · MongoDB · React · Stripe · AWS</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .build-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2.4rem, 4cqi, 4.8rem);
+    align-items: center;
+    margin-top: clamp(1.6rem, 2.5cqi, 2.4rem);
+  }
+  .build-services {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-top: 2.4rem;
+  }
+  .build-svc {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border-hairline);
+  }
+  .svc-name {
+    font-size: clamp(1.2rem, 1.6cqi, 1.6rem);
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+  .svc-flag {
+    font-family: var(--font-mono);
+    font-size: clamp(0.8rem, 1cqi, 1rem);
+    color: var(--brand-primary);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .svc-dur {
+    font-family: var(--font-mono);
+    font-size: clamp(0.9rem, 1.1cqi, 1.1rem);
+    color: var(--text-muted);
+    margin-left: auto;
+  }
+  .proof-label {
+    font-family: var(--font-mono);
+    font-size: clamp(0.9rem, 1.1cqi, 1.1rem);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.2rem;
+  }
+  .proof-name {
+    font-size: clamp(2rem, 3cqi, 3.2rem);
+    font-weight: 700;
+    color: var(--brand-primary);
+    margin-bottom: 0.8rem;
+  }
+  .proof-desc {
+    font-size: clamp(1.1rem, 1.4cqi, 1.4rem);
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 1.6rem;
+  }
+  .proof-stack {
+    font-family: var(--font-mono);
+    font-size: clamp(0.9rem, 1.1cqi, 1.1rem);
+    color: var(--text-tertiary);
+    letter-spacing: 0.05em;
+  }
+  @media (max-width: 767px) {
+    .build-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

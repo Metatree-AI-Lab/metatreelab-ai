@@ -1,0 +1,85 @@
+---
+import type { Locale } from '../../config/site';
+import { deckSlides } from '../../data/deck';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const slide = deckSlides[0];
+---
+
+<div class="slide-inner cover">
+  <div class="glow-bg cover-glow"></div>
+
+  <div class="cover-content" data-deck-reveal>
+    <!-- Large logo -->
+    <div class="cover-logo">
+      <svg width="64" height="64" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="coverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00E5A0" />
+            <stop offset="100%" stop-color="#00B4D8" />
+          </linearGradient>
+        </defs>
+        <path d="M5 25V7L16 17L27 7V25" stroke="url(#coverGrad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="5" cy="7" r="3" fill="url(#coverGrad)" />
+        <circle cx="27" cy="7" r="3" fill="url(#coverGrad)" />
+        <circle cx="16" cy="17" r="3" fill="url(#coverGrad)" />
+      </svg>
+      <div class="cover-brand">
+        <span class="brand-meta">Meta</span><span class="brand-tree">tree</span>
+        <span class="brand-lab">Lab</span>
+      </div>
+    </div>
+  </div>
+
+  <h1 class="slide-title cover-title" data-deck-reveal>{slide.title[locale]}</h1>
+
+  {slide.subtitle && (
+    <p class="cover-tagline" data-deck-reveal>{slide.subtitle[locale]}</p>
+  )}
+</div>
+
+<style>
+  .cover {
+    align-items: center;
+    text-align: center;
+  }
+  .cover-glow {
+    bottom: -10%;
+    left: 30%;
+  }
+  .cover-content {
+    margin-bottom: 3.2rem;
+  }
+  .cover-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.6rem;
+  }
+  .cover-brand {
+    font-family: var(--font-sans);
+    font-size: clamp(2.4rem, 3.5cqi, 4rem);
+    letter-spacing: -0.03em;
+    color: #fff;
+    line-height: 1;
+  }
+  .brand-meta { font-weight: 800; }
+  .brand-tree { font-weight: 400; color: var(--brand-primary); margin-left: 0.1rem; }
+  .brand-lab { font-weight: 300; color: var(--text-tertiary); margin-left: 0.4rem; }
+
+  .cover-title {
+    text-align: center;
+    max-width: 80%;
+    margin: 0 auto;
+  }
+  .cover-tagline {
+    font-family: var(--font-mono);
+    font-size: clamp(1.2rem, 1.6cqi, 1.8rem);
+    color: var(--text-tertiary);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 2rem;
+    text-align: center;
+  }
+</style>

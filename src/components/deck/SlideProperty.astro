@@ -1,0 +1,66 @@
+---
+import type { Locale } from '../../config/site';
+import { useTranslations } from '../../i18n/index';
+import { deckSlides } from '../../data/deck';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const slide = deckSlides[6];
+
+const propertyItems = t.deck.propertyServices.split(' · ');
+---
+
+<div class="slide-inner">
+  <span class="slide-label">{slide.label}</span>
+
+  <div class="prop-layout">
+    <div class="prop-left">
+      <h2 class="slide-title" data-deck-reveal>{slide.title[locale]}</h2>
+      <p class="slide-subtitle" data-deck-reveal>{locale === 'en'
+        ? 'Engineering team builds marketing — pixel-perfect and fast. AI-accelerated design and content production.'
+        : '工程团队做营销 — 像素级精准且快速。AI 加速设计和内容生产。'}</p>
+    </div>
+    <div class="prop-right">
+      <div class="prop-services">
+        {propertyItems.map((item) => (
+          <div class="prop-item deck-card" data-deck-reveal>
+            <span class="prop-name">{item}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .prop-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2.4rem, 4cqi, 4.8rem);
+    align-items: center;
+  }
+  .prop-left .slide-subtitle {
+    max-width: 100%;
+  }
+  .prop-services {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .prop-item {
+    padding: 1.6rem 2rem;
+    display: flex;
+    align-items: center;
+  }
+  .prop-name {
+    font-size: clamp(1.3rem, 1.8cqi, 1.8rem);
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  @media (max-width: 767px) {
+    .prop-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

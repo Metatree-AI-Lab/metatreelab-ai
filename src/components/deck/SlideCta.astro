@@ -1,0 +1,100 @@
+---
+import type { Locale } from '../../config/site';
+import { useTranslations } from '../../i18n/index';
+import { siteConfig } from '../../config/site';
+import { deckSlides } from '../../data/deck';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const slide = deckSlides[11];
+---
+
+<div class="slide-inner cta-slide">
+  <div class="glow-bg cta-glow"></div>
+
+  <span class="slide-label">{slide.label}</span>
+
+  <h2 class="slide-title cta-title" data-deck-reveal>{slide.title[locale]}</h2>
+
+  <div class="cta-buttons" data-deck-reveal>
+    <a href="mailto:hello@jiangren.com.au" class="deck-btn-primary">{t.deck.bookCall} →</a>
+    <a href={`mailto:${siteConfig.contact.email}`} class="deck-btn-ghost">{t.deck.sendEmail}</a>
+  </div>
+
+  <div class="cta-contact" data-deck-reveal>
+    <div class="contact-row">
+      <span class="contact-item">{siteConfig.contact.email}</span>
+      <span class="contact-divider">·</span>
+      <span class="contact-item">{siteConfig.contact.phone}</span>
+    </div>
+    <div class="contact-offices">
+      {siteConfig.offices.map((office) => (
+        <span class="contact-office">{office.city}</span>
+      ))}
+    </div>
+  </div>
+
+  <div class="cta-url" data-deck-reveal>metatreelab.ai</div>
+</div>
+
+<style>
+  .cta-slide {
+    align-items: center;
+    text-align: center;
+  }
+  .cta-glow {
+    bottom: 0;
+    left: 30%;
+  }
+  .cta-title {
+    text-align: center;
+    max-width: 80%;
+    margin: 0 auto;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 1.6rem;
+    margin-top: clamp(2.4rem, 3.5cqi, 3.6rem);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .cta-contact {
+    margin-top: clamp(2.4rem, 3.5cqi, 4rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+  .contact-item {
+    font-family: var(--font-mono);
+    font-size: clamp(1rem, 1.3cqi, 1.3rem);
+    color: var(--text-secondary);
+  }
+  .contact-divider {
+    color: var(--text-muted);
+  }
+  .contact-offices {
+    display: flex;
+    gap: 2rem;
+  }
+  .contact-office {
+    font-family: var(--font-mono);
+    font-size: clamp(0.9rem, 1.1cqi, 1.1rem);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .cta-url {
+    margin-top: clamp(2.4rem, 3.5cqi, 4rem);
+    font-family: var(--font-mono);
+    font-size: clamp(1.2rem, 1.6cqi, 1.6rem);
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+</style>

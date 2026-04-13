@@ -1,0 +1,84 @@
+---
+import type { Locale } from '../../config/site';
+import { deckSlides, processSteps } from '../../data/deck';
+
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const slide = deckSlides[8];
+---
+
+<div class="slide-inner">
+  <span class="slide-label">{slide.label}</span>
+
+  <h2 class="slide-title" data-deck-reveal>{slide.title[locale]}</h2>
+
+  <div class="process-track">
+    {processSteps.map((step, i) => (
+      <div class="process-step" data-deck-reveal>
+        <div class="step-num">{step.step}</div>
+        <div class="step-line-wrap">
+          {i < processSteps.length - 1 && <div class="step-line"></div>}
+        </div>
+        <h3 class="step-title">{step.title[locale]}</h3>
+        <p class="step-desc">{step.desc[locale]}</p>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .process-track {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(1.2rem, 2cqi, 2.4rem);
+    margin-top: clamp(3.2rem, 5cqi, 6rem);
+  }
+  .process-step {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+  }
+  .step-num {
+    font-family: var(--font-mono);
+    font-size: clamp(3rem, 5cqi, 5.6rem);
+    font-weight: 700;
+    color: var(--brand-primary);
+    line-height: 1;
+    margin-bottom: 1.2rem;
+  }
+  .step-line-wrap {
+    width: 100%;
+    height: 0.3rem;
+    margin-bottom: 1.6rem;
+    position: relative;
+  }
+  .step-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% + clamp(1.2rem, 2cqi, 2.4rem));
+    height: 0.2rem;
+    background: linear-gradient(90deg, var(--brand-primary), var(--brand-secondary));
+    opacity: 0.3;
+  }
+  .step-title {
+    font-size: clamp(1.4rem, 1.8cqi, 2rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 0.6rem;
+    line-height: 1.2;
+  }
+  .step-desc {
+    font-size: clamp(1rem, 1.3cqi, 1.3rem);
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+  }
+  @media (max-width: 767px) {
+    .process-track {
+      grid-template-columns: 1fr 1fr;
+    }
+    .step-line { display: none; }
+  }
+</style>

@@ -13,13 +13,13 @@
     "subtitle": "We help companies adopt AI that actually works — from RAG pipelines and autonomous agents to Claude Code rollouts and OpenClaw automation. No slide decks, just systems that run.",
     "cta_primary": "Get in touch",
     "cta_secondary": "See our work",
-    "backing": "AI Strategy · Agent Development · Claude Cowork · OpenClaw 🦞 · RAG Systems"
+    "backing": "AI Strategy · Compound Engineering · Harness Engineering · Agent Development · RAG Systems"
   },
   "split": {
     "sectionLabel": "/ 02 — WHAT DO YOU NEED?",
     "ai": {
       "title": "AI Consulting",
-      "subtitle": "Custom AI agents, RAG systems, or help your team adopt Claude and OpenClaw.",
+      "subtitle": "Compound AI systems, harness engineering, or help your team go AI-native with Claude and OpenClaw.",
       "bullets": [
         "AI strategy & proof-of-concept",
         "RAG & knowledge system engineering",
@@ -64,9 +64,9 @@
     "or": "or",
     "parentBacking": "Backed by JR Academy — 5+ years in ed-tech, powering AI education for 1000+ enterprises.",
     "trackBuild": "AI Build",
-    "trackBuildDesc": "Custom AI engineering. Agents, RAG, LLM apps — built for production, not demos.",
+    "trackBuildDesc": "Compound AI engineering. Agents, RAG, LLM apps — built for production, not demos.",
     "trackAdopt": "AI Adopt",
-    "trackAdoptDesc": "Get your team AI-native. Claude Code rollouts, OpenClaw automation, workflow upgrades.",
+    "trackAdoptDesc": "Harness engineering for your team. Claude Code rollouts, OpenClaw automation, workflow upgrades.",
     "trackProperty": "Property Marketing",
     "trackPropertyDesc": "Developer sites, pitch decks, brand identity — engineered fast, pixel-perfect.",
     "buildServices": "AI Agent Development · RAG & Knowledge Systems · Custom LLM Apps · AI Platform Engineering",
@@ -76,5 +76,19 @@
     "founderRole": "Founder & AI Strategy Lead",
     "founderBio": "Full-stack product leader, 5+ years building AI-powered education and SaaS platforms. Leads strategy, agent architecture, and platform engineering.",
     "teamCapabilities": "AI Strategy · Agent Architecture · RAG Engineering · Claude Code · MCP · OpenClaw · Platform Engineering · Product Design"
+  },
+  "engagement": {
+    "sectionLabel": "/ HOW WE WORK",
+    "title": "Two ways to engage",
+    "project": {
+      "tag": "Project-based",
+      "title": "End-to-end delivery",
+      "description": "We own the project from scoping to production. You get a working system — compound AI pipelines, agent platforms, or full-stack applications — delivered on a fixed scope and timeline."
+    },
+    "consultant": {
+      "tag": "Consultant",
+      "title": "Build your AI team",
+      "description": "We embed with your team to set up AI engineering capabilities — hiring guidance, toolchain setup, workflow design, and hands-on training until your team ships independently."
+    }
   }
 }
