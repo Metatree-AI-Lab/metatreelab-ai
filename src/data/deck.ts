@@ -66,9 +66,9 @@ export const deckSlides: DeckSlide[] = [
     title: { en: 'Two ways to work\nwith us.', zh: '两种合作模式。' },
   },
   {
-    id: 'team',
-    label: '/ 11 — TEAM',
-    title: { en: 'Small team.\nFull coverage.', zh: '精锐团队，\n全面覆盖。' },
+    id: 'consultants',
+    label: '/ 11 — CONSULTANTS',
+    title: { en: '16 senior engineers.\nAustralia-wide.', zh: '16 位资深工程师，\n覆盖全澳。' },
   },
   {
     id: 'why-us',

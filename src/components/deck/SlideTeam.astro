@@ -2,118 +2,105 @@
 import type { Locale } from '../../config/site';
 import { useTranslations } from '../../i18n/index';
 import { deckSlides } from '../../data/deck';
+import { consultants } from '../../data/consultants';
 
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 const slide = deckSlides[10];
 
-const capabilities = t.deck.teamCapabilities.split(' · ');
+const sorted = [...consultants].sort((a, b) => a.order - b.order);
 ---
 
 <div class="slide-inner">
   <span class="slide-label">{slide.label}</span>
 
-  <div class="team-layout">
-    <div class="team-left">
-      <h2 class="slide-title" data-deck-reveal>{slide.title[locale]}</h2>
+  <h2 class="slide-title" data-deck-reveal>{slide.title[locale]}</h2>
+  <p class="slide-subtitle" data-deck-reveal>{t.deck.consultantsSubtitle}</p>
 
-      <div class="founder-card deck-card" data-deck-reveal>
-        <div class="founder-avatar">LW</div>
-        <div class="founder-info">
-          <h3 class="founder-name">{t.deck.founderTitle}</h3>
-          <p class="founder-role">{t.deck.founderRole}</p>
-          <p class="founder-bio">{t.deck.founderBio}</p>
-        </div>
+  <div class="consultants-grid" data-deck-reveal>
+    {sorted.map((c) => (
+      <div class="consultant-chip">
+        <img
+          class="consultant-avatar"
+          src={c.avatar}
+          alt={`${c.name} avatar`}
+          loading="lazy"
+          width="96"
+          height="96"
+        />
+        <div class="consultant-name">{c.name}</div>
+        <div class="consultant-city">{c.city[locale]}</div>
       </div>
-    </div>
-
-    <div class="team-right" data-deck-reveal>
-      <div class="cap-label">Capabilities</div>
-      <div class="cap-cloud">
-        {capabilities.map((cap) => (
-          <span class="cap-tag">{cap}</span>
-        ))}
-      </div>
-    </div>
+    ))}
   </div>
+
+  <div class="consultants-meta" data-deck-reveal>{t.deck.consultantsMeta}</div>
 </div>
 
 <style>
-  .team-layout {
+  .slide-subtitle {
+    max-width: 80%;
+    margin-top: 1.2rem;
+  }
+  .consultants-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(2.4rem, 4cqi, 4.8rem);
-    align-items: center;
+    grid-template-columns: repeat(8, 1fr);
+    gap: clamp(1rem, 1.6cqi, 1.6rem) clamp(0.6rem, 1cqi, 1.2rem);
+    margin-top: clamp(2rem, 3.2cqi, 3.2rem);
+    container-type: inline-size;
   }
-  .founder-card {
-    display: flex;
-    gap: 1.6rem;
-    align-items: flex-start;
-    margin-top: 2.4rem;
-  }
-  .founder-avatar {
-    flex-shrink: 0;
-    width: clamp(4.8rem, 6cqi, 6.4rem);
-    height: clamp(4.8rem, 6cqi, 6.4rem);
-    border-radius: 50%;
-    background: var(--brand-gradient);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-mono);
-    font-size: clamp(1.4rem, 2cqi, 2rem);
-    font-weight: 700;
-    color: #000;
-  }
-  .founder-info {
+  .consultant-chip {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 0.4rem;
+    min-width: 0;
   }
-  .founder-name {
-    font-size: clamp(1.4rem, 1.8cqi, 2rem);
-    font-weight: 700;
+  .consultant-avatar {
+    width: clamp(4.2rem, 5.4cqi, 6.4rem);
+    height: clamp(4.2rem, 5.4cqi, 6.4rem);
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-hairline);
+    transition: border-color 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+  }
+  .consultant-chip:hover .consultant-avatar {
+    border-color: var(--brand-primary);
+    transform: translateY(-2px);
+  }
+  .consultant-name {
+    font-family: var(--font-sans);
+    font-size: clamp(1rem, 1.2cqi, 1.3rem);
+    font-weight: 600;
     color: var(--text-primary);
-    margin: 0;
+    line-height: 1.1;
+    text-align: center;
   }
-  .founder-role {
+  .consultant-city {
     font-family: var(--font-mono);
-    font-size: clamp(0.9rem, 1.2cqi, 1.2rem);
-    color: var(--brand-primary);
-    margin: 0;
-  }
-  .founder-bio {
-    font-size: clamp(1rem, 1.3cqi, 1.3rem);
-    color: var(--text-secondary);
-    line-height: 1.5;
-    margin: 0.4rem 0 0;
-  }
-
-  .cap-label {
-    font-family: var(--font-mono);
-    font-size: clamp(0.9rem, 1.1cqi, 1.2rem);
+    font-size: clamp(0.8rem, 0.95cqi, 1rem);
     color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    margin-bottom: 1.6rem;
+    letter-spacing: 0.08em;
+    line-height: 1.1;
+    text-align: center;
   }
-  .cap-cloud {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-  }
-  .cap-tag {
+  .consultants-meta {
+    margin-top: clamp(1.6rem, 2.4cqi, 2.4rem);
     font-family: var(--font-mono);
-    font-size: clamp(1rem, 1.3cqi, 1.4rem);
-    color: var(--text-secondary);
-    background: var(--bg-glass);
-    border: 1px solid var(--border-hairline);
-    border-radius: var(--radius-sm);
-    padding: 0.6rem 1.2rem;
-    backdrop-filter: blur(8px);
+    font-size: clamp(1rem, 1.2cqi, 1.3rem);
+    color: var(--text-tertiary);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 1199px) {
+    .consultants-grid { grid-template-columns: repeat(4, 1fr); }
   }
   @media (max-width: 767px) {
-    .team-layout { grid-template-columns: 1fr; }
+    .consultants-grid { grid-template-columns: repeat(3, 1fr); }
+    .slide-subtitle { max-width: 100%; }
   }
 </style>

@@ -74,10 +74,8 @@
     "buildServices": "流程自动化 · 智能文档处理 · AI 客服助手 · 定制 AI 软件",
     "adoptServices": "AI 工具配置 · 团队培训 · 工作流自动化 · 流程优化",
     "propertyServices": "开发商官网 · Pitch Deck · 营销物料 · 品牌视觉",
-    "founderTitle": "Lightman Wang",
-    "founderRole": "创始人 & AI 战略负责人",
-    "founderBio": "5 年以上 AI 平台搭建经验，已帮助 50+ 企业落地 AI——从战略到可运行的系统。",
-    "teamCapabilities": "AI 战略 · 流程自动化 · 团队培训 · 定制软件 · AI 智能助手 · 数据系统 · 产品设计 · 平台工程"
+    "consultantsSubtitle": "资深工程师遍布澳洲，按项目随时组队——AI 工程、云与 DevOps、网络安全、房产营销与 IT 支持全覆盖。",
+    "consultantsMeta": "16 位顾问 · 6 座澳洲城市 · 按小时或按项目"
   },
   "quote": {
     "sectionLabel": "/ 即时报价",
