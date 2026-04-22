@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../ui/PageHero.astro';
 import EngagementModes from '../home/EngagementModes.astro';
 import CtaFooter from '../shared/CtaFooter.astro';
-import { type Locale } from '../../config/site';
+import { localizedHref, type Locale } from '../../config/site';
 import { servicesByTrack, type ServiceEntry } from '../../data/services';
 
 interface Props {
@@ -36,6 +36,10 @@ const copy = locale === 'zh'
           text: '同一套记忆层驱动 Hermes / OpenClaw / 自研 agent — 客服、审批、CRM 跟进共享同一个"大脑"。',
         },
       ],
+      useCasesLabel: '/ USE CASES — 企业到底能拿它做什么',
+      useCasesTitle: '部门场景 · 行业落地 · 部署旅程 · FAQ',
+      useCasesDesc: '光讲产品不够。我们把 AI 数字员工在客服、销售、HR、财务、研发、法务 6 个部门的真实用法，以及房地产 / 金融 / 电商 / 教育 4 个行业的落地场景，拆到可执行的颗粒度。',
+      useCasesCta: '查看企业应用详情 →',
       servicesHeading: '/ SERVICES — 4 种方式把数字员工装进来',
       archHeading: '/ ARCHITECTURE — 企业级记忆系统',
       archDesc: '不是一个 prompt + 一个向量库的组装。三层记忆分别承担不同职责，按 workload 选用合适的后端。',
@@ -98,6 +102,10 @@ const copy = locale === 'zh'
           text: 'One memory layer powers Hermes / OpenClaw / your custom agents — support, approvals, CRM follow-ups all share the same mind.',
         },
       ],
+      useCasesLabel: '/ USE CASES — what enterprises can actually do with it',
+      useCasesTitle: 'By department · by industry · by deployment rhythm · FAQ',
+      useCasesDesc: "Product talk is not enough. We break down the digital employee's real usage across 6 departments (customer service, sales, HR, finance, engineering, legal) and 4 industries (property, finance, e-commerce, education) to executable granularity.",
+      useCasesCta: 'See enterprise use cases →',
       servicesHeading: '/ SERVICES — 4 ways to install it',
       archHeading: '/ ARCHITECTURE — enterprise-grade memory system',
       archDesc: 'Not one prompt glued to one vector DB. Three memory layers each doing distinct work, with the right backend per workload.',
@@ -173,6 +181,22 @@ const digitalEmployeeServices = servicesByTrack.digitalEmployee;
             </div>
           ))
         }
+      </div>
+    </div>
+  </section>
+
+  <!-- USE CASES CTA -->
+  <section class="de-usecases-cta">
+    <div class="de-usecases-cta__inner container-x">
+      <div class="de-usecases-cta__card">
+        <div class="de-usecases-cta__body">
+          <span class="section-label">{copy.useCasesLabel}</span>
+          <h2 class="de-usecases-cta__title">{copy.useCasesTitle}</h2>
+          <p class="de-usecases-cta__desc">{copy.useCasesDesc}</p>
+        </div>
+        <a href={localizedHref('/services/digital-employee/use-cases/', locale)} class="btn-primary de-usecases-cta__btn">
+          {copy.useCasesCta}
+        </a>
       </div>
     </div>
   </section>
@@ -329,6 +353,56 @@ const digitalEmployeeServices = servicesByTrack.digitalEmployee;
     font-size: var(--fs-body-sm);
     color: var(--text-secondary);
     line-height: var(--lh-normal);
+  }
+
+  /* USE CASES CTA */
+  .de-usecases-cta {
+    position: relative;
+    padding-block: var(--space-7);
+    border-top: 1px solid var(--border-hairline);
+    z-index: 2;
+  }
+
+  .de-usecases-cta__card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-5);
+    align-items: center;
+    padding: var(--space-6);
+    border: 1px solid rgba(0, 229, 160, 0.3);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(
+      135deg,
+      rgba(0, 229, 160, 0.06) 0%,
+      rgba(0, 180, 216, 0.04) 100%
+    );
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .de-usecases-cta__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .de-usecases-cta__title {
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-bold);
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    line-height: var(--lh-snug);
+  }
+
+  .de-usecases-cta__desc {
+    font-size: var(--fs-body);
+    color: var(--text-secondary);
+    line-height: var(--lh-normal);
+    max-width: 72rem;
+  }
+
+  .de-usecases-cta__btn {
+    white-space: nowrap;
   }
 
   /* SERVICES */
@@ -674,6 +748,15 @@ const digitalEmployeeServices = servicesByTrack.digitalEmployee;
     .de-why__grid,
     .de-agents__grid {
       grid-template-columns: 1fr;
+    }
+
+    .de-usecases-cta__card {
+      grid-template-columns: 1fr;
+      padding: var(--space-5);
+    }
+
+    .de-usecases-cta__title {
+      font-size: var(--fs-h4);
     }
   }
 </style>

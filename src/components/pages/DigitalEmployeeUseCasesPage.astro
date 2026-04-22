@@ -1,0 +1,904 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../ui/PageHero.astro';
+import CtaFooter from '../shared/CtaFooter.astro';
+import { localizedHref, type Locale } from '../../config/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const copy = locale === 'zh'
+  ? {
+      sectionLabel: '/ AI DIGITAL EMPLOYEE · USE CASES',
+      title: 'AI 数字员工：企业到底能用它做什么？',
+      subtitle: '我们不卖"AI 能力"，我们卖"问题被解决"。下面是 AI 数字员工在真实企业里跑起来的样子 — 按部门拆、按行业拆、按部署节奏拆。',
+      backLink: '← 回到产品概览',
+      backHref: '/services/digital-employee/',
+
+      departmentsHeading: '/ 按部门 — 每个团队都能装一个',
+      departmentsIntro: '记忆层是横向基建，每个团队都能从同一套底座上长出属于自己的数字员工。',
+      departments: [
+        {
+          dept: '客服 · CUSTOMER SERVICE',
+          roles: '7×24 响应 · 多语言 · 跨会话记忆',
+          tasks: [
+            '记住每一位客户过去的咨询记录、订单、投诉处理结果',
+            '中英日韩多语言自动切换，不用按市场拆人力',
+            '一线问题直接处理，复杂的升级给人类客服并附上上下文摘要',
+          ],
+          memoryWhy: '传统客服最大的问题是新人上岗需要看 3 个月工单才懂业务。数字员工第一天就带着所有历史记忆。',
+        },
+        {
+          dept: '销售 · SALES / BD',
+          roles: 'Lead 筛选 · 自动跟进 · CRM 自动填',
+          tasks: [
+            '对每个新 lead 做评分和分类，给销售推优先级',
+            '记住每一次沟通内容，下次跟进时自动 briefing',
+            '把非结构化的对话自动写回 CRM（不用再手填 Salesforce）',
+          ],
+          memoryWhy: '销售记忆断层是成交杀手。数字员工不会忘记客户 3 个月前说过什么，也不会把同事跟过的 lead 二次骚扰。',
+        },
+        {
+          dept: 'HR & 内部 · HR / INTERNAL',
+          roles: '新人 Onboarding · 政策问答 · 请假审批',
+          tasks: [
+            '新员工第一天就有个"老员工"带，回答公司文化、流程、系统使用',
+            '政策、社保、年假、报销规则的即时问答（并能引用源文档）',
+            '常规审批自动走（请假、报销、设备申请），异常的升级给 HR',
+          ],
+          memoryWhy: '每个企业都有一堆没写下来的"公司常识"。数字员工把这些沉淀成结构化记忆，不再依赖某个老员工口口相传。',
+        },
+        {
+          dept: '财务 & 运营 · FINANCE / OPS',
+          roles: '发票处理 · 费用预审 · 审批路由',
+          tasks: [
+            '发票 OCR + 校验（税号、金额、供应商是否在白名单）',
+            '出差报销预检（超标的自动拦截 + 给出政策依据）',
+            '按金额和部门自动路由审批链',
+          ],
+          memoryWhy: '财务规则每年都在变，但实际判断还是靠老财务的经验。数字员工把每次判断沉淀成 case-based 记忆，跨年度不失真。',
+        },
+        {
+          dept: '研发 · ENGINEERING',
+          roles: 'On-call 助手 · Code Review · Ticket 分流',
+          tasks: [
+            '半夜告警第一响应：查日志、关联历史事故、给出初步诊断',
+            'PR 自动 review（风格、常见 bug、业务规则冲突）',
+            'Bug 工单分流 + 相似历史工单召回',
+          ],
+          memoryWhy: '工程团队的机构记忆都藏在 Slack 截图和老员工脑子里。数字员工把这些变成可检索的知识。',
+        },
+        {
+          dept: '法务 & 合规 · LEGAL / COMPLIANCE',
+          roles: '合同 review · 合规问答 · 审计准备',
+          tasks: [
+            '标准合同条款自动标红（与公司模板的偏差）',
+            '合规问题即时问答（GDPR / Privacy Act / Fair Trading 等）',
+            '审计前自动整理相关记录、邮件链、审批流',
+          ],
+          memoryWhy: '法务咨询成本极高但重复度极高。数字员工做第一层过滤，真正需要专业判断的才到人类法务。',
+        },
+      ],
+
+      industriesHeading: '/ 按行业 — 我们最熟的几个场景',
+      industriesIntro: '不是每个行业都需要一模一样的数字员工。下面是我们已经在做或正在推进的几个落地方向。',
+      industries: [
+        {
+          name: '房地产 · PROPERTY',
+          context: '母公司匠人学院 + Metatree 服务澳洲多家开发商',
+          scenarios: [
+            '楼盘 launch 期：多平台（微信 / 邮件 / 官网 chat）统一响应，记住每位买家的户型偏好和预算',
+            'Off-the-plan 到 settlement 的全流程跟进，关键节点自动触达',
+            '中英双语原生切换，华人买家市场和主流市场一套人马',
+          ],
+        },
+        {
+          name: '金融 & 财富管理 · FINANCE',
+          context: '需要合规级响应 + 客户长期关系维护',
+          scenarios: [
+            '客户 Q&A 带有组合历史记忆（过去投过什么、风险偏好）',
+            '合规护栏：所有给客户的回答都可追溯、可审计',
+            'KYC / AML 流程的结构化数据收集与校验',
+          ],
+        },
+        {
+          name: '电商 & 零售 · E-COMMERCE',
+          context: '高并发客服 + 客户生命周期运营',
+          scenarios: [
+            '售前咨询带着客户购物车和浏览历史',
+            '售后带着订单 + 物流 + 过往投诉记忆，不用客户重复讲',
+            '复购时机判断 + 个性化推荐（基于 episodic 记忆）',
+          ],
+        },
+        {
+          name: '教育 & 培训 · EDUCATION',
+          context: '母公司匠人学院已经在跑，是我们的 reference 场景',
+          scenarios: [
+            '学员成功教练：记住学习进度、难点、职业目标',
+            '课程问答助手：能引用到具体章节和源资料',
+            '招生跟进：从咨询到报名的全链路留资 + 转化',
+          ],
+        },
+      ],
+
+      journeyHeading: '/ 部署旅程 — 从 0 到生产',
+      journeyIntro: '我们不建议一上来就做大工程。一个清晰的分阶段路径，每一步都有明确的 go/no-go 决策点。',
+      journeySteps: [
+        {
+          phase: 'PHASE 1 — PILOT',
+          duration: '第 1-3 周',
+          what: '1 个角色 · 1 个渠道 · 1 套启动记忆层',
+          outcome: '拿到真实流量反馈、验证业务假设、得到 ROI 初步判断',
+          gate: '通过：进入 Core；不通过：调整范围或停止，损失最小。',
+        },
+        {
+          phase: 'PHASE 2 — CORE',
+          duration: '第 4-12 周',
+          what: '多角色 · 多渠道 · 完整三层记忆系统 · 跨 agent 共享',
+          outcome: '上线到多个团队、完整接入 Slack / 飞书 / 微信 / CRM，记忆层开始跨部门共享',
+          gate: '90 天 ramp-up 结束后，决定是否转入 Retainer。',
+        },
+        {
+          phase: 'PHASE 3 — RETAINER',
+          duration: '第 4 个月起',
+          what: '持续 skill 开发 · 记忆治理 · 评估回归 · 季度 review',
+          outcome: '数字员工每个月都在变强，记忆层持续沉淀，评估指标持续向好',
+          gate: '根据业务规模灵活调整 scope，可降可升。',
+        },
+      ],
+
+      faqHeading: '/ FAQ — 企业客户最常问的 6 个问题',
+      faqs: [
+        {
+          q: '这和 ChatGPT / Copilot 有什么区别？',
+          a: 'ChatGPT 是通用助手，用完即忘。数字员工是你组织里的"员工" — 有持久记忆、懂你的业务 SOP、跨会话延续、跨 agent 共享。它不是更强的 ChatGPT，它是一个新工种。',
+        },
+        {
+          q: '我的数据会离开内网吗？',
+          a: '不会。我们支持完全自托管部署（你的 AWS / 阿里云 / 自建机房），记忆层在你自己的数据库里。OpenClaw 🦞 就是专门为这个合规需求设计的。',
+        },
+        {
+          q: '能和我们现有系统（CRM / ERP / OA）集成吗？',
+          a: '能。我们通过 MCP（Model Context Protocol）和自研连接器对接。Salesforce、HubSpot、飞书、企微、钉钉、Slack、Jira、Linear 都已经做过。没做过的，我们给你写。',
+        },
+        {
+          q: 'AI 出错怎么办？',
+          a: '三重护栏：(1) 关键决策点 human-in-the-loop 审批；(2) 所有行为写审计日志；(3) 评估基建持续回归测试，发现退化自动报警。我们不承诺 AI 不犯错，但承诺犯错会被发现、被定位、被修复。',
+        },
+        {
+          q: '怎么衡量 ROI？',
+          a: '三类指标：(1) 直接成本节省（替代的人力工时 × 时薪）；(2) 响应质量（CSAT、一次解决率、升级率）；(3) 记忆资产价值（积累的 skill 数、可复用知识条数）。Retainer 阶段每季度出正式报告。',
+        },
+        {
+          q: '不是工程师的团队能用吗？',
+          a: '能。数字员工对终端用户就是一个聊天对话，和你用飞书、企微、Slack 一样。配置和 skill 开发需要工程参与，但日常使用零门槛 — 我们还会把匠人学院的培训体系重新打包给你的非技术团队。',
+        },
+      ],
+
+      ctaHeading: '准备装一个？',
+      ctaDesc: '我们通常从一个 2-3 周的 Pilot 开始。你来定角色和场景，我们来搭。',
+      ctaButton: '联系我们聊一聊',
+    }
+  : {
+      sectionLabel: '/ AI DIGITAL EMPLOYEE · USE CASES',
+      title: 'AI Digital Employee: what can enterprises actually do with it?',
+      subtitle: "We don't sell 'AI capabilities' — we sell 'problems solved'. Here is what an AI digital employee looks like in real enterprises, broken down by department, by industry, and by deployment rhythm.",
+      backLink: '← Back to product overview',
+      backHref: '/services/digital-employee/',
+
+      departmentsHeading: '/ By department — every team gets one',
+      departmentsIntro: 'The memory layer is horizontal infrastructure. Every team grows their own digital employee on top of the same foundation.',
+      departments: [
+        {
+          dept: 'CUSTOMER SERVICE',
+          roles: '24/7 response · Multilingual · Cross-session memory',
+          tasks: [
+            'Remembers every past interaction, order, and resolved complaint per customer',
+            'Auto-switches across EN / ZH / JA / KO — no per-market staffing',
+            'Handles tier-1 directly; escalates complex cases to human agents with full context summary',
+          ],
+          memoryWhy: "The hardest problem in CS is new hires taking 3 months of tickets before they understand the business. The digital employee ships day-1 with all the history.",
+        },
+        {
+          dept: 'SALES / BD',
+          roles: 'Lead qualification · Automated follow-up · CRM auto-fill',
+          tasks: [
+            'Scores and tiers every new lead; gives sales a prioritised queue',
+            'Remembers every conversation — the next touch arrives with a full briefing',
+            'Writes unstructured conversation back into the CRM (no more manual Salesforce entry)',
+          ],
+          memoryWhy: 'Sales memory loss kills deals. The digital employee never forgets what a prospect said 3 months ago, and will not double-touch a lead already worked by a teammate.',
+        },
+        {
+          dept: 'HR & INTERNAL',
+          roles: 'Onboarding · Policy Q&A · Leave and approvals',
+          tasks: [
+            "Day-1 'buddy' for new hires — answers culture, process, and systems questions",
+            'Instant Q&A on policies, payroll, leave, reimbursements — cites source documents',
+            'Runs routine approvals (leave, expense, equipment) and escalates exceptions',
+          ],
+          memoryWhy: 'Every company has a pile of undocumented tribal knowledge. The digital employee turns it into structured memory instead of depending on that one long-tenured employee.',
+        },
+        {
+          dept: 'FINANCE / OPS',
+          roles: 'Invoice processing · Expense pre-check · Approval routing',
+          tasks: [
+            'Invoice OCR + validation (tax ID, amount, supplier whitelist)',
+            "Pre-checks travel and expense claims; auto-blocks out-of-policy with policy citations",
+            'Routes approvals by amount and department automatically',
+          ],
+          memoryWhy: 'Finance rules change every year, but real judgment still lives in senior finance staff. The digital employee turns each decision into case-based memory that persists across tenure.',
+        },
+        {
+          dept: 'ENGINEERING',
+          roles: 'On-call assistant · Code review · Ticket triage',
+          tasks: [
+            'First-response on alerts: pulls logs, links past incidents, offers a starter diagnosis',
+            'Auto-reviews PRs (style, common bugs, business-rule conflicts)',
+            'Triages bug tickets and retrieves similar past cases',
+          ],
+          memoryWhy: "Engineering institutional memory lives in Slack screenshots and senior engineers' heads. The digital employee makes it searchable.",
+        },
+        {
+          dept: 'LEGAL / COMPLIANCE',
+          roles: 'Contract review · Compliance Q&A · Audit prep',
+          tasks: [
+            'Flags deviations from standard clauses in third-party contracts',
+            'Instant Q&A on compliance topics (GDPR / Privacy Act / Fair Trading)',
+            'Assembles relevant records, email chains and approval trails ahead of audits',
+          ],
+          memoryWhy: 'Legal consultation is expensive but high-repetition. The digital employee does the first-layer filter; real professional judgment escalates to human counsel.',
+        },
+      ],
+
+      industriesHeading: '/ By industry — the verticals we know best',
+      industriesIntro: 'Not every industry needs the same digital employee. These are the verticals we have already delivered or are actively delivering into.',
+      industries: [
+        {
+          name: 'PROPERTY',
+          context: 'JR Academy + Metatree serve multiple Australian developers',
+          scenarios: [
+            'Launch period: unified response across WeChat / email / website chat; remembers each buyer\'s floorplan preference and budget',
+            'Full off-the-plan → settlement lifecycle follow-up with automated milestone touches',
+            'Native EN + ZH switching — one team serves mainstream + Chinese buyer markets',
+          ],
+        },
+        {
+          name: 'FINANCE & WEALTH',
+          context: 'Requires compliance-grade response + long-term client relationships',
+          scenarios: [
+            'Client Q&A with portfolio history (past holdings, risk profile)',
+            'Compliance guardrails: every client-facing response is traceable and auditable',
+            'Structured KYC / AML data collection and validation',
+          ],
+        },
+        {
+          name: 'E-COMMERCE & RETAIL',
+          context: 'High-volume support + customer lifecycle marketing',
+          scenarios: [
+            'Pre-sales consultation with cart and browse history in context',
+            'Post-sales with order + shipping + complaint memory — customer does not repeat themselves',
+            'Repurchase timing + personalised recommendations driven by episodic memory',
+          ],
+        },
+        {
+          name: 'EDUCATION & TRAINING',
+          context: 'JR Academy (our parent) already runs this in production as our reference',
+          scenarios: [
+            'Student success coach: remembers progress, blockers, career goals',
+            'Course Q&A assistant: cites specific chapters and source material',
+            'Enrollment funnel: full-lifecycle lead capture and conversion',
+          ],
+        },
+      ],
+
+      journeyHeading: '/ Deployment journey — from zero to production',
+      journeyIntro: 'We do not recommend starting big. A clear phased path with explicit go / no-go gates at every step.',
+      journeySteps: [
+        {
+          phase: 'PHASE 1 — PILOT',
+          duration: 'Weeks 1-3',
+          what: '1 role · 1 channel · 1 starter memory layer',
+          outcome: 'Real traffic feedback, validated business assumption, first ROI read',
+          gate: 'Pass: proceed to Core. Fail: adjust scope or stop — loss is minimal.',
+        },
+        {
+          phase: 'PHASE 2 — CORE',
+          duration: 'Weeks 4-12',
+          what: 'Multi-role · Multi-channel · Full three-layer memory · Cross-agent shared',
+          outcome: 'Deployed across multiple teams, connected to Slack / Feishu / WeChat / CRM, memory begins to cross departments',
+          gate: 'At end of 90-day ramp-up, decide whether to move to Retainer.',
+        },
+        {
+          phase: 'PHASE 3 — RETAINER',
+          duration: 'Month 4 onwards',
+          what: 'Ongoing skill development · Memory curation · Eval regression · Quarterly review',
+          outcome: 'The digital employee gets measurably sharper each month; memory compounds; evaluation metrics trend up',
+          gate: 'Scope flexes with business — scale up or scale down as needed.',
+        },
+      ],
+
+      faqHeading: '/ FAQ — the 6 questions enterprise buyers always ask',
+      faqs: [
+        {
+          q: 'How is this different from ChatGPT or Copilot?',
+          a: "ChatGPT is a general assistant — you close the tab and it forgets. A digital employee is staff in your org: persistent memory, business-SOP aware, cross-session continuity, cross-agent sharing. It is not a better ChatGPT — it is a new role.",
+        },
+        {
+          q: 'Does my data leave our network?',
+          a: 'No. We support fully self-hosted deployment (your AWS / Aliyun / on-prem). The memory layer lives in your own databases. OpenClaw 🦞 is purpose-built for this compliance profile.',
+        },
+        {
+          q: 'Can it integrate with our existing systems (CRM / ERP / OA)?',
+          a: 'Yes. We use MCP (Model Context Protocol) and custom connectors. Salesforce, HubSpot, Feishu, WeCom, DingTalk, Slack, Jira, Linear — all done before. If yours is not on the list, we build it.',
+        },
+        {
+          q: 'What happens when the AI makes a mistake?',
+          a: "Three guardrails: (1) human-in-the-loop approval on critical decisions; (2) audit log on every action; (3) continuous eval regression catches quality decay. We don't promise zero mistakes — we promise mistakes are caught, located and fixed.",
+        },
+        {
+          q: 'How do we measure ROI?',
+          a: "Three metric families: (1) direct cost (replaced human hours × hourly rate); (2) response quality (CSAT, first-contact resolution, escalation rate); (3) memory asset value (skills authored, reusable knowledge entries). Formal quarterly report during Retainer.",
+        },
+        {
+          q: 'Can non-engineers use it?',
+          a: "Yes. For end users, a digital employee is just a chat — same as Feishu, WeCom or Slack. Configuration and skill development need engineering, but daily use has zero learning curve — and we repackage JR Academy's training curriculum for your non-technical team.",
+        },
+      ],
+
+      ctaHeading: 'Ready to install one?',
+      ctaDesc: 'We typically start with a 2-3 week Pilot. You define the role and scenario — we build it.',
+      ctaButton: 'Get in touch',
+    };
+---
+
+<BaseLayout title={copy.title} locale={locale} path={Astro.url.pathname}>
+  <PageHero
+    sectionLabel={copy.sectionLabel}
+    title={copy.title}
+    subtitle={copy.subtitle}
+    variant="editorial"
+    eyebrow={locale === 'zh' ? '企业落地场景 / 按部门 + 行业 + 部署节奏' : 'Enterprise scenarios / by department + industry + deployment'}
+  />
+
+  <!-- Back link -->
+  <section class="uc-back">
+    <div class="uc-back__inner container-x">
+      <a href={localizedHref(copy.backHref, locale)} class="uc-back__link">{copy.backLink}</a>
+    </div>
+  </section>
+
+  <!-- DEPARTMENTS -->
+  <section class="uc-depts" id="departments">
+    <div class="uc-depts__inner container-x">
+      <div class="uc-depts__header">
+        <span class="section-label">{copy.departmentsHeading}</span>
+        <p class="uc-depts__intro">{copy.departmentsIntro}</p>
+      </div>
+
+      <div class="uc-depts__grid">
+        {
+          copy.departments.map((d) => (
+            <article class="uc-dept">
+              <header class="uc-dept__head">
+                <span class="uc-dept__label">{d.dept}</span>
+                <p class="uc-dept__roles">{d.roles}</p>
+              </header>
+              <ul class="uc-dept__tasks">
+                {d.tasks.map((t) => <li>· {t}</li>)}
+              </ul>
+              <div class="uc-dept__memory">
+                <span class="section-label">{locale === 'zh' ? '记忆层起了什么作用' : 'Why memory matters'}</span>
+                <p>{d.memoryWhy}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES -->
+  <section class="uc-industries" id="industries">
+    <div class="uc-industries__inner container-x">
+      <div class="uc-industries__header">
+        <span class="section-label">{copy.industriesHeading}</span>
+        <p class="uc-industries__intro">{copy.industriesIntro}</p>
+      </div>
+
+      <div class="uc-industries__grid">
+        {
+          copy.industries.map((i) => (
+            <article class="uc-industry">
+              <header class="uc-industry__head">
+                <h3 class="uc-industry__name">{i.name}</h3>
+                <p class="uc-industry__context">{i.context}</p>
+              </header>
+              <ul class="uc-industry__scenarios">
+                {i.scenarios.map((s) => <li>· {s}</li>)}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- JOURNEY -->
+  <section class="uc-journey" id="journey">
+    <div class="uc-journey__inner container-x">
+      <div class="uc-journey__header">
+        <span class="section-label">{copy.journeyHeading}</span>
+        <p class="uc-journey__intro">{copy.journeyIntro}</p>
+      </div>
+
+      <div class="uc-journey__timeline">
+        {
+          copy.journeySteps.map((step, idx) => (
+            <div class="uc-step">
+              <div class="uc-step__marker">
+                <span class="uc-step__num">0{idx + 1}</span>
+              </div>
+              <div class="uc-step__body">
+                <div class="uc-step__top">
+                  <span class="uc-step__phase">{step.phase}</span>
+                  <span class="uc-step__duration">{step.duration}</span>
+                </div>
+                <p class="uc-step__what">{step.what}</p>
+                <div class="uc-step__row">
+                  <span class="section-label">{locale === 'zh' ? '产出' : 'Outcome'}</span>
+                  <p>{step.outcome}</p>
+                </div>
+                <div class="uc-step__row">
+                  <span class="section-label">{locale === 'zh' ? '决策点' : 'Gate'}</span>
+                  <p>{step.gate}</p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="uc-faq" id="faq">
+    <div class="uc-faq__inner container-x">
+      <span class="section-label">{copy.faqHeading}</span>
+      <div class="uc-faq__list">
+        {
+          copy.faqs.map((f) => (
+            <details class="uc-faq__item">
+              <summary class="uc-faq__q">{f.q}</summary>
+              <p class="uc-faq__a">{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="uc-cta">
+    <div class="uc-cta__inner container-x">
+      <h2 class="uc-cta__heading">{copy.ctaHeading}</h2>
+      <p class="uc-cta__desc">{copy.ctaDesc}</p>
+      <a href={localizedHref('/contact/', locale)} class="btn-primary uc-cta__btn">{copy.ctaButton} →</a>
+    </div>
+  </section>
+
+  <CtaFooter locale={locale} />
+</BaseLayout>
+
+<style>
+  /* BACK LINK */
+  .uc-back {
+    padding-block: var(--space-4);
+  }
+
+  .uc-back__link {
+    font-family: var(--font-mono);
+    font-size: var(--fs-body-sm);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    transition: color var(--dur-normal) var(--ease-out);
+  }
+
+  .uc-back__link:hover {
+    color: var(--brand-primary);
+  }
+
+  /* SHARED */
+  section {
+    position: relative;
+    z-index: 2;
+  }
+
+  .uc-depts,
+  .uc-industries,
+  .uc-journey,
+  .uc-faq {
+    padding-block: var(--space-8);
+    border-top: 1px solid var(--border-hairline);
+  }
+
+  /* DEPARTMENTS */
+  .uc-depts__inner,
+  .uc-industries__inner,
+  .uc-journey__inner,
+  .uc-faq__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .uc-depts__header,
+  .uc-industries__header,
+  .uc-journey__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .uc-depts__intro,
+  .uc-industries__intro,
+  .uc-journey__intro {
+    font-size: var(--fs-body-lg);
+    color: var(--text-secondary);
+    max-width: 72rem;
+    line-height: var(--lh-normal);
+  }
+
+  .uc-depts__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+
+  .uc-dept {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-5);
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-lg);
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: border-color var(--dur-normal) var(--ease-out);
+  }
+
+  .uc-dept:hover {
+    border-color: var(--brand-primary);
+  }
+
+  .uc-dept__head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .uc-dept__label {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    letter-spacing: 0.08em;
+    color: var(--brand-primary);
+    text-transform: uppercase;
+    font-weight: var(--fw-bold);
+  }
+
+  .uc-dept__roles {
+    font-size: var(--fs-body);
+    color: var(--text-primary);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-snug);
+  }
+
+  .uc-dept__tasks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--border-hairline);
+  }
+
+  .uc-dept__tasks li {
+    font-size: var(--fs-body-sm);
+    color: var(--text-secondary);
+    line-height: var(--lh-normal);
+  }
+
+  .uc-dept__memory {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--border-hairline);
+  }
+
+  .uc-dept__memory p {
+    font-size: var(--fs-body-sm);
+    color: var(--text-primary);
+    font-style: italic;
+    line-height: var(--lh-normal);
+  }
+
+  /* INDUSTRIES */
+  .uc-industries__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+
+  .uc-industry {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-5);
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-lg);
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: border-color var(--dur-normal) var(--ease-out);
+  }
+
+  .uc-industry:hover {
+    border-color: var(--brand-primary);
+  }
+
+  .uc-industry__head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .uc-industry__name {
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-bold);
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+  }
+
+  .uc-industry__context {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    color: var(--brand-primary);
+    letter-spacing: 0.02em;
+  }
+
+  .uc-industry__scenarios {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--border-hairline);
+  }
+
+  .uc-industry__scenarios li {
+    font-size: var(--fs-body-sm);
+    color: var(--text-secondary);
+    line-height: var(--lh-normal);
+  }
+
+  /* JOURNEY */
+  .uc-journey {
+    background: linear-gradient(180deg, rgba(0, 229, 160, 0.02) 0%, transparent 100%);
+  }
+
+  .uc-journey__timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .uc-step {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    gap: var(--space-5);
+    padding: var(--space-5);
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-lg);
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: border-color var(--dur-normal) var(--ease-out);
+  }
+
+  .uc-step:hover {
+    border-color: var(--brand-primary);
+  }
+
+  .uc-step__marker {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .uc-step__num {
+    font-family: var(--font-mono);
+    font-size: var(--fs-h1);
+    font-weight: var(--fw-bold);
+    color: var(--brand-primary);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .uc-step__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .uc-step__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .uc-step__phase {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    letter-spacing: 0.1em;
+    color: var(--text-primary);
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+  }
+
+  .uc-step__duration {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    color: var(--text-tertiary);
+    letter-spacing: 0.04em;
+  }
+
+  .uc-step__what {
+    font-size: var(--fs-body-lg);
+    color: var(--text-primary);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-normal);
+  }
+
+  .uc-step__row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .uc-step__row p {
+    font-size: var(--fs-body-sm);
+    color: var(--text-secondary);
+    line-height: var(--lh-normal);
+  }
+
+  /* FAQ */
+  .uc-faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--border-hairline);
+  }
+
+  .uc-faq__item {
+    border-bottom: 1px solid var(--border-hairline);
+    padding-block: var(--space-4);
+  }
+
+  .uc-faq__q {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-semibold);
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    cursor: pointer;
+    list-style: none;
+    padding-right: var(--space-5);
+    position: relative;
+    transition: color var(--dur-normal) var(--ease-out);
+  }
+
+  .uc-faq__q::-webkit-details-marker {
+    display: none;
+  }
+
+  .uc-faq__q::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-family: var(--font-mono);
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-regular);
+    color: var(--brand-primary);
+    line-height: 1;
+    transition: transform var(--dur-normal) var(--ease-out);
+  }
+
+  .uc-faq__item[open] .uc-faq__q::after {
+    content: '−';
+  }
+
+  .uc-faq__q:hover {
+    color: var(--brand-primary);
+  }
+
+  .uc-faq__a {
+    margin-top: var(--space-3);
+    font-size: var(--fs-body);
+    color: var(--text-secondary);
+    line-height: var(--lh-normal);
+    max-width: 72rem;
+  }
+
+  /* CTA */
+  .uc-cta {
+    padding-block: var(--space-9);
+    border-top: 1px solid var(--border-hairline);
+    text-align: center;
+  }
+
+  .uc-cta__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    align-items: center;
+  }
+
+  .uc-cta__heading {
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-bold);
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+  }
+
+  .uc-cta__desc {
+    font-size: var(--fs-body-lg);
+    color: var(--text-secondary);
+    max-width: 52rem;
+  }
+
+  .uc-cta__btn {
+    margin-top: var(--space-3);
+  }
+
+  @media (max-width: 991px) {
+    .uc-depts__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .uc-depts__grid,
+    .uc-industries__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .uc-step {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+
+    .uc-step__marker {
+      justify-content: flex-start;
+    }
+
+    .uc-step__num {
+      font-size: var(--fs-h2);
+    }
+
+    .uc-cta__heading {
+      font-size: var(--fs-h3);
+    }
+  }
+</style>
