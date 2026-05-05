@@ -12,15 +12,20 @@ const t = useTranslations(locale);
 ---
 
 <section class="hero">
-  <div class="hero__bg" aria-hidden="true">
-    <div class="hero__aurora hero__aurora--a"></div>
-    <div class="hero__aurora hero__aurora--b"></div>
-    <div class="hero__aurora hero__aurora--c"></div>
-    <div class="hero__ring hero__ring--outer"></div>
-    <div class="hero__ring hero__ring--inner"></div>
-    <div class="hero__beam hero__beam--a"></div>
-    <div class="hero__beam hero__beam--b"></div>
-    <div class="hero__grid-glow"></div>
+  <div class="hero__video-layer" aria-hidden="true">
+    <video
+      class="hero__video"
+      poster="/hero-bg.poster.jpg"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+    >
+      <source src="/hero-bg.webm" type="video/webm" />
+      <source src="/hero-bg.mp4" type="video/mp4" />
+    </video>
+    <div class="hero__video-scrim"></div>
   </div>
 
   <div class="hero__network-layer" aria-hidden="true">
@@ -81,7 +86,45 @@ const t = useTranslations(locale);
     z-index: 2;
     pointer-events: none;
     overflow: hidden;
-    opacity: 0.6;
+    opacity: 0.25;
+    mix-blend-mode: screen;
+  }
+
+  .hero__video-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .hero__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .hero__video-scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.78) 0%,
+        rgba(0, 0, 0, 0.5) 42%,
+        rgba(0, 0, 0, 0.18) 72%,
+        rgba(0, 0, 0, 0.45) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.4) 0%,
+        rgba(0, 0, 0, 0) 30%,
+        rgba(0, 0, 0, 0) 70%,
+        rgba(0, 0, 0, 0.6) 100%
+      );
   }
 
   .hero__bg {
