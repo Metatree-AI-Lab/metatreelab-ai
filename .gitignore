@@ -31,3 +31,15 @@ Thumbs.db
 # Lockfiles other than pnpm (we use pnpm)
 package-lock.json
 yarn.lock
+
+# Client-specific proposals (contain client names, briefs, pricing)
+proposals/
+
+# Post-sale delivery artifacts (kickoff / sprint / status / CO / milestone-gate /
+# handoff / internal retros / financial burn). Contains live client data,
+# milestone fees, change order pricing, and internal-only retros. NEVER commit.
+delivery/
+
+# Private pricing anchors used by the /proposal skill — contain real client
+# contract values, names, and internal hourly rates. NEVER commit to a public repo.
+.claude/skills/proposal/references/
