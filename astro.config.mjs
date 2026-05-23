@@ -44,4 +44,9 @@ export default defineConfig({
 
   // SEO / sitemap handled in layout via <link rel="alternate">
   trailingSlash: 'always',
+
+  redirects: {
+    '/enterprise-brain': '/playbooks/ai-marketing/',
+    '/zh/enterprise-brain': '/zh/playbooks/ai-marketing/',
+  },
 });

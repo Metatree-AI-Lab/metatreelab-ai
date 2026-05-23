@@ -32,6 +32,11 @@ const copy = locale === 'zh'
       propertyDesc: '澳洲房地产营销全栈：开发商主站、楼盘专属页、品牌视觉、广告着陆页、长期 retainer。',
       explore: '查看全部服务',
       title_b: '了解 Property 服务',
+      brainEyebrow: 'PLAYBOOK · 4 步演进 + Step 5 企业记忆',
+      brainLabel: '/ AI MARKETING PLAYBOOK',
+      brainTitle: '从手写 1 条小红书 → 自动跑 4 平台的 marketing pipeline',
+      brainDesc: '匠人学院真实在跑的 marketing pipeline，4 步演进 + Step 5 企业级长期记忆。6 个 Claude Skill、Master/Variant 架构、反馈闭环 — 每一步都对应 Metatree 一个交付 service。',
+      brainCta: '看 playbook →',
     }
   : {
       sectionLabel: '/ SERVICES',
@@ -51,6 +56,11 @@ const copy = locale === 'zh'
       propertyDesc: 'Full-stack property marketing for Australia: developer websites, single-project landing pages, brand identity, ad pages, ongoing retainers.',
       explore: 'Explore all services',
       title_b: 'Explore Property services',
+      brainEyebrow: 'PLAYBOOK · 4-step ramp + Step 5 enterprise memory',
+      brainLabel: '/ AI MARKETING PLAYBOOK',
+      brainTitle: 'From 1 hand-written Xiaohongshu post to a 4-platform pipeline that runs itself',
+      brainDesc: 'The exact marketing pipeline JR Academy runs daily — 4 evolution steps + Step 5 enterprise long-term memory. 6 Claude Skills, Master/Variant architecture, learning loop. Every step maps to a Metatree delivery.',
+      brainCta: 'See playbook →',
     };
 
 const tracks = [
@@ -112,6 +122,21 @@ const servicesSchema = buildItemList(
     subtitle={copy.subtitle}
   />
 
+  <!-- ENTERPRISE BRAIN CALLOUT -->
+  <section class="brain-callout">
+    <div class="brain-callout__inner container-x">
+      <a href={localizedHref('/playbooks/ai-marketing/', locale)} class="brain-callout__card">
+        <div class="brain-callout__body">
+          <span class="section-label">{copy.brainLabel}</span>
+          <p class="brain-callout__eyebrow">{copy.brainEyebrow}</p>
+          <h2 class="brain-callout__title">{copy.brainTitle}</h2>
+          <p class="brain-callout__desc">{copy.brainDesc}</p>
+        </div>
+        <span class="brain-callout__cta">{copy.brainCta}</span>
+      </a>
+    </div>
+  </section>
+
   <section class="tracks">
     <div class="tracks__inner container-x">
       {
@@ -150,6 +175,90 @@ const servicesSchema = buildItemList(
 </BaseLayout>
 
 <style>
+  /* ENTERPRISE BRAIN CALLOUT */
+  .brain-callout {
+    position: relative;
+    padding-block: var(--space-6);
+    z-index: 2;
+  }
+
+  .brain-callout__card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: var(--space-5);
+    padding: var(--space-6);
+    border: 1px solid rgba(0, 229, 160, 0.35);
+    border-radius: var(--radius-lg);
+    background:
+      linear-gradient(135deg, rgba(0, 229, 160, 0.08) 0%, rgba(0, 180, 216, 0.04) 50%, transparent 100%),
+      var(--bg-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: border-color var(--dur-normal) var(--ease-out), transform var(--dur-normal) var(--ease-out);
+  }
+
+  .brain-callout__card:hover {
+    border-color: var(--brand-primary);
+    transform: translateY(-2px);
+  }
+
+  .brain-callout__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .brain-callout__eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    letter-spacing: 0.04em;
+    color: var(--brand-secondary);
+    text-transform: uppercase;
+  }
+
+  .brain-callout__title {
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-bold);
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    line-height: var(--lh-snug);
+  }
+
+  .brain-callout__desc {
+    font-size: var(--fs-body);
+    color: var(--text-secondary);
+    line-height: var(--lh-normal);
+    max-width: 80rem;
+  }
+
+  .brain-callout__cta {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    letter-spacing: 0.06em;
+    color: var(--brand-primary);
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--brand-primary);
+    border-radius: var(--radius-md);
+    transition: background var(--dur-normal) var(--ease-out);
+  }
+
+  .brain-callout__card:hover .brain-callout__cta {
+    background: rgba(0, 229, 160, 0.12);
+  }
+
+  @media (max-width: 767px) {
+    .brain-callout__card {
+      grid-template-columns: 1fr;
+      padding: var(--space-5);
+    }
+    .brain-callout__title {
+      font-size: var(--fs-h4);
+    }
+  }
+
   .tracks {
     position: relative;
     padding-block: var(--space-8);
