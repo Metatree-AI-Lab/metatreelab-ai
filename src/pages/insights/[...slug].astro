@@ -1,0 +1,282 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { siteConfig } from '../../config/site';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('insights')).filter(
+    (p) => p.data.draft !== true,
+  );
+  return posts.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const path = `/insights/${entry.id}/`;
+const canonical = new URL(path, siteConfig.url).toString();
+
+const dateFmt = new Intl.DateTimeFormat('en-AU', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const pubDateIso = entry.data.pubDate.toISOString();
+const modifiedIso = (entry.data.updatedDate ?? entry.data.pubDate).toISOString();
+
+// BlogPosting JSON-LD — critical for SEO + AI-citation.
+const blogPostingSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: entry.data.title,
+  description: entry.data.description,
+  datePublished: pubDateIso,
+  dateModified: modifiedIso,
+  keywords: entry.data.tags.join(', '),
+  inLanguage: 'en-AU',
+  author: {
+    '@type': 'Organization',
+    name: 'Metatree Lab',
+    url: siteConfig.url,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: siteConfig.name,
+    url: siteConfig.url,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${siteConfig.url}/logo.png`,
+    },
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': canonical,
+  },
+};
+---
+
+<BaseLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  locale="en"
+  path={path}
+  schema={blogPostingSchema}
+>
+  <article class="post">
+    <div class="post__inner container-x">
+      <header class="post__header">
+        <a href="/insights/" class="post__back">/ INSIGHTS</a>
+        <h1 class="post__title">{entry.data.title}</h1>
+        <div class="post__meta">
+          <time datetime={pubDateIso}>{dateFmt.format(entry.data.pubDate)}</time>
+          <span class="post__by">{entry.data.author}</span>
+        </div>
+        {
+          entry.data.tags.length > 0 && (
+            <div class="post__tags">
+              {entry.data.tags.map((tag) => (
+                <span class="post__tag">{tag}</span>
+              ))}
+            </div>
+          )
+        }
+      </header>
+
+      <div class="prose">
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .post {
+    position: relative;
+    padding-block: var(--space-9) var(--space-9);
+    z-index: 2;
+  }
+
+  .post__inner {
+    max-width: 76rem;
+    margin-inline: auto;
+  }
+
+  .post__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding-bottom: var(--space-5);
+    margin-bottom: var(--space-6);
+    border-bottom: 1px solid var(--border-hairline);
+  }
+
+  .post__back {
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    align-self: flex-start;
+  }
+
+  .post__back:hover {
+    color: var(--brand-primary);
+  }
+
+  .post__title {
+    font-size: var(--fs-h1);
+    font-weight: var(--fw-bold);
+    line-height: var(--lh-tight);
+    letter-spacing: -0.02em;
+  }
+
+  .post__meta {
+    display: flex;
+    gap: var(--space-3);
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: var(--fs-body-sm);
+    color: var(--text-tertiary);
+  }
+
+  .post__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .post__tag {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-pill);
+  }
+
+  /* ---- Article typography (no @tailwindcss/typography installed) ---- */
+  .prose {
+    font-size: var(--fs-body-lg);
+    line-height: var(--lh-loose);
+    color: var(--text-secondary);
+  }
+
+  .prose :global(h2) {
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-bold);
+    line-height: var(--lh-snug);
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+    margin-top: var(--space-7);
+    margin-bottom: var(--space-3);
+  }
+
+  .prose :global(h3) {
+    font-size: var(--fs-h4);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-snug);
+    color: var(--text-primary);
+    margin-top: var(--space-5);
+    margin-bottom: var(--space-2);
+  }
+
+  .prose :global(p) {
+    margin-bottom: var(--space-4);
+  }
+
+  .prose :global(a) {
+    color: var(--brand-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .prose :global(a:hover) {
+    color: var(--brand-accent);
+  }
+
+  .prose :global(strong) {
+    color: var(--text-primary);
+    font-weight: var(--fw-semibold);
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin-bottom: var(--space-4);
+    padding-left: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .prose :global(li) {
+    line-height: var(--lh-normal);
+  }
+
+  .prose :global(ul li) {
+    list-style: disc;
+  }
+
+  .prose :global(ol li) {
+    list-style: decimal;
+  }
+
+  .prose :global(blockquote) {
+    border-left: 2px solid var(--brand-primary);
+    padding-left: var(--space-4);
+    margin: var(--space-5) 0;
+    color: var(--text-primary);
+    font-style: italic;
+  }
+
+  .prose :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: var(--bg-glass);
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-sm);
+    padding: 0.15em 0.4em;
+  }
+
+  .prose :global(pre) {
+    background: var(--bg-glass);
+    border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    overflow-x: auto;
+    margin-bottom: var(--space-4);
+  }
+
+  .prose :global(pre code) {
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  .prose :global(hr) {
+    border: none;
+    border-top: 1px solid var(--border-hairline);
+    margin: var(--space-6) 0;
+  }
+
+  .prose :global(h2:first-child),
+  .prose :global(h3:first-child),
+  .prose :global(p:first-child) {
+    margin-top: 0;
+  }
+
+  @media (max-width: 767px) {
+    .post__title {
+      font-size: var(--fs-h2);
+    }
+    .prose {
+      font-size: var(--fs-body);
+    }
+  }
+</style>

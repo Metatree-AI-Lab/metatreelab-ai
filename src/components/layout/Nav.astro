@@ -14,6 +14,8 @@ const links = [
   { href: localizedHref('/services/', locale), label: t.nav.services },
   { href: localizedHref('/work/', locale), label: t.nav.work },
   { href: localizedHref('/consultants/', locale), label: t.nav.consultants },
+  // Insights is English-only — always link to the unprefixed route.
+  { href: '/insights/', label: t.nav.insights },
   { href: localizedHref('/quote/', locale), label: t.nav.quote },
   { href: localizedHref('/about/', locale), label: t.nav.about },
   { href: localizedHref('/contact/', locale), label: t.nav.contact },
