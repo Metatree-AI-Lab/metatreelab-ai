@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../ui/PageHero.astro';
 import CtaFooter from '../shared/CtaFooter.astro';
-import { type Locale } from '../../config/site';
+import { localizedHref, type Locale } from '../../config/site';
 import { consultants, type ConsultantEntry, type ConsultantRate } from '../../data/consultants';
 import { buildItemList, buildPerson } from '../../lib/schema';
 
@@ -373,6 +373,40 @@ const capabilityGroups: Array<{
   },
 ];
 
+const fde = locale === 'zh'
+  ? {
+      label: '/ DELIVERY MODEL — FORWARD DEPLOYED',
+      role: 'Forward Deployment Engineer',
+      tagline: '每一个真正上线的 AI 部署，背后都是这个角色。',
+      body: 'AI deployment 现在最火，但大多数项目都卡在"demo 能跑"到"团队天天在用"之间。Forward Deployment Engineer（驻场工程师）就是来填平这道鸿沟的：一名工程师驻进你的团队，把 AI 接进你真实的系统和工作流，做生产级加固，一直陪到它稳定运行，再交接给你。不是顾问、不是外包——是和你并肩把东西干上线的工程师。',
+      points: [
+        '驻场你的团队，远程为主，墨尔本 / 悉尼可现场',
+        '把 AI 接进真实系统：CRM、ERP、数据仓库、内部 API',
+        '生产级加固：评估基建、护栏、可观测性、成本管控',
+        '交接到你团队能自己维护，而不是制造依赖',
+      ],
+      rate: 'AUD 160+/小时 · 或按月驻场 retainer',
+      rateLabel: '起',
+      ctaPrimary: '聊聊你的 AI 部署',
+      ctaSecondary: '看 AI 部署服务',
+    }
+  : {
+      label: '/ DELIVERY MODEL — FORWARD DEPLOYED',
+      role: 'Forward Deployment Engineer',
+      tagline: 'The role behind every AI deployment that actually ships.',
+      body: 'AI deployment is the hottest thing in the room right now — but most projects stall in the gap between "the demo runs" and "the team uses it every day". A Forward Deployment Engineer closes that gap: one engineer embeds with your team, wires the AI into your real systems and workflows, hardens it for production, and stays until it is genuinely running — then hands it over. Not a consultant, not an outsourced ticket — an engineer who ships it live alongside you.',
+      points: [
+        'Embeds with your team — remote-first, on-site in MEL / SYD',
+        'Wires AI into real systems: CRM, ERP, data warehouse, internal APIs',
+        'Production hardening: eval harness, guardrails, observability, cost controls',
+        'Hands over so your team owns it — no dependency by design',
+      ],
+      rate: 'AUD 160+/hr · or embedded monthly retainer',
+      rateLabel: 'From',
+      ctaPrimary: 'Talk through your AI deployment',
+      ctaSecondary: 'See the AI Deployment service',
+    };
+
 const sorted = [...consultants].sort((a, b) => a.order - b.order);
 
 const cityCounts = new Set(sorted.map((c) => c.city.en));
@@ -457,6 +491,39 @@ const consultantsSchema = buildItemList(
       role="tooltip"
       aria-hidden="true"
     ></div>
+  </section>
+
+  <section class="fde">
+    <div class="fde__inner container-x">
+      <article class="fde-card">
+        <div class="fde-card__badge" aria-hidden="true">
+          <span class="fde-card__monogram">FDE</span>
+          <span class="fde-card__pulse"></span>
+        </div>
+
+        <div class="fde-card__body">
+          <span class="section-label fde-card__label">{fde.label}</span>
+          <h2 class="fde-card__role">{fde.role}</h2>
+          <p class="fde-card__tagline">{fde.tagline}</p>
+          <p class="fde-card__text">{fde.body}</p>
+
+          <ul class="fde-card__points">
+            {fde.points.map((p) => <li>{p}</li>)}
+          </ul>
+
+          <div class="fde-card__footer">
+            <span class="fde-card__rate">
+              <span class="fde-card__rate-label">{fde.rateLabel}</span>
+              <span class="fde-card__rate-value">{fde.rate}</span>
+            </span>
+            <div class="fde-card__actions">
+              <a href={localizedHref('/contact/', locale)} class="btn-primary">↓ {fde.ctaPrimary}</a>
+              <a href={localizedHref('/services/ai/', locale)} class="btn-ghost">{fde.ctaSecondary} →</a>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
   </section>
 
   <section class="consultants">
@@ -732,6 +799,173 @@ const consultantsSchema = buildItemList(
 
     .capability-group__chips {
       padding-bottom: var(--space-4);
+    }
+  }
+
+  /* ===== Forward Deployment Engineer — delivery model card ===== */
+  .fde {
+    position: relative;
+    padding-block: var(--space-5) 0;
+    z-index: 2;
+  }
+
+  .fde-card {
+    display: grid;
+    grid-template-columns: minmax(12rem, 16rem) minmax(0, 1fr);
+    gap: var(--space-6);
+    align-items: stretch;
+    padding: var(--space-6);
+    background: var(--bg-glass);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid var(--brand-primary);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 0 50px rgba(0, 229, 160, 0.1);
+    overflow: hidden;
+  }
+
+  .fde-card__badge {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, #00e5a0 0%, #00b4d8 100%);
+    min-height: 12rem;
+    overflow: hidden;
+  }
+
+  .fde-card__monogram {
+    font-family: var(--font-mono);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: var(--fw-bold);
+    letter-spacing: 0.04em;
+    color: #00120c;
+    z-index: 2;
+  }
+
+  .fde-card__pulse {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.35) 0%, transparent 55%);
+    animation: fdePulse 5s ease-in-out infinite;
+  }
+
+  @keyframes fdePulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50%      { opacity: 0.9; transform: scale(1.08); }
+  }
+
+  .fde-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .fde-card__label {
+    color: var(--brand-primary);
+  }
+
+  .fde-card__role {
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-bold);
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+    margin-top: var(--space-1);
+  }
+
+  .fde-card__tagline {
+    font-size: var(--fs-body-lg);
+    color: var(--brand-primary);
+    line-height: var(--lh-normal);
+  }
+
+  .fde-card__text {
+    font-size: var(--fs-body-sm);
+    color: var(--text-secondary);
+    line-height: var(--lh-normal);
+    max-width: 60rem;
+    margin-top: var(--space-1);
+  }
+
+  .fde-card__points {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-2) 0 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-1) var(--space-4);
+  }
+
+  .fde-card__points li {
+    position: relative;
+    padding-left: var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--fs-label);
+    line-height: 1.5;
+    color: var(--text-tertiary);
+  }
+
+  .fde-card__points li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--brand-primary);
+    font-family: var(--font-mono);
+  }
+
+  .fde-card__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding-top: var(--space-4);
+    margin-top: var(--space-3);
+    border-top: 1px solid var(--border-hairline);
+  }
+
+  .fde-card__rate {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--fs-body-sm);
+  }
+
+  .fde-card__rate-label {
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-size: var(--fs-micro);
+    letter-spacing: 0.08em;
+  }
+
+  .fde-card__rate-value {
+    color: var(--brand-primary);
+    font-weight: var(--fw-medium);
+  }
+
+  .fde-card__actions {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 991px) {
+    .fde-card {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+      padding: var(--space-5);
+    }
+
+    .fde-card__badge {
+      min-height: 7rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .fde-card__points {
+      grid-template-columns: 1fr;
     }
   }
 

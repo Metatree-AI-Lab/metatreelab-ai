@@ -151,11 +151,56 @@ export const services: ServiceEntry[] = [
   },
 
   {
+    slug: 'ai-deployment',
+    track: 'build',
+    flagship: true,
+    duration: '2-8w',
+    order: 4,
+    tags: ['deployment', 'fde', 'forward-deployed', 'production', 'flagship'],
+    title: {
+      en: 'AI Deployment & Forward Deployed Engineering',
+      zh: 'AI 落地部署 · Forward Deployed Engineering',
+    },
+    subtitle: {
+      en: 'We embed an engineer in your team and take AI from pilot to production.',
+      zh: '我们派工程师驻进你的团队，把 AI 从 pilot 一路推到生产。',
+    },
+    summary: {
+      en: 'Most AI projects die in the gap between a working demo and a system people actually use. We close that gap with the Forward Deployed Engineer model: an engineer embeds with your team, wires the AI into your real systems and workflows, hardens it for production, and stays until it is genuinely running — then hands it over. This is exactly how we ship JR Academy\'s AI to production every day, and the model behind our live OpenClaw and Hermes Agent client deployments.',
+      zh: '大多数 AI 项目都死在"demo 能跑"到"团队真的在用"之间的那道鸿沟。我们用 Forward Deployed Engineer（驻场工程师）模式来填平它：工程师驻进你的团队，把 AI 接进你真实的系统和工作流，做生产级加固，一直陪到它真正稳定运行，再交接给你。这正是我们每天把匠人学院的 AI 推到生产的方式，也是我们线上 OpenClaw 与 Hermes Agent 客户部署背后的模式。',
+    },
+    deliverables: {
+      en: [
+        'Production-readiness audit of your existing AI POC / pilot',
+        'Forward Deployed Engineer embedded with your team (remote-first, on-site in MEL / SYD)',
+        'Integration into real systems (CRM, ERP, data warehouse, internal APIs)',
+        'Production hardening: eval harness, guardrails, observability, cost controls',
+        'CI/CD + Infrastructure-as-Code deployment pipeline (AWS / GCP / Azure / on-prem)',
+        'Monitoring, alerting, and on-call runbooks',
+        'Knowledge transfer so your team owns it after we leave',
+      ],
+      zh: [
+        '对你现有 AI POC / pilot 做生产就绪审计',
+        'Forward Deployed Engineer 驻场你的团队（远程为主，墨尔本 / 悉尼可现场）',
+        '接入真实系统（CRM、ERP、数据仓库、内部 API）',
+        '生产级加固：评估基建、护栏、可观测性、成本管控',
+        'CI/CD + IaC 部署流水线（AWS / GCP / Azure / 自建机房）',
+        '监控、告警、on-call runbook',
+        '知识转移，我们离开后你团队自己能维护',
+      ],
+    },
+    proof: {
+      en: 'We deploy AI to production daily — JR Academy, plus live OpenClaw & Hermes Agent client deployments.',
+      zh: '我们每天把 AI 推到生产 — 匠人学院，以及线上的 OpenClaw 与 Hermes Agent 客户部署。',
+    },
+  },
+
+  {
     slug: 'custom-llm-applications',
     track: 'build',
     flagship: false,
     duration: '3-8w',
-    order: 4,
+    order: 5,
     tags: ['llm', 'app', 'eval'],
     title: {
       en: 'Custom LLM Applications',
@@ -192,7 +237,7 @@ export const services: ServiceEntry[] = [
     track: 'build',
     flagship: false,
     duration: 'retainer',
-    order: 5,
+    order: 6,
     tags: ['platform', 'saas', 'multi-tenant'],
     title: {
       en: 'AI Platform Engineering',
@@ -233,7 +278,7 @@ export const services: ServiceEntry[] = [
     track: 'build',
     flagship: false,
     duration: '2-6w',
-    order: 6,
+    order: 7,
     tags: ['web3', 'blockchain', 'dapp', 'defi'],
     title: {
       en: 'Web3 & Blockchain Applications',
