@@ -59,6 +59,12 @@ A 6-partner firm in Brisbane was running at 80% capacity during tax season large
 
 Result after 8 weeks: receipt coding dropped from ~9 hours/week per bookkeeper to under 2. Client document turnaround improved from an average of 5 days to 2.5 days. The three staff who'd been doing entry work shifted into review and quality control. The firm handled 20% more returns that season without adding headcount.
 
+<div class="stat-row">
+  <div class="stat"><b>9h → &lt;2h</b><span>weekly receipt coding per bookkeeper</span></div>
+  <div class="stat"><b>5 days → 2.5 days</b><span>client document turnaround</span></div>
+  <div class="stat"><b>+20% returns</b><span>handled with no extra headcount</span></div>
+</div>
+
 The total tooling cost was under $400/month. The time saved across the team paid for that in the first two weeks.
 
 ## Where to start if you're not sure
@@ -66,12 +72,27 @@ The total tooling cost was under $400/month. The time saved across the team paid
 The mistake is trying to automate everything at once. Pick the single task your team complains about most. Measure the current hours. Run a tool trial for 30 days. If it doesn't reduce time noticeably, drop it and try the next candidate.
 
 For most accounting firms, the order is:
-1. Document capture (Dext, Hubdoc) — fastest payback, low risk
-2. Practice management automation (Karbon, Ignition) — saves client onboarding and comms time
-3. Drafting assistance for emails and routine documents — medium effort, consistent value
+
+<ul class="icon-list">
+  <li>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="8 12 11 15 16 9"></polyline></svg>
+    <span><strong>Document capture (Dext, Hubdoc)</strong> — fastest payback, low risk. Start here.</span>
+  </li>
+  <li>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 14"></polyline></svg>
+    <span><strong>Practice management automation (Karbon, Ignition)</strong> — saves client onboarding and comms time.</span>
+  </li>
+  <li>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"></rect><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"></path><rect x="10" y="10" width="4" height="4"></rect></svg>
+    <span><strong>Drafting assistance</strong> for emails and routine documents — medium effort, consistent value.</span>
+  </li>
+</ul>
 
 Don't commission custom AI until you've maxed out what off-the-shelf tools can do. Most firms find that steps 1 and 2 alone recover more hours than they expected.
 
-The firms pulling ahead in 2026 aren't the ones with the flashiest technology. They're the ones who quietly stopped paying qualified staff to type numbers from PDFs.
+<div class="callout">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"></path></svg>
+  <p>The firms pulling ahead in 2026 aren't the ones with the flashiest technology — they're the ones who quietly stopped paying qualified staff to type numbers from PDFs.</p>
+</div>
 
 If you want someone to map your firm's specific workflow against the tools worth trialling, [book a free AI diagnostic](/contact/). We'll tell you the two or three changes worth making first — no pitch, just a plan.

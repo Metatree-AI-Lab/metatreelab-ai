@@ -85,7 +85,13 @@ The goal is **genuinely useful, human-sounding writing** by a practitioner. Low 
 
 ## Visuals / charts (MANDATORY)
 
-**Every article MUST include at least one inline chart** — a bar chart or a stat-row (ideally one of each where the content supports it). Articles must never be walls of text.
+> **Source of truth for visual selection: `.claude/skills/insights-visuals/SKILL.md`.**
+> That skill holds the full decision guide (which content type → which visual), the
+> "how many" guideline, the hand-written inline-SVG icon library, and the exact
+> copy-paste snippets for every visual. Load it whenever you write or edit an article.
+> The summary below is the quick reference; the skill is authoritative.
+
+**Every article MUST include at least one inline chart** — a bar chart or a stat-row (ideally one of each where the content supports it). Articles must never be walls of text. Beyond the mandatory chart, use **icon-lists**, **callouts**, and **comparison tables** where they genuinely help — match the visual to the data, never decorate emptily. A ~800-word article should carry 2-4 varied visuals total.
 
 Hard rules:
 
@@ -126,6 +132,30 @@ Copy these exact snippets:
 | First response  | 9 hours        | under 2 min    |
 | Tickets handled | all manual     | 60-70% auto    |
 | Bookkeeping     | 10 hrs/week    | ~3 hrs/week    |
+```
+
+**Icon-list** (`<ul class="icon-list">` — features/benefits/steps that each deserve emphasis; each `<li>` starts with a hand-written inline `<svg>` using `stroke="currentColor"`, then a bold lead + description). See the skill's icon library for the full set of ready-to-paste 24×24 line icons:
+
+```html
+<ul class="icon-list">
+  <li>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="8 12 11 15 16 9"></polyline></svg>
+    <span><strong>Document capture first</strong> — fastest payback, lowest risk.</span>
+  </li>
+  <li>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="3 17 9 11 13 15 21 7"></polyline><polyline points="15 7 21 7 21 13"></polyline></svg>
+    <span><strong>Then automation</strong> — recover onboarding and client-comms time.</span>
+  </li>
+</ul>
+```
+
+**Callout** (`<div class="callout">` — pull out one key insight on a glass card with a jade left-border accent; icon + short emphasized line):
+
+```html
+<div class="callout">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"></path></svg>
+  <p>The firms pulling ahead in 2026 quietly stopped paying qualified staff to type numbers from PDFs.</p>
+</div>
 ```
 
 ## Instructions for the daily agent

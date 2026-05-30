@@ -414,6 +414,78 @@ const blogPostingSchema = {
     border-bottom: none;
   }
 
+  /* ============================================================
+     Inline-SVG icons — zero-JS, no icon font, no external requests.
+     SVGs are hand-written in the markdown with stroke=currentColor;
+     these rules size them and set the jade stroke colour.
+     ============================================================ */
+
+  /* ---- Icon feature list ---- */
+  .prose :global(ul.icon-list) {
+    list-style: none;
+    padding-left: 0;
+    margin: var(--space-5) 0;
+    gap: var(--space-3);
+  }
+
+  .prose :global(ul.icon-list li) {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    gap: var(--space-3);
+    line-height: var(--lh-normal);
+    list-style: none;
+  }
+
+  .prose :global(ul.icon-list li svg) {
+    width: 2.4rem;
+    height: 2.4rem;
+    flex: none;
+    margin-top: 0.2rem;
+    color: var(--brand-primary);
+    stroke: currentColor;
+    stroke-width: 1.5;
+    fill: none;
+  }
+
+  .prose :global(ul.icon-list li strong) {
+    display: block;
+    color: var(--text-primary);
+    font-weight: var(--fw-semibold);
+  }
+
+  /* ---- Icon callout / pull-callout ---- */
+  .prose :global(.callout) {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: var(--space-3);
+    margin: var(--space-5) 0;
+    padding: var(--space-4);
+    background: var(--bg-glass);
+    border: 1px solid var(--border-hairline);
+    border-left: 3px solid var(--brand-primary);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+  }
+
+  .prose :global(.callout svg) {
+    width: 2.4rem;
+    height: 2.4rem;
+    flex: none;
+    color: var(--brand-primary);
+    stroke: currentColor;
+    stroke-width: 1.5;
+    fill: none;
+  }
+
+  .prose :global(.callout p) {
+    margin: 0;
+    color: var(--text-primary);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-snug);
+  }
+
   @media (max-width: 767px) {
     .post__title {
       font-size: var(--fs-h2);
