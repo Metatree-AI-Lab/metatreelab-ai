@@ -20,6 +20,8 @@ interface Props {
   noindex?: boolean;
   /** Override OG image. Defaults to /og.png (raster) with /og.svg as fallback. */
   ogImage?: string;
+  /** Set true for English-only pages with no /zh counterpart (e.g. /insights/*). Omits the zh hreflang + og:locale:alternate. */
+  enOnly?: boolean;
 }
 
 const {
@@ -30,6 +32,7 @@ const {
   schema,
   noindex = false,
   ogImage,
+  enOnly = false,
 } = Astro.props;
 
 const fullTitle = title === siteConfig.name
@@ -88,9 +91,18 @@ const allSchemas = [
     />
 
     <!-- i18n hreflang -->
-    <link rel="alternate" hreflang="en" href={enUrl} />
-    <link rel="alternate" hreflang="zh" href={zhUrl} />
-    <link rel="alternate" hreflang="x-default" href={enUrl} />
+    {enOnly ? (
+      <>
+        <link rel="alternate" hreflang="en" href={enUrl} />
+        <link rel="alternate" hreflang="x-default" href={enUrl} />
+      </>
+    ) : (
+      <>
+        <link rel="alternate" hreflang="en" href={enUrl} />
+        <link rel="alternate" hreflang="zh" href={zhUrl} />
+        <link rel="alternate" hreflang="x-default" href={enUrl} />
+      </>
+    )}
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -99,7 +111,9 @@ const allSchemas = [
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={locale === 'zh' ? 'zh_CN' : 'en_US'} />
-    <meta property="og:locale:alternate" content={locale === 'zh' ? 'en_US' : 'zh_CN'} />
+    {!enOnly && (
+      <meta property="og:locale:alternate" content={locale === 'zh' ? 'en_US' : 'zh_CN'} />
+    )}
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />

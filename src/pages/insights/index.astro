@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import { siteConfig } from '../../config/site';
+import { buildOrganization, buildBreadcrumb } from '../../lib/schema';
 
 const posts = (await getCollection('insights'))
   .filter((p) => p.data.draft !== true)
@@ -14,6 +16,34 @@ const dateFmt = new Intl.DateTimeFormat('en-AU', {
 
 const description =
   'Practical playbooks on using AI to cut costs and grow revenue — written for business owners and founders, not engineers.';
+
+const insightsUrl = new URL('/insights/', siteConfig.url).toString();
+
+// Breadcrumb: Home > Insights
+const breadcrumbSchema = buildBreadcrumb(
+  [
+    { name: 'Home', path: '/' },
+    { name: 'Insights', path: '/insights/' },
+  ],
+  'en',
+);
+
+// Blog JSON-LD listing the published posts (refs only, not full bodies).
+const blogSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'Insights',
+  description,
+  url: insightsUrl,
+  inLanguage: 'en-AU',
+  publisher: buildOrganization('en'),
+  blogPost: posts.map((post) => ({
+    '@type': 'BlogPosting',
+    headline: post.data.title,
+    url: new URL(`/insights/${post.id}/`, siteConfig.url).toString(),
+    datePublished: post.data.pubDate.toISOString(),
+  })),
+};
 ---
 
 <BaseLayout
@@ -21,6 +51,8 @@ const description =
   description={description}
   locale="en"
   path="/insights/"
+  enOnly
+  schema={[blogSchema, breadcrumbSchema]}
 >
   <section class="insights-hero">
     <div class="insights-hero__inner container-x">

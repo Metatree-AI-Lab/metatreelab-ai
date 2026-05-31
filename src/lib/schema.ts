@@ -237,7 +237,8 @@ export function buildPerson(consultant: ConsultantEntry, locale: Locale) {
 
 export interface BreadcrumbItem {
   name: string;
-  path: string;
+  /** Omit for the final crumb (current page) — schema.org allows a trailing item with no url. */
+  path?: string;
 }
 
 export function buildBreadcrumb(items: BreadcrumbItem[], locale: Locale) {
@@ -248,7 +249,7 @@ export function buildBreadcrumb(items: BreadcrumbItem[], locale: Locale) {
       '@type': 'ListItem',
       position: i + 1,
       name: item.name,
-      item: absoluteUrl(item.path, locale),
+      ...(item.path ? { item: absoluteUrl(item.path, locale) } : {}),
     })),
   };
 }
