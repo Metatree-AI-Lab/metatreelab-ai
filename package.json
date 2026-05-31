@@ -11,6 +11,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "render:og": "node scripts/render-og.mjs",
+    "render:og:insights": "node scripts/render-insights-og.mjs",
     "astro": "astro"
   },
   "dependencies": {

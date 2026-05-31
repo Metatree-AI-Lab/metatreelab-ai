@@ -177,5 +177,6 @@ Each run:
    ```
    Follow every writing rule above. Use the seed article (`how-small-businesses-cut-costs-with-ai-2026.md`) as the style template — note how it embeds a bar chart and a stat-row.
 4. **Embed at least one inline chart** (bar chart or stat-row) using the snippets in the "Visuals / charts (MANDATORY)" section above. Make sure the chart numbers match your prose, and leave a blank line before/after each HTML block.
-5. Run `pnpm check && pnpm build`.
-6. **Only commit if both pass.** If either fails, fix the article (usually frontmatter) until green, then commit. Never commit a broken build.
+5. **Generate the social-share thumbnail:** run `pnpm run render:og:insights`. This reads every article and writes a per-article OG image (1200×630, title + branding) to `public/og/insights/<slug>.png` using bundled fonts. The article page auto-references `/og/insights/<slug>.png` as its `og:image` / `twitter:image` / BlogPosting `image`, so WeChat/LinkedIn/X shows a unique card per article. **Commit the new `public/og/insights/<slug>.png` together with the article.**
+6. Run `pnpm build` (build must pass; note `pnpm check` has pre-existing unrelated errors in `src/data/projects.ts` / `ProjectThumbnail.astro` — ignore those, only your new file matters).
+7. **Only commit if the build passes.** Include the article markdown AND its generated OG PNG. If the build fails, fix the article (usually frontmatter) until green. Never commit a broken build.
