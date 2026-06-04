@@ -147,6 +147,21 @@ const description = locale === 'zh'
             {copy.parentCta}
           </a>
         </div>
+        <div class="parent__aside">
+          <span class="parent__badge-label section-label">
+            {locale === 'zh' ? '/ 云合作伙伴' : '/ CLOUD PARTNER'}
+          </span>
+          <div class="parent__badge">
+            <img
+              src="/partners/aws-partner-network.png"
+              alt="AWS Partner Network"
+              width="679"
+              height="187"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -279,13 +294,48 @@ const description = locale === 'zh'
     );
     border: 1px solid rgba(0, 229, 160, 0.2);
     border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-7);
+    flex-wrap: wrap;
   }
 
   .parent__body {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
+    flex: 1 1 32rem;
     max-width: 72rem;
+  }
+
+  .parent__aside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .parent__badge-label {
+    color: var(--text-muted);
+  }
+
+  .parent__badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    padding: var(--space-4) var(--space-5);
+    border-radius: var(--radius-md);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.1),
+      0 12px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .parent__badge img {
+    display: block;
+    width: 184px;
+    height: auto;
   }
 
   .parent__title {
