@@ -157,7 +157,7 @@ type Project = {
 const projects: Project[] = [
   {
     id: 'azure-bay-villa',
-    chip: { en: 'Azure Bay Villa · 蔚蓝湾别墅', zh: '蔚蓝湾别墅' },
+    chip: { en: 'Azure Bay Villa', zh: '蔚蓝湾别墅' },
     status: { en: 'Under offer', zh: '在售 · 已有 offer' },
     brief: {
       positioning: { en: 'Brighton waterfront villa · 3-bed + study · price guide $1.65M–$1.78M', zh: 'Brighton 一线海景独栋 · 3 房+书房 · 指导价 $1.65M–$1.78M' },
@@ -228,7 +228,7 @@ const projects: Project[] = [
   },
   {
     id: 'school-zone-apartment',
-    chip: { en: 'School-Zone 2-Bed · 学区两房公寓', zh: '学区两房公寓' },
+    chip: { en: 'School-Zone 2-Bed', zh: '学区两房公寓' },
     status: { en: 'For sale', zh: '在售' },
     brief: {
       positioning: { en: 'Box Hill school-zone 2-bed apartment · 88㎡ · price guide $620K–$660K', zh: 'Box Hill 学区两房公寓 · 套内 88㎡ · 指导价 $620K–$660K' },
@@ -294,7 +294,7 @@ const projects: Project[] = [
   },
   {
     id: 'cbd-studio',
-    chip: { en: 'CBD Studio · CBD 单间公寓', zh: 'CBD 单间公寓' },
+    chip: { en: 'CBD Studio', zh: 'CBD 单间公寓' },
     status: { en: 'For sale', zh: '在售' },
     brief: {
       positioning: { en: 'High-floor Melbourne CBD studio · 42㎡ · price guide $380K–$410K', zh: '墨尔本 CBD 高层单间 · 套内 42㎡ · 指导价 $380K–$410K' },
@@ -360,6 +360,28 @@ const projects: Project[] = [
   },
 ];
 
+// Tag labels are authored in Chinese in the data above; map to EN for the English locale.
+const TAG_EN: Record<string, string> = {
+  热门买家: 'Hot buyer',
+  学区疑虑: 'School-zone question',
+  二次看房: 'Second viewing',
+  价格异议: 'Price objection',
+  待回访: 'To follow up',
+  急售: 'Urgent sale',
+  价格底线: 'Price floor',
+  临门一脚: 'Close to closing',
+  物业费: 'Strata fees',
+  投资客: 'Investor',
+  租金回报: 'Rental yield',
+  可议价: 'Negotiable',
+  交割灵活: 'Flexible settlement',
+  观望: 'Watching',
+  回报率: 'Yield',
+  自住客: 'Owner-occupier',
+  贷款疑问: 'Loan question',
+};
+const localizeTags = (tags: string[]) => (locale === 'zh' ? tags : tags.map((t) => TAG_EN[t] ?? t));
+
 // ---- localize to plain strings for the inline script ----
 const projectsLocalized = projects.map((p) => ({
   id: p.id,
@@ -372,10 +394,10 @@ const projectsLocalized = projects.map((p) => ({
     tone: p.brief.tone[locale],
   },
   records: {
-    inspections: p.records.inspections.map((r) => ({ text: r.text[locale], tags: r.tags })),
-    enquiries: p.records.enquiries.map((r) => ({ text: r.text[locale], tags: r.tags })),
-    vendor: p.records.vendor.map((r) => ({ text: r.text[locale], tags: r.tags })),
-    offers: p.records.offers.map((r) => ({ text: r.text[locale], tags: r.tags })),
+    inspections: p.records.inspections.map((r) => ({ text: r.text[locale], tags: localizeTags(r.tags) })),
+    enquiries: p.records.enquiries.map((r) => ({ text: r.text[locale], tags: localizeTags(r.tags) })),
+    vendor: p.records.vendor.map((r) => ({ text: r.text[locale], tags: localizeTags(r.tags) })),
+    offers: p.records.offers.map((r) => ({ text: r.text[locale], tags: localizeTags(r.tags) })),
   },
   generated: {
     listing: p.generated.listing[locale],

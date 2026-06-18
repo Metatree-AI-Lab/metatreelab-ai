@@ -54,7 +54,7 @@ type Demo = {
   track: string;
   title: { en: string; zh: string };
   desc: { en: string; zh: string };
-  preview: string[]; // mini ascii-ish lines for the card mockup
+  preview: { en: string[]; zh: string[] }; // mini ascii-ish lines for the card mockup
 };
 
 const demos: Demo[] = [
@@ -68,7 +68,10 @@ const demos: Demo[] = [
       en: 'Ask a question in plain language — get an answer grounded in your company’s own documents, with the source cited.',
       zh: '用大白话提问，AI 用你公司自己的文档作答，并标出引用来源。员工再也不用翻手册、问同事。',
     },
-    preview: ['You: 退货政策是几天？', '🦞 根据《售后手册》§2.1，自签收起', '   14 天内可退…  ▸ 来源'],
+    preview: {
+      en: ['You: How many days for returns?', '🦞 Per Returns Policy §2.1, within 14', '   days of delivery…  ▸ source'],
+      zh: ['You: 退货政策是几天？', '🦞 根据《售后手册》§2.1，自签收起', '   14 天内可退…  ▸ 来源'],
+    },
   },
   {
     slug: 'document-extraction',
@@ -80,7 +83,10 @@ const demos: Demo[] = [
       en: 'Drop in an invoice or contract — watch AI pull out every field into a clean, structured table.',
       zh: '丢进一张发票或合同，AI 逐字段高亮抽取成结构化表格。会计、律所、采购的重复劳动一键完成。',
     },
-    preview: ['📄 invoice.pdf → 解析中…', '✓ 供应商  ✓ 金额 $4,820', '✓ GST $438  ✓ 到期 30 Jun'],
+    preview: {
+      en: ['📄 invoice.pdf → parsing…', '✓ Supplier  ✓ Amount $4,820', '✓ GST $438  ✓ Due 30 Jun'],
+      zh: ['📄 invoice.pdf → 解析中…', '✓ 供应商  ✓ 金额 $4,820', '✓ GST $438  ✓ 到期 30 Jun'],
+    },
   },
   {
     slug: 'property-copywriter',
@@ -92,7 +98,10 @@ const demos: Demo[] = [
       en: 'Pick a property — generate listing copy, social posts and selling points in one click, in any tone.',
       zh: '选一套房源，一键生成挂牌文案、小红书 / 朋友圈帖子和卖点清单，语气可切换。',
     },
-    preview: ['🏠 滨海 3 房 → 一键生成', '📝 挂牌文案 ✓  📱 小红书 ✓', '✦ 卖点：学区 / 海景 / 精装'],
+    preview: {
+      en: ['🏠 3-bed waterfront → generate', '📝 Listing ✓  📱 Social post ✓', '✦ Highlights: school / view / reno'],
+      zh: ['🏠 滨海 3 房 → 一键生成', '📝 挂牌文案 ✓  📱 小红书 ✓', '✦ 卖点：学区 / 海景 / 精装'],
+    },
   },
   {
     slug: 'property-brochure',
@@ -104,7 +113,10 @@ const demos: Demo[] = [
       en: 'Turn a property’s data into a polished PDF brochure or pitch deck — branded, in seconds.',
       zh: '把房源数据一键变成带品牌的 PDF 楼书或提案 PPT，几秒出片，告别美工排版。',
     },
-    preview: ['📊 房源数据 → 出片', '📑 PDF 楼书 ✓', '🖥 提案 PPT ✓  品牌模板'],
+    preview: {
+      en: ['📊 Property data → render', '📑 PDF brochure ✓', '🖥 Pitch deck ✓  branded template'],
+      zh: ['📊 房源数据 → 出片', '📑 PDF 楼书 ✓', '🖥 提案 PPT ✓  品牌模板'],
+    },
   },
   {
     slug: 'super-memory',
@@ -116,7 +128,10 @@ const demos: Demo[] = [
       en: 'Every employee reports to the AI; it becomes the company’s living brain — searchable, never forgets.',
       zh: '全员日报 / 进展都汇报给 AI，AI 沉淀成一个永不遗忘、可随时追问的「企业大脑」。架构流程演示。',
     },
-    preview: ['员工A ─┐', '员工B ─┼─▶ 🧠 企业大脑', '员工C ─┘   （可追问 / 永不忘）'],
+    preview: {
+      en: ['Staff A ─┐', 'Staff B ─┼─▶ 🧠 Company brain', 'Staff C ─┘   (queryable / never forgets)'],
+      zh: ['员工A ─┐', '员工B ─┼─▶ 🧠 企业大脑', '员工C ─┘   （可追问 / 永不忘）'],
+    },
   },
   {
     slug: 'agency-memory',
@@ -128,7 +143,10 @@ const demos: Demo[] = [
       en: 'Each property is a project — fill its design.md + records, AI auto-writes every channel and assigns the follow-ups. Replicable.',
       zh: '每套房一个 project：填 design.md + 记录，AI 自动出全渠道文案并派跟进。整套文件结构可复制开新房。',
     },
-    preview: ['📁 蔚蓝湾/  design.md + 记录', '   └─▶ 🧠 LLM', '挂牌·小红书·楼书·派跟进 ✓'],
+    preview: {
+      en: ['📁 azure-bay/  design.md + records', '   └─▶ 🧠 LLM', 'Listing · social · brochure · follow-ups ✓'],
+      zh: ['📁 蔚蓝湾/  design.md + 记录', '   └─▶ 🧠 LLM', '挂牌·小红书·楼书·派跟进 ✓'],
+    },
   },
 ];
 
@@ -166,7 +184,7 @@ const description = zh
               <p class="demo-card__desc">{demo.desc[locale]}</p>
 
               <div class="demo-card__preview" aria-hidden="true">
-                {demo.preview.map((line) => <span>{line}</span>)}
+                {demo.preview[locale].map((line) => <span>{line}</span>)}
               </div>
 
               <span class:list={['demo-card__cta', isLive ? 'btn-primary' : 'btn-ghost']}>
