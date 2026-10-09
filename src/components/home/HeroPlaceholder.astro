@@ -57,9 +57,10 @@ const t = useTranslations(locale);
         <div class="hero__partner">
           <img
             src="/partners/claude-partner-certified.svg"
+            class="hero__partner-large"
             alt={t.hero.partner}
-            width="48"
-            height="48"
+            width="72"
+            height="72"
             decoding="async"
           />
           <img
@@ -352,6 +353,10 @@ const t = useTranslations(locale);
     width: auto;
     height: 48px;
     border-radius: 6px;
+  }
+
+  .hero__partner .hero__partner-large {
+    height: 72px;
   }
 
   .hero__partner .hero__partner-round {
