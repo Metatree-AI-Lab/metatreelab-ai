@@ -161,6 +161,18 @@ const description = locale === 'zh'
               decoding="async"
             />
           </div>
+          <span class="parent__badge-label section-label">
+            {locale === 'zh' ? '/ AI 合作伙伴' : '/ AI PARTNER'}
+          </span>
+          <img
+            class="parent__claude"
+            src="/partners/claude-partner-certified.svg"
+            alt="Claude Certified Services Partner"
+            width="120"
+            height="120"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
       </div>
     </div>
@@ -336,6 +348,14 @@ const description = locale === 'zh'
     display: block;
     width: 184px;
     height: auto;
+  }
+
+  .parent__claude {
+    display: block;
+    width: 120px;
+    height: 120px;
+    border-radius: var(--radius-md);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
   }
 
   .parent__title {

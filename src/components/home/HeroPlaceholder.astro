@@ -54,6 +54,23 @@ const t = useTranslations(locale);
 
       <div class="hero__backing">
         <span class="section-label">· {t.hero.backing} ·</span>
+        <div class="hero__partner">
+          <img
+            src="/partners/claude-partner-certified.svg"
+            alt={t.hero.partner}
+            width="48"
+            height="48"
+            decoding="async"
+          />
+          <img
+            src="/partners/aws-partner-network.png"
+            class="hero__partner-aws"
+            alt="AWS Partner Network"
+            width="131"
+            height="36"
+            decoding="async"
+          />
+        </div>
       </div>
     </div>
 
@@ -312,6 +329,27 @@ const t = useTranslations(locale);
     opacity: 0;
     transform: translateY(1.2rem);
     animation: heroContentIn 900ms var(--ease-out) 480ms forwards;
+  }
+
+  .hero__partner {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-top: var(--space-3);
+  }
+
+  .hero__partner img {
+    display: block;
+    width: auto;
+    height: 48px;
+    border-radius: 6px;
+  }
+
+  .hero__partner .hero__partner-aws {
+    height: 36px;
+    padding: 6px 12px;
+    background: #fff;
   }
 
   @media (max-width: 991px) {
