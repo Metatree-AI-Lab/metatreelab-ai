@@ -149,30 +149,29 @@ const description = locale === 'zh'
         </div>
         <div class="parent__aside">
           <span class="parent__badge-label section-label">
-            {locale === 'zh' ? '/ 云合作伙伴' : '/ CLOUD PARTNER'}
+            {locale === 'zh' ? '/ 合作伙伴' : '/ PARTNERS'}
           </span>
-          <div class="parent__badge">
+          <div class="parent__badges">
+            <div class="parent__badge">
+              <img
+                src="/partners/aws-partner-network.png"
+                alt="AWS Partner Network"
+                width="679"
+                height="187"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
             <img
-              src="/partners/aws-partner-network.png"
-              alt="AWS Partner Network"
-              width="679"
-              height="187"
+              class="parent__claude"
+              src="/partners/claude-partner-certified.svg"
+              alt="Claude Certified Services Partner"
+              width="120"
+              height="120"
               loading="lazy"
               decoding="async"
             />
           </div>
-          <span class="parent__badge-label section-label">
-            {locale === 'zh' ? '/ AI 合作伙伴' : '/ AI PARTNER'}
-          </span>
-          <img
-            class="parent__claude"
-            src="/partners/claude-partner-certified.svg"
-            alt="Claude Certified Services Partner"
-            width="120"
-            height="120"
-            loading="lazy"
-            decoding="async"
-          />
         </div>
       </div>
     </div>
@@ -350,10 +349,18 @@ const description = locale === 'zh'
     height: auto;
   }
 
+  .parent__badges {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+  }
+
   .parent__claude {
     display: block;
-    width: 120px;
-    height: 120px;
+    width: 98px;
+    height: 98px;
     border-radius: var(--radius-md);
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
   }
