@@ -66,8 +66,16 @@ const t = useTranslations(locale);
             src="/partners/aws-partner-network.png"
             class="hero__partner-aws"
             alt="AWS Partner Network"
-            width="131"
-            height="36"
+            width="155"
+            height="48"
+            decoding="async"
+          />
+          <img
+            class="hero__partner-round"
+            src="/partners/csiro.svg"
+            alt="CSIRO"
+            width="48"
+            height="48"
             decoding="async"
           />
         </div>
@@ -346,8 +354,12 @@ const t = useTranslations(locale);
     border-radius: 6px;
   }
 
+  .hero__partner .hero__partner-round {
+    border-radius: 50%;
+  }
+
   .hero__partner .hero__partner-aws {
-    height: 36px;
+    height: 48px;
     padding: 6px 12px;
     background: #fff;
   }
