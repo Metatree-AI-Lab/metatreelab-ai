@@ -3,7 +3,7 @@
 > A digital studio by JR Academy. AI consulting & property marketing.
 
 **Live**: [metatreelab.ai](https://metatreelab.ai)
-**Parent**: [JR Academy](https://jiangren.com.au)
+**Parent**: [JR Academy](https://jracademy.ai)
 
 ## Documents
 
